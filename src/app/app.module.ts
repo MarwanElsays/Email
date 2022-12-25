@@ -7,10 +7,11 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { HomeComponent } from './ComponentsToShow/HomePage/Home.component';
-import { DraftCompComponent } from './ComponentsToShow/Draft-comp/draft-comp.component';
+import { DraftComponent } from './ComponentsToShow/Draft/draft.component';
 import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
 import { SentComponent } from './ComponentsToShow/sent/sent.component';
 import { TrashComponent } from './ComponentsToShow/trash/trash.component';
+import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
 
 
 @NgModule({
@@ -19,11 +20,12 @@ import { TrashComponent } from './ComponentsToShow/trash/trash.component';
     TopMenuComponent,
     MainPageComponent,
     LeftMenuComponent,
-    DraftCompComponent,
+    DraftComponent,
     HomeComponent,
     InboxComponent,
     SentComponent,
     TrashComponent,
+    NewMailComponent,
   ],
   imports: [
     BrowserModule,
