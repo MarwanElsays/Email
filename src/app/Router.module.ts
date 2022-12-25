@@ -6,26 +6,28 @@ import { HomeComponent } from './ComponentsToShow/HomePage/Home.component';
 import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
 import { SentComponent } from './ComponentsToShow/sent/sent.component';
 import { TrashComponent } from './ComponentsToShow/trash/trash.component';
-import { DraftCompComponent } from './ComponentsToShow/Draft-comp/draft-comp.component';
+import { DraftComponent } from './ComponentsToShow/Draft/draft.component';
+import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
 
 
-const appRoute:Routes=[
-    {path:'',component:HomeComponent},
-    {path:'Home',component:HomeComponent},
-    {path:'Inbox',component:InboxComponent},
-    {path:'Sent',component:SentComponent},
-    {path:'Trash',component:TrashComponent},
-    {path:'draft',component:DraftCompComponent}
+const appRoute: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'Home', component: HomeComponent },
+  { path: 'Inbox', component: InboxComponent },
+  { path: 'Sent', component: SentComponent },
+  { path: 'Trash', component: TrashComponent },
+  { path: 'draft', component: DraftComponent },
+  { path: 'new-mail', component: NewMailComponent }
 ]
 
 @NgModule({
-    imports: [
-      RouterModule.forRoot(appRoute)
-    ],
-    exports:[
-        RouterModule
-    ],
-    providers: [],
-    bootstrap: [AppComponent]
-  })
-  export class AppRouting { }
+  imports: [
+    RouterModule.forRoot(appRoute)
+  ],
+  exports: [
+    RouterModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppRouting { }

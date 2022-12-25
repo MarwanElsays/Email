@@ -1,0 +1,82 @@
+#main {
+    display: grid;
+    grid-template-rows: 2fr 10fr 1fr;
+    height: 100%;
+}
+
+#mail-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 20px;
+    align-items: left;
+}
+
+.info {
+    margin-left: 2.5%;
+    width: 95%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+input {
+    width: 1076px;
+    font-size: 24px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-radius: 10px;
+}
+
+#to {
+    margin-left: 108px;
+}
+
+#subject {
+    margin-left: 54px;
+}
+
+#mail-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#mail {
+    width: 95%;
+    height: 90%;
+    resize: none;
+    overflow-y: scroll;
+    font-size: 24px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#mail-options {
+    display: flex;
+    flex-direction: row;
+}
+
+button {
+    width: 100px;
+    height: 30px;
+    background-color: #dedede;
+    border-radius: 10px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    cursor: pointer;
+}
+
+button:active {
+    background-color: white;
+    transform: translateY(1px);
+}
+
+#send {
+    margin-left: 2.4%;
+}
+
+#attach {
+    margin-left: 5px;
+}
+
+#delete {
+    margin-left: 71.5%;
+}
