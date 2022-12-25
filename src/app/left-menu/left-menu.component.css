@@ -1,0 +1,21 @@
+div{
+    background-color: rgb(243, 242, 240);
+    width:250px;
+    height: 675px;
+}
+
+#items{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#items li{
+    list-style: none;
+    padding-left: 100px;
+    padding-right: 100px;
+    margin-bottom: 20px;
+    background-color: rgb(205, 234, 255);
+    cursor: pointer;
+}
