@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ConnectorService } from '../services/connector.service';
 
 @Component({
   selector: 'app-main-page',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./main-page.component.css']
 })
 export class MainPageComponent {
+  constructor(private s:ConnectorService){}
 
+  Do():boolean{
+    return this.s.hidemenu;
+  }
 }

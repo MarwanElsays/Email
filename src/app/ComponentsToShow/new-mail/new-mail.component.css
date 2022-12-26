@@ -7,21 +7,20 @@
 #mail-info {
     display: flex;
     flex-direction: column;
-    justify-content: end;
+    justify-content: flex-end;
     gap: 20px;
     align-items: left;
 }
 
 .info {
     margin-left: 2.5%;
-    width: 95%;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-weight: bold;
     font-size: 24px;
 }
 
 input {
-    width: 1076px;
+    width: 86%;
     font-size: 24px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     border-radius: 10px;

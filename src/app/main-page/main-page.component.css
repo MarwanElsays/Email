@@ -1,5 +1,12 @@
 div {
     background-color: #bababa;
-    width:1286px;
-    height: 693px;
+    width:1271px;
+    height: 665px;
+    border-radius: 20px;
+    padding-top: 5px;
+    padding-left: 10px;
+}
+
+.expand{
+    width:1470px;
 }

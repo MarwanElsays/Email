@@ -1,7 +1,7 @@
-div{
+.container{
     background-color: rgb(243, 242, 240);
     width:250px;
-    height: 693px;
+    height: 675px;
 }
 
 #items{
@@ -11,17 +11,60 @@ div{
     align-items: center;
 }
 
-#items li{
+.hidden{
+    width:50px;
+}
+
+.hide{
     list-style: none;
-    width: 250px;
     text-align: center;
     margin-bottom: 20px;
+    width:30px;
+    height: 30px;
+    line-height: 200%;
+    background-color: rgb(216, 239, 255);
+    cursor: pointer;
+    border-radius: 100%;
+    box-shadow: 0px 0px 5px rgb(0, 255, 238);
+}
+
+li.hide:hover{
+    box-shadow: 0px 0px 5px rgb(0, 102, 179);
+}
+
+.itemslist{
+    list-style: none;
+    text-align: center;
+    width:250px;
+    height: 30px;
+    line-height: 200%;
+    margin-bottom: 20px;
     background-color: rgb(205, 234, 255);
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
     cursor: pointer;
 }
 
-button {
-    background-color: rgb(205, 234, 255);
+li.itemslist:hover{
+    background-color: rgb(255, 251, 251);
+}
+
+.hidebutton{
+    display: none;
+}
+
+button{
+    background-color: inherit;
     border: none;
     cursor: pointer;
+    margin-left: 10px;
+    color: inherit;
+}
+
+.active{
+    background-color: rgb(6, 85, 183);
+    color:seashell
+}
+li.active:hover{
+    background-color: rgb(6, 85, 183);
 }

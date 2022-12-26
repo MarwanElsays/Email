@@ -1,3 +1,4 @@
+import { ConnectorService } from './../services/connector.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./top-menu.component.css']
 })
 export class TopMenuComponent {
+
+  constructor(private s:ConnectorService){}
+
+  Do(){
+    this.s.hidemenu = !this.s.hidemenu;
+  }
 
 }
