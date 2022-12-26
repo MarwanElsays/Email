@@ -1,19 +1,24 @@
-<div>
+<div [ngClass]="{hidden:Do()}" class="container">
     <ul id="items">
-        <li routerLink="Inbox">
-            <button>Inbox</button>
+        <li routerLink="Inbox" [routerLinkActive]="'active'" [ngClass]="Do()?'hide':'itemslist'">
+                <fa-icon [icon]="faInbox"></fa-icon>
+                <button [ngClass]="{hidebutton:Do()}">Inbox</button>
         </li>
-        <li routerLink="Sent">
-            <button>Sent</button>
+        <li routerLink="Sent" [routerLinkActive]="'active'" [ngClass]="Do()?'hide':'itemslist'">
+                <fa-icon [icon]="faPaperPlane"></fa-icon>
+                <button [ngClass]="{hidebutton:Do()}">Sent</button>
         </li>
-        <li routerLink="Trash">
-            <button>Trash</button>
+        <li routerLink="Trash" [routerLinkActive]="'active'" [ngClass]="Do()?'hide':'itemslist'">
+                <fa-icon [icon]="faTrash"></fa-icon>
+                <button [ngClass]="{hidebutton:Do()}">Trash</button>
         </li>
-        <li routerLink="draft">
-            <button>Draft</button>
+        <li routerLink="draft" [routerLinkActive]="'active'" [ngClass]="Do()?'hide':'itemslist'">
+                <fa-icon [icon]="faNoteSticky"></fa-icon>
+                <button [ngClass]="{hidebutton:Do()}">Draft</button>
         </li>
-        <li routerLink="new-mail">
-            <button>New Mail</button>
+        <li routerLink="new-mail" [routerLinkActive]="'active'" [ngClass]="Do()?'hide':'itemslist'">
+                <i class="bi bi-pen-fill"></i>
+                <button [ngClass]="{hidebutton:Do()}">New Mail</button>
         </li>
     </ul>
 </div>

@@ -12,6 +12,8 @@ import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
 import { SentComponent } from './ComponentsToShow/sent/sent.component';
 import { TrashComponent } from './ComponentsToShow/trash/trash.component';
 import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
+import { ConnectorService } from './services/connector.service';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -29,9 +31,10 @@ import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component
   ],
   imports: [
     BrowserModule,
-    AppRouting
+    AppRouting,
+    FontAwesomeModule
   ],
-  providers: [],
+  providers: [ConnectorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
