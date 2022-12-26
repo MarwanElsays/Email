@@ -14,6 +14,7 @@ import { TrashComponent } from './ComponentsToShow/trash/trash.component';
 import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
 import { ConnectorService } from './services/connector.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SentEmailsComponent } from './ComponentsToShow/sent/sent-emails/sent-emails.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     SentComponent,
     TrashComponent,
     NewMailComponent,
+    SentEmailsComponent
   ],
   imports: [
     BrowserModule,

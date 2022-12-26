@@ -1,5 +1,25 @@
 div {
-    background-color: rgb(243, 242, 240);
+    background-color: #f6f8fc;
     width:1536px;
     height: 70px;
+}
+
+#menu{
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    width:45px;
+    height: 45px;
+    border:none;
+    cursor: pointer;
+    border-radius: 90%;
+    color: rgb(0, 0, 0);
+}
+
+#menu:hover{
+    background-color: rgb(220, 220, 220);
+}
+
+#fabars{
+     font-size: x-large;
 }
