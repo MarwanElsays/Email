@@ -1,7 +1,8 @@
-div {
+.container{
+    padding-top: 10px;
     background-color: #f6f8fc;
     width:1536px;
-    height: 70px;
+    height: 60px;
 }
 
 #menu{
@@ -23,3 +24,55 @@ div {
 #fabars{
      font-size: x-large;
 }
+
+#Search{
+    position: relative;
+    margin-left: 260px;
+    width:690px;
+    height: 50px;
+    background-color: rgb(234,241,251);
+    border-radius: 10px;
+    color: rgb(117, 141, 162);
+}
+
+#Search input[type="text"]{
+    margin-left: 45px;
+    margin-right: 20px;
+    font-size: 16px;
+    border: none;
+    height: 50px;
+    width:600px;
+    background-color:rgb(234,241,251);
+}
+
+/* #Search input[type="text"]:active{
+    border:none;
+} */
+
+.icons{
+    position: absolute;
+    width:24px;
+    height: 24px;
+    text-align: center;
+    padding: 5px;
+    font-size: large;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+#faxmark{
+    font-size: x-large;
+    top:7px;
+    right: 10px;   
+}
+
+#fasearch{
+    top:10px;
+    left:8px;
+}
+
+#faxmark:hover,#fasearch:hover{
+    background-color: rgba(211, 211, 211, 0.863);
+}
+
+/* background-color: rgb(234,241,251); */
