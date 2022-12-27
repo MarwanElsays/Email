@@ -15,7 +15,6 @@ export class SentComponent implements OnInit{
   constructor(private s:ConnectorService){}
   faRotateRight = faRotateRight;
   faTrash = faTrash;
-  //@ViewChild('emailsDiv')emailsDiv: ElementRef | undefined;
   emails:Email[] = [];
 
   ngOnInit(): void{
@@ -23,8 +22,8 @@ export class SentComponent implements OnInit{
   }
 
   Del(email:Email){
-    this.emails.splice(this.emails.indexOf(email),0);
     this.s.emails.splice(this.s.emails.indexOf(email),1);
+    console.log(this.emails);
     this.s.deletedMails.push(email);
   }
 }

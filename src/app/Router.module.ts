@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './ComponentsToShow/HomePage/Home.component';
 import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
 import { SentComponent } from './ComponentsToShow/sent/sent.component';
 import { TrashComponent } from './ComponentsToShow/trash/trash.component';
@@ -12,8 +11,7 @@ import { SentEmailsComponent } from './ComponentsToShow/sent/sent-emails/sent-em
 
 
 const appRoute: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'Home', component: HomeComponent },
+  { path: '', component: InboxComponent },
   { path: 'Inbox', component: InboxComponent },
   { path: 'Sent', component: SentComponent },
   { path: 'Trash', component: TrashComponent },
