@@ -16,6 +16,7 @@ import { ConnectorService } from './services/connector.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SentEmailsComponent } from './ComponentsToShow/sent/sent-emails/sent-emails.component';
 import { ChangebkcolorDirective } from './Directives/changebkcolor.directive';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -31,12 +32,13 @@ import { ChangebkcolorDirective } from './Directives/changebkcolor.directive';
     TrashComponent,
     NewMailComponent,
     SentEmailsComponent,
-    ChangebkcolorDirective
+    ChangebkcolorDirective,
   ],
   imports: [
     BrowserModule,
     AppRouting,
-    FontAwesomeModule
+    FontAwesomeModule,
+    FormsModule
   ],
   providers: [ConnectorService],
   bootstrap: [AppComponent]

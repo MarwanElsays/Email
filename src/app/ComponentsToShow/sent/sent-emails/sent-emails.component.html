@@ -1,9 +1,15 @@
-<h1> email from Marwan</h1>
-<div>
-    <p><b>Hi my friend</b></p>
+<div class="container">
+    <div id="top"> 
+        <div id="backicon" routerLink="/Sent"><fa-icon [icon]="faArrowLeft" ></fa-icon></div>
+        <input type="checkbox">
+        <div id="rotateicon"><fa-icon [icon]="faRotateRight"></fa-icon></div>
+    </div>
+    <div id="InboxemailsDiv">
+        <div id="subject">{{email?.subject}}</div>
+        <div id="To">To: {{email?.to}}</div>
+        <div id="messgae">
+            {{email?.message}}
+        </div>
+    </div>
 </div>
-<br><br>
-<h3>
-    yours marwan
-</h3>
 

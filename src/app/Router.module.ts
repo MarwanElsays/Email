@@ -21,6 +21,12 @@ const appRoute: Routes = [
   { path: 'new-mail', component: NewMailComponent },
   { path: 'Sent' ,children:[
     {path: 'sentemails/:id',component:SentEmailsComponent}
+  ]},
+  {path: 'Trash' ,children:[
+    {path: 'sentemails/:id',component:SentEmailsComponent}
+  ]},
+  {path: 'draft' ,children:[
+    {path: 'sentemails/:id',component:SentEmailsComponent}
   ]}
 ]
 
