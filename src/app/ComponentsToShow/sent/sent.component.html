@@ -5,26 +5,12 @@
     </div>
     
     <div id="emailsDiv" #emailsDiv> 
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
+        <div *ngFor="let email of emails" routerLink="sentemails/{{email.id}}" class="email"> 
+            <span class="to">To: {{email.to}}</span>
+            <p class="subject"><b>{{email.subject}}</b> - {{email.message}}</p>
+            <button  id="trashicon" (click)="Del(email)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <span class="datespan">{{email.date.getFullYear() + '-' + (email.date.getMonth()+1) + '-' + email.date.getDate()}}</span>
+        </div>
     </div>
     
     <router-outlet></router-outlet>

@@ -1,0 +1,113 @@
+.container{
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    width:100%;
+    height: 664px;
+    border-radius: 20px;
+}
+
+#top{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
+    width:98.6%;
+    height:30px;
+    background-color: rgb(255, 255, 255);
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+input[type="checkbox"]{
+    width:20px;
+    height: 20px;
+    cursor:pointer;
+}
+
+#backicon{
+    cursor: pointer;
+    color:rgb(94, 95, 95);
+}
+
+#rotateicon{
+    cursor: pointer;
+    color:rgb(94, 95, 95);
+}
+
+.email{
+    display: flex;
+    flex-direction: row;
+    width:99.3%;
+    height: 50px;
+    background-color: #e1ecfc;
+    color: rgb(56, 53, 53);
+    border: none;
+    border-bottom: 0.1px solid rgb(187, 173, 247);
+    cursor: pointer;
+}
+
+.email:hover{
+    background-color: #d9e7fc;
+    box-shadow: 0px 2px 2px 1px grey;
+}
+
+#InboxemailsDiv{
+    width:100%;
+    height: 619px;
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+    overflow-y: auto;
+}
+
+#InboxemailsDiv::-webkit-scrollbar{
+    width: 14px;
+}
+
+#InboxemailsDiv::-webkit-scrollbar-track{
+    background-color: rgb(255, 255, 255);
+}
+
+#InboxemailsDiv::-webkit-scrollbar-thumb{
+    background-color: rgb(1, 15, 54);
+    border-radius: 45px;
+}
+
+#subject{
+    width:96.15%;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 40px;
+    padding-top: 25px;
+    height: 50px;
+    background-color: #ffffff;
+    color: rgb(2, 47, 74);
+    border: none;
+}
+
+#To{
+    width:96.15%;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 40px;
+    padding-top: 25px;
+    height: 50px;
+    background-color: #ffffff;
+    color: rgb(2, 47, 74);
+    border: none;
+}
+
+#messgae{
+    width:96%;
+    font-size: 20px;
+    padding-top: 40px;
+    padding-left: 30px;
+    padding-right: 20px;
+    background-color: #ffffff;
+    color: rgb(56, 53, 53);
+    border: none;
+    text-align: center;
+    overflow-wrap: break-word;
+}
+
+

@@ -30,13 +30,71 @@ input[type="checkbox"]{
     color:rgb(94, 95, 95);
 }
 
-button{
+.email{
+    display: flex;
+    flex-direction: row;
     width:99.3%;
-    height: 100px;
+    height: 50px;
     background-color: #e1ecfc;
     color: rgb(56, 53, 53);
     border: none;
     border-bottom: 0.1px solid rgb(187, 173, 247);
+    cursor: pointer;
+}
+
+.email:hover{
+    background-color: #d9e7fc;
+    box-shadow: 0px 2px 2px 1px grey;
+}
+
+.to{
+    font-size: 17px;
+    color: #00245a;
+    width:180px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 60px;
+    line-height: 300%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: 30px;
+}
+
+.subject{
+    color: #00245a;
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    width: 872px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 300%;
+}
+
+#trashicon{
+    border:none;
+    background-color: #e1ecfc;
+    line-height: 200%;
+    margin-top: 5px;
+    width:40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+#trashicon:hover{
+    background-color: rgb(219, 219, 219);
+}
+
+.datespan{
+    font-size: 14px;
+    color: #00245a;
+    width:80px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 350%;
 }
 
 #emailsDiv{

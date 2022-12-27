@@ -2,20 +2,20 @@
     <div id="mail-info">
         <div class="info">
             <label>To:</label>
-            <input type="email" id="to">
+            <input type="email" id="to" #emailbox>
         </div>
         <div class="info">
             <label>Subject:</label>
-            <input type="text" id="subject">
+            <input type="text" id="subject" #subjectbox>
         </div>
     </div>
     
     <div id="mail-body">
-        <textarea id="mail" cols="30" rows="10"></textarea>
+        <textarea id="mail" cols="30" rows="10" #messagebox></textarea>
     </div>
     
     <div id="mail-options">
-        <button id="send">
+        <button id="send" (click)="send()" routerLink="/Sent">
             Send
         </button>
     
@@ -24,7 +24,7 @@
             <input type="file">
         </button>
     
-        <button id="delete">
+        <button id="delete" (click)="Drafts()" routerLink="/draft">
             Delete Draft
         </button>
     </div>
