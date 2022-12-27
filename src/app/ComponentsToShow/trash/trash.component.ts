@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-trash',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class TrashComponent {
 
+  constructor(){}
+
+  faRotateRight = faRotateRight;
 }

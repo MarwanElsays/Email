@@ -8,6 +8,7 @@ import { SentComponent } from './ComponentsToShow/sent/sent.component';
 import { TrashComponent } from './ComponentsToShow/trash/trash.component';
 import { DraftComponent } from './ComponentsToShow/Draft/draft.component';
 import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
+import { SentEmailsComponent } from './ComponentsToShow/sent/sent-emails/sent-emails.component';
 
 
 const appRoute: Routes = [
@@ -17,7 +18,10 @@ const appRoute: Routes = [
   { path: 'Sent', component: SentComponent },
   { path: 'Trash', component: TrashComponent },
   { path: 'draft', component: DraftComponent },
-  { path: 'new-mail', component: NewMailComponent }
+  { path: 'new-mail', component: NewMailComponent },
+  { path: 'Sent' ,children:[
+    {path: 'sentemails/:id',component:SentEmailsComponent}
+  ]}
 ]
 
 @NgModule({

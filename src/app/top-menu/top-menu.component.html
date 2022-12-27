@@ -1,3 +1,8 @@
-<div>
-    <button (click)="Do()">click on me</button>
+<div class="container">
+    <button id="menu" (click)="Do()"><fa-icon id="fabars" [icon]="faBars"></fa-icon></button>
+    <div id="Search">
+        <fa-icon [icon]="faMagnifyingGlass" id="fasearch" class="icons"></fa-icon>
+        <input type="text" placeholder="search">
+        <fa-icon [icon]="faXmark" id="faxmark" class="icons"></fa-icon>
+    </div>
 </div>

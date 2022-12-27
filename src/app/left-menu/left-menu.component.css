@@ -1,5 +1,5 @@
 .container{
-    background-color: rgb(243, 242, 240);
+    background-color:#f6f8fc;
     width:250px;
     height: 675px;
 }
@@ -12,7 +12,7 @@
 }
 
 .hidden{
-    width:50px;
+    width:70px;
 }
 
 .hide{
@@ -46,7 +46,7 @@ li.hide:hover{
 }
 
 li.itemslist:hover{
-    background-color: rgb(255, 251, 251);
+    background-color: rgb(223, 222, 222);
 }
 
 .hidebutton{

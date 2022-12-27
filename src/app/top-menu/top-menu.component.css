@@ -1,5 +1,78 @@
-div {
-    background-color: rgb(243, 242, 240);
+.container{
+    padding-top: 10px;
+    background-color: #f6f8fc;
     width:1536px;
-    height: 70px;
+    height: 60px;
 }
+
+#menu{
+    position: absolute;
+    left: 10px;
+    top: 7px;
+    width:45px;
+    height: 45px;
+    border:none;
+    cursor: pointer;
+    border-radius: 90%;
+    color: rgb(0, 0, 0);
+}
+
+#menu:hover{
+    background-color: rgb(220, 220, 220);
+}
+
+#fabars{
+     font-size: x-large;
+}
+
+#Search{
+    position: relative;
+    margin-left: 260px;
+    width:690px;
+    height: 50px;
+    background-color: rgb(234,241,251);
+    border-radius: 10px;
+    color: rgb(117, 141, 162);
+}
+
+#Search input[type="text"]{
+    margin-left: 45px;
+    margin-right: 20px;
+    font-size: 16px;
+    border: none;
+    height: 50px;
+    width:600px;
+    background-color:rgb(234,241,251);
+}
+
+#Search input[type="text"]:focus{
+   outline: none;
+} 
+
+.icons{
+    position: absolute;
+    width:24px;
+    height: 24px;
+    text-align: center;
+    padding: 5px;
+    font-size: large;
+    border-radius: 100%;
+    cursor: pointer;
+}
+
+#faxmark{
+    font-size: x-large;
+    top:7px;
+    right: 10px;   
+}
+
+#fasearch{
+    top:10px;
+    left:8px;
+}
+
+#faxmark:hover,#fasearch:hover{
+    background-color: rgba(211, 211, 211, 0.863);
+}
+
+/* background-color: rgb(234,241,251); */
