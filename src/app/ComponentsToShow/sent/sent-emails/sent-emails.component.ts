@@ -22,7 +22,6 @@ export class SentEmailsComponent implements OnInit{
     this.activeRoute.paramMap.subscribe((param) =>{
       this.emailID = parseInt(<string>param.get('id'));
       this.email = this.s.allMails.find(x => x.id == this.emailID);
-      console.log(this.email);
     })
   }
 

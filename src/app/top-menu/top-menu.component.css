@@ -25,6 +25,19 @@
      font-size: x-large;
 }
 
+#logo{
+    color: rgb(160, 157, 157);
+    font-weight: bold;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    position: absolute;
+    left: 110px;
+    top: 15px;
+    font-size: x-large;
+    width:45px;
+    height: 45px;
+    cursor: pointer;
+}
+
 #Search{
     position: relative;
     margin-left: 260px;
