@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-draft',
@@ -10,6 +11,8 @@ export class DraftComponent implements OnInit {
   constructor(){
 
   }
+  faRotateRight = faRotateRight;
+
   ngOnInit(){
   }
 

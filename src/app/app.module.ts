@@ -15,6 +15,7 @@ import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component
 import { ConnectorService } from './services/connector.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SentEmailsComponent } from './ComponentsToShow/sent/sent-emails/sent-emails.component';
+import { ChangebkcolorDirective } from './Directives/changebkcolor.directive';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { SentEmailsComponent } from './ComponentsToShow/sent/sent-emails/sent-em
     SentComponent,
     TrashComponent,
     NewMailComponent,
-    SentEmailsComponent
+    SentEmailsComponent,
+    ChangebkcolorDirective
   ],
   imports: [
     BrowserModule,

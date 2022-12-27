@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-inbox',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class InboxComponent {
 
+  constructor(){}
+  
+  faRotateRight = faRotateRight;
+  styleIt:boolean = true;
 }

@@ -45,9 +45,9 @@
     background-color:rgb(234,241,251);
 }
 
-/* #Search input[type="text"]:active{
-    border:none;
-} */
+#Search input[type="text"]:focus{
+   outline: none;
+} 
 
 .icons{
     position: absolute;
