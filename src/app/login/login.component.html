@@ -5,15 +5,15 @@
         </b>
         mail
     </div>
-    <form>
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()">
         <div id="email">
-            <input type="email" placeholder="E-mail">
+            <input type="email" placeholder="E-mail" formControlName="email">
         </div>
         <div id="password">
-            <input type="password" placeholder="Password">
+            <input type="password" placeholder="Password" formControlName="password">
         </div>
-        <div id="login-signup">
-            <button id="login" [routerLink]="['/mail-page']">
+        <div id="login-signup" >
+            <button id="login"  type="submit" [routerLink]="['/mail-page']">
                 Login
             </button>
             <button id="signup">
@@ -22,3 +22,4 @@
         </div>
     </form>
 </div>
+

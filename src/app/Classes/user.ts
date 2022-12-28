@@ -46,6 +46,10 @@ export class User {
         return this._email;
     }
 
+    get password() {
+        return this._password;
+    }
+
     get draft() {
         return this._draft;
     }
