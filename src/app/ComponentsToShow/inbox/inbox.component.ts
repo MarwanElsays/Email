@@ -7,9 +7,6 @@ import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./inbox.component.css']
 })
 export class InboxComponent {
-
-  constructor(){}
-  
   faRotateRight = faRotateRight;
   styleIt:boolean = true;
 }

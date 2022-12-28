@@ -1,6 +1,6 @@
 <div class="container">
     <div id="top"> 
-        <div id="backicon" routerLink="/Sent"><fa-icon [icon]="faArrowLeft" ></fa-icon></div>
+        <div id="backicon" [routerLink]="['/mail-page', {outlets:{main:'sent'}}]"><fa-icon [icon]="faArrowLeft" ></fa-icon></div>
         <input type="checkbox">
         <div id="rotateicon"><fa-icon [icon]="faRotateRight"></fa-icon></div>
     </div>

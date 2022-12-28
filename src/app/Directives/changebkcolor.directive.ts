@@ -3,11 +3,9 @@ import { Directive, ElementRef, Renderer2, OnInit, HostListener } from '@angular
 @Directive({
   selector: '[appChangebkcolor]'
 })
-export class ChangebkcolorDirective implements OnInit{
+export class ChangebkcolorDirective {
 
   constructor(private elem:ElementRef,private renderer:Renderer2) { }
-
-  ngOnInit(): void {}
   
   @HostListener('click') onmouseClick(){
     this.renderer.setStyle(this.elem.nativeElement,'border-bottom','3px solid black');

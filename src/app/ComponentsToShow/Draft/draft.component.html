@@ -1,17 +1,19 @@
 <div class="container">
-    <div id="top"> 
+    <div id="top">
         <input type="checkbox">
         <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
     </div>
-    
-    <div id="emailsDiv" #emailsDiv> 
-        <div *ngFor="let email of draftEmails" routerLink="sentemails/{{email.id}}" class="email"> 
+
+    <div id="emailsDiv" #emailsDiv>
+        <div *ngFor="let email of draftEmails" [routerLink]="['/mail-page', {outlets: {main:['sentemails', email.id]}}]"
+            class="email">
             <span class="to">To: {{email.to}}</span>
             <p class="subject"><b>{{email.subject}}</b> - {{email.message}}</p>
             <!-- <button  id="trashicon" (click)="Del(email)"><fa-icon [icon]="faTrash"></fa-icon></button> -->
-            <span class="datespan">{{email.date.getFullYear() + '-' + (email.date.getMonth()+1) + '-' + email.date.getDate()}}</span>
+            <span class="datespan">{{email.date.getFullYear() + '-' + (email.date.getMonth()+1) + '-' +
+                email.date.getDate()}}</span>
         </div>
     </div>
-    
+
     <router-outlet></router-outlet>
 </div>

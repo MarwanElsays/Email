@@ -1,4 +1,4 @@
-import { EventEmitter, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Email } from '../EmailType/Email';
 
 @Injectable({
@@ -7,12 +7,12 @@ import { Email } from '../EmailType/Email';
 export class ConnectorService {
 
   constructor() { }
-  ID:number = 0;
-  hidemenu : boolean = false;
-  deletedMails : Email[] = [];
-  emails : Email[] = [];
-  Draftemails : Email[] = [];
-  allMails : Email[] = [];
+  ID: number = 0;
+  hidemenu: boolean = false;
+  deletedMails: Email[] = [];
+  emails: Email[] = [];
+  Draftemails: Email[] = [];
+  allMails: Email[] = [];
 }
 
 
