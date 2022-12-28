@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/Classes/user';
+import { ConnectorService } from 'src/app/services/connector.service';
 
 @Component({
   selector: 'app-inbox',
@@ -7,6 +9,14 @@ import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./inbox.component.css']
 })
 export class InboxComponent {
+
+  constructor(private s: ConnectorService) {}
   faRotateRight = faRotateRight;
-  styleIt:boolean = true;
+  faTrash = faTrash;
+  styleIt: boolean = true;
+  private _user: User = this.s.activeUser;
+
+  get user() {
+    return this._user;
+  }
 }

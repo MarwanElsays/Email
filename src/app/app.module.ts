@@ -10,7 +10,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { DraftComponent } from './ComponentsToShow/Draft/draft.component';
 import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
 import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
-import { SentEmailsComponent } from './ComponentsToShow/sent/sent-emails/sent-emails.component';
+import { ViewMailComponent } from './ComponentsToShow/view-mail/view-mail.component';
 import { SentComponent } from './ComponentsToShow/sent/sent.component';
 import { TrashComponent } from './ComponentsToShow/trash/trash.component';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
@@ -34,7 +34,7 @@ import { CommonModule } from '@angular/common';
     SentComponent,
     TrashComponent,
     NewMailComponent,
-    SentEmailsComponent,
+    ViewMailComponent,
     MailPageComponent,
   ],
   imports: [

@@ -1,6 +1,7 @@
 import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Email } from 'src/app/EmailType/Email';
+import { Email } from 'src/app/Classes/Email';
+import { User } from 'src/app/Classes/user';
 
 @Component({
   selector: 'app-new-mail',
@@ -16,23 +17,30 @@ export class NewMailComponent {
   @ViewChild('messagebox') messagebox: ElementRef | undefined;
 
   send() {
-    let email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
-    let subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
-    let message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
-    let e = new Email(email, subject, message, [], new Date(), this.s.ID, 1);
-    this.s.ID++;
-    this.s.emails.push(e);
+    const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
+    const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
+    const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
+    let to = new User("", "");
+    this.s.users.forEach(user => {
+      if (user.email == email)
+        to = user;
+    });
+    const e = new Email(to, this.s.activeUser, subject, message, [], new Date(), this.s.ID, 1);
+    this.s.incrementID();
+    this.s.activeUser.addToSent(e);
+    to.addToInbox(e);
+    console.log(this.s.users);
     this.s.allMails.push(e);
   }
 
   Drafts() {
-    let email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
-    let subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
-    let message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
-    let e = new Email(email, subject, message, [], new Date(), this.s.ID, 1);
-    this.s.ID++;
-    this.s.Draftemails.push(e);
-    this.s.allMails.push(e);
+    const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
+    const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
+    const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
+    // let e = new Email(email, subject, message, [], new Date(), this.s.ID, 1);
+    // this.s.ID++;
+    // this.s.Draftemails.push(e);
+    // this.s.allMails.push(e);
   }
 
 }

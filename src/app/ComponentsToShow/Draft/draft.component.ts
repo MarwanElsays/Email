@@ -1,21 +1,23 @@
 import { ConnectorService } from './../../services/connector.service';
 import { Component, OnInit } from '@angular/core';
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { Email } from 'src/app/EmailType/Email';
+import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/Classes/user';
 
 @Component({
   selector: 'app-draft',
   templateUrl: './draft.component.html',
   styleUrls: ['./draft.component.css']
 })
-export class DraftComponent implements OnInit {
+export class DraftComponent {
 
-  constructor(private s:ConnectorService){}
+  constructor(private s: ConnectorService) { }
+  private _user: User = this.s.activeUser;
   faRotateRight = faRotateRight;
-  draftEmails:Email[] = [];
+  faTrash = faTrash;
 
-  ngOnInit(): void{
-    this.draftEmails = this.s.Draftemails;
+  get user() {
+    return this._user;
   }
+
 
 }
