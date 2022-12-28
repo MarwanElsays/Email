@@ -1,8 +1,9 @@
 import { ConnectorService } from './../../services/connector.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, AfterViewInit } from '@angular/core';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { Email } from 'src/app/EmailType/Email';
+import { Email } from 'src/app/Classes/Email';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { User } from 'src/app/Classes/user';
 
 @Component({
   selector: 'app-sent',
@@ -10,20 +11,14 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./sent.component.css']
 })
 
-export class SentComponent implements OnInit{
+export class SentComponent {
 
-  constructor(private s:ConnectorService){}
+  constructor(private s: ConnectorService) { }
   faRotateRight = faRotateRight;
   faTrash = faTrash;
-  emails:Email[] = [];
+  private _user: User = this.s.activeUser;
 
-  ngOnInit(): void{
-    this.emails = this.s.emails;
-  }
-
-  Del(email:Email){
-    this.s.emails.splice(this.s.emails.indexOf(email),1);
-    console.log(this.emails);
-    this.s.deletedMails.push(email);
+  get user() {
+    return this._user;
   }
 }

@@ -8,8 +8,16 @@
         <div id="modes"> 
             <div class="mode" (click)="styleIt = true" [ngClass]="{activetab:styleIt}">Default</div>
             <div class="mode" (click)="styleIt = false" [ngClass]="{activetab:!styleIt}">Priority</div>
-        </div> 
+        </div>
+        <div *ngFor="let email of user.inbox" [routerLink]="['/mail-page',{outlets:{main:['sentemails', 'inbox', email.id]}}]" class="email">
+            <span class="to">To: {{email.to}}</span>
+            <p class="subject"><b>{{email.subject}}</b> - {{email.message}}</p>
+            <button  id="trashicon" (click)="user.delete(email, 'inbox')"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <span class="datespan">{{email.date.getFullYear() + '-' + (email.date.getMonth()+1) + '-' + email.date.getDate()}}</span>
+        </div>
         
+        <!-- <button routerLink="sentemails/1"> See email</button> -->
+        <!-- <button routerLink="sentemails/1"> See email</button>
         <button routerLink="sentemails/1"> See email</button>
         <button routerLink="sentemails/1"> See email</button>
         <button routerLink="sentemails/1"> See email</button>
@@ -27,9 +35,7 @@
         <button routerLink="sentemails/1"> See email</button>
         <button routerLink="sentemails/1"> See email</button>
         <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
-        <button routerLink="sentemails/1"> See email</button>
+        <button routerLink="sentemails/1"> See email</button> -->
     </div>
     
     <router-outlet></router-outlet>

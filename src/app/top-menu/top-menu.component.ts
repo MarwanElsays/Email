@@ -1,6 +1,6 @@
 import { ConnectorService } from './../services/connector.service';
 import { Component } from '@angular/core';
-import { faBars,faMagnifyingGlass,faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faMagnifyingGlass, faXmark } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-top-menu',
@@ -9,14 +9,14 @@ import { faBars,faMagnifyingGlass,faXmark } from '@fortawesome/free-solid-svg-ic
 })
 export class TopMenuComponent {
 
-  constructor(private s:ConnectorService){}
-  faBars= faBars;
+  constructor(private s: ConnectorService) { }
+  faBars = faBars;
   faMagnifyingGlass = faMagnifyingGlass;
   faXmark = faXmark;
 
-  
-  Do(){
-    this.s.hidemenu = !this.s.hidemenu;
+
+  Do() {
+    this.s.toggleMenu();
   }
 
 }

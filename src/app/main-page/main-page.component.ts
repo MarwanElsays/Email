@@ -10,6 +10,6 @@ export class MainPageComponent {
   constructor(private s:ConnectorService){}
 
   Do():boolean{
-    return this.s.hidemenu;
+    return this.s.hideMenu;
   }
 }
