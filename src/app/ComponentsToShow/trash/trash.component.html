@@ -5,7 +5,7 @@
     </div>
     
     <div id="emailsDiv" #emailsDiv> 
-        <div *ngFor="let email of deletedemails" routerLink="sentemails/{{email.id}}" class="email"> 
+        <div *ngFor="let email of deletedemails" [routerLink]="['/mail-page',{outlets:{main:['sentemails',email.id]}}]" class="email"> 
             <span class="to">To: {{email.to}}</span>
             <p class="subject"><b>{{email.subject}}</b> - {{email.message}}</p>
             <!-- <button  id="trashicon" (click)="Del(email)"><fa-icon [icon]="faTrash"></fa-icon></button> -->
