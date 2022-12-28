@@ -1,3 +1,4 @@
+import { MailPageRouteGaurdService } from './services/mail-page-route-gaurd.service';
 import { AppRouting } from './Router.module';
 import { NgModule } from '@angular/core';
 
@@ -5,7 +6,7 @@ import { AppComponent } from './app.component';
 import { ConnectorService } from './services/connector.service';
 import { ChangebkcolorDirective } from './Directives/changebkcolor.directive';
 import { LoginComponent } from './login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { DraftComponent } from './ComponentsToShow/Draft/draft.component';
 import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
@@ -19,6 +20,7 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { TopMenuComponent } from './top-menu/top-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
+import { AuthService } from './services/auth-service.service';
 
 
 @NgModule({
@@ -42,9 +44,10 @@ import { CommonModule } from '@angular/common';
     FontAwesomeModule,
     FormsModule,
     CommonModule,
-    AppRouting
+    AppRouting,
+    ReactiveFormsModule
   ],
-  providers: [ConnectorService],
+  providers: [ConnectorService,MailPageRouteGaurdService,AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
