@@ -60,5 +60,5 @@ button:active {
     gap: 20px;
     height: 350px;
     border-radius: 20px;
-    background-color: rgb(245, 247, 252);
+    background-color: rgb(245, 247, 252,0.5);
 }
