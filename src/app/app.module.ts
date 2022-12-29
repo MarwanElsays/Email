@@ -21,6 +21,7 @@ import { TopMenuComponent } from './top-menu/top-menu.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth-service.service';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { AuthService } from './services/auth-service.service';
     NewMailComponent,
     ViewMailComponent,
     MailPageComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,

@@ -11,13 +11,15 @@ import { ViewMailComponent } from './ComponentsToShow/view-mail/view-mail.compon
 import { LoginComponent } from './login/login.component';
 import { MailPageComponent } from './mail-page/mail-page.component';
 import { MailPageRouteGaurdService } from './services/mail-page-route-gaurd.service';
+import { SignupComponent } from './signup/signup.component';
 
 
 const appRoute: Routes = [
   { path: '', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
   {
     path: 'mail-page',
-    component: MailPageComponent,canActivate:[MailPageRouteGaurdService],
+    component: MailPageComponent,
     children: [
       { path: 'inbox', component: InboxComponent, outlet: 'main' },
       { path: 'sent', component: SentComponent, outlet: 'main' },
