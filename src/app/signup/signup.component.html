@@ -1,0 +1,41 @@
+<div id="main">
+    <div id="logo">
+        <b style="color: rgb(3, 63, 116);">
+            M
+        </b>
+        mail
+    </div>
+    <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" id="myform">
+        <div id="firstname">
+            <label id="namelabel">firstname: </label>
+            <input type="text" placeholder="firstname" formControlName="firstname">
+        </div>
+        <div id="lastname">
+            <label>lastname: </label>
+            <input type="text" placeholder="lastname" formControlName="lastname">
+        </div>
+        <div id="birthDate">
+            <label>birthDate: </label>
+            <input type="date" formControlName="birthDate">
+        </div>
+        <div id="email">
+            <label id="emaillabel">Email: </label>
+            <input type="email" placeholder="E-mail" formControlName="email">
+        </div>
+        <div id="password">
+            <label>password: </label>
+            <input type="password" placeholder="Password" formControlName="password">
+        </div>
+        <div id="Gender">
+            Gender:
+            <select>
+                <option>male</option>
+                <option>female</option>
+            </select>
+        </div>
+
+        <button id="login"  type="submit" >
+            Submit
+        </button>
+    </form>
+</div>

@@ -1,0 +1,64 @@
+#main {
+    background-color: #ffe7e7;
+    width: 100%;
+    height: 745px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#logo{
+    color: rgb(160, 157, 157);
+    font-weight: bold;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 64px;
+}
+
+input{
+    width: 300px;
+    font-size: 16px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border-color: azure;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+#emaillabel{
+   margin-right: 35px;
+}
+
+label {
+    color: rgb(3, 14, 79);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 20px;
+}
+
+button {
+    width: 300px;
+    margin-left: 50px;
+    font-weight: bold;
+    font-size: large;
+    height: 30px;
+    margin-bottom: 1px;
+    background-image:linear-gradient(45deg,rgb(203, 235, 239),blue);
+    color: #ffffff;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    cursor: pointer;
+    border-radius: 16px;
+}
+
+button:active {
+    background-color: rgb(2, 59, 144);
+    transform: translateY(1px);
+}
+
+#myform{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    height: 350px;
+    border-radius: 20px;
+    background-color: rgb(245, 247, 252);
+}
