@@ -17,7 +17,7 @@ const appRoute: Routes = [
   { path: '', component: LoginComponent },
   {
     path: 'mail-page',
-    component: MailPageComponent,canActivate:[MailPageRouteGaurdService],
+    component: MailPageComponent,
     children: [
       { path: 'inbox', component: InboxComponent, outlet: 'main' },
       { path: 'sent', component: SentComponent, outlet: 'main' },

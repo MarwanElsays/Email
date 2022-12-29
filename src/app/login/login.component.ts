@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth-service.service';
 import { User } from '../Classes/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ import { User } from '../Classes/user';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private connectorservice: ConnectorService,private authservice:AuthService){}
+  constructor(private connectorservice: ConnectorService,private r:Router){}
 
   reactiveForm!: FormGroup;
 
@@ -28,10 +29,14 @@ export class LoginComponent implements OnInit {
     const pass:string = this.reactiveForm.get('password')?.value;
 
     //const user = new User(email,pass);
+    let Go:boolean = false;
     this.connectorservice.users.forEach((u) =>{
       if(u.email == email && u.password == pass){
-        this.authservice.accept = true;
+       Go = true;
       }
     })
+
+    if(Go)this.r.navigateByUrl('mail-page');
+
   }
 }
