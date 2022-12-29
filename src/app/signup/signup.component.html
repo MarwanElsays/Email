@@ -1,11 +1,9 @@
 <div id="main">
     <div id="logo">
-        <b style="color: rgb(3, 63, 116);">
-            M
-        </b>
-        mail
+        <b style="color: rgb(3, 63, 116);">M</b>mail
     </div>
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" id="myform">
+        <h1> Create an Account </h1> 
         <div id="firstname">
             <label id="namelabel">firstname: </label>
             <input type="text" placeholder="firstname" formControlName="firstname">
