@@ -23,6 +23,9 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth-service.service';
 import { SignupComponent } from './signup/signup.component';
 import { ContactsComponent } from './ComponentsToShow/contacts/contacts.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -49,9 +52,12 @@ import { ContactsComponent } from './ComponentsToShow/contacts/contacts.componen
     FormsModule,
     CommonModule,
     AppRouting,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatFormFieldModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
   ],
-  providers: [ConnectorService,MailPageRouteGaurdService,AuthService],
+  providers: [ConnectorService,MailPageRouteGaurdService,AuthService, HttpClient],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

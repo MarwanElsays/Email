@@ -1,7 +1,17 @@
 import { Contact } from "./contact";
 import { Email } from "./Email";
 
+export enum Gender {
+    male,
+    female
+}
+
 export class User {
+    
+    private _firstName: string;
+    private _lastName: string;
+    private _birthDate: Date;
+    private _gender: Gender;
     private _email: string;
     private _password: string;
     private _inbox: Email[] = [];
@@ -10,7 +20,11 @@ export class User {
     private _draft: Email[] = [];
     private _contacts: Contact[] = [];
 
-    constructor(email: string, password: string) {
+    constructor(firstName: string, lastName: string, birthDate: Date, gender: Gender ,email: string, password: string) {
+        this._firstName = firstName;
+        this._lastName = lastName;
+        this._birthDate = birthDate;
+        this._gender = gender;
         this._email = email;
         this._password = password;
     }

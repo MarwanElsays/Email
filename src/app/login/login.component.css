@@ -1,5 +1,5 @@
 #main {
-    background-color: #ffe7e7;
+    background-color: #f6f8fc;
     width: 100%;
     height: 745px;
     display: flex;
@@ -16,12 +16,12 @@
 }
 
 input{
-    width: 300px;
-    font-size: 16px;
-    margin-bottom: 10px;
+    width: 350px;
+    font-size: 18px;
     border-radius: 10px;
     border-color: azure;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-right: 35px;
 }
 
 #emaillabel{
@@ -36,6 +36,7 @@ label {
     color: rgb(3, 14, 79);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     font-size: 20px;
+    margin-right: 35px;
 }
 
 button {
@@ -68,6 +69,7 @@ button:active {
     flex-direction: column;
     gap: 20px;
     height: 200px;
-    border-radius: 20px;
-    background-color: rgb(245, 247, 252);
+    border-radius: 20px;    
+    background-color: rgb(234,241,251);
+
 }
