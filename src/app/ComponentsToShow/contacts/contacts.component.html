@@ -1,0 +1,21 @@
+<div class="container">
+    <div id="top"> 
+        <input type="checkbox">
+        <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
+    </div>
+    
+    <div id="InboxemailsDiv" #emailsDiv>        
+        <button *ngFor="let contact of user.contacts">
+            {{contact.name}}
+            <br>
+            <span *ngFor="let acc of contact.accounts">
+               {{acc.email}}
+               <br>
+            </span>
+            
+        </button>
+        
+    </div>
+    
+    <router-outlet></router-outlet>
+</div>

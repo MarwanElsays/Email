@@ -1,6 +1,6 @@
 import { ConnectorService } from './../services/connector.service';
 import { Component } from '@angular/core';
-import { faInbox, faPaperPlane, faTrash, faNoteSticky } from '@fortawesome/free-solid-svg-icons';
+import { faInbox, faPaperPlane, faTrash, faNoteSticky,faContactBook} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-left-menu',
@@ -14,6 +14,7 @@ export class LeftMenuComponent {
   faPaperPlane = faPaperPlane;
   faTrash = faTrash;
   faNoteSticky = faNoteSticky;
+  faContactBook = faContactBook;
 
   Do(): boolean {
     return this.s.hideMenu;

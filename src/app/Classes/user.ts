@@ -15,6 +15,10 @@ export class User {
         this._password = password;
     }
 
+    addContacts(name:string,users:User[]){
+        this._contacts.push(new Contact(name,users));
+    }
+
     addToSent(mail: Email) {
         this.sent.push(mail);
     }
@@ -56,5 +60,9 @@ export class User {
 
     get sent() {
         return this._sent;
+    }
+
+    get contacts() {
+        return this._contacts;
     }
 }

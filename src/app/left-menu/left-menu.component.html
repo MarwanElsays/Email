@@ -25,5 +25,10 @@
                         <i class="bi bi-pen-fill"></i>
                         <button [ngClass]="{hidebutton:Do()}">New Mail</button>
                 </li>
+                <li [routerLink]="[{outlets:{main:'contacts'}}]" [routerLinkActive]="'active'"
+                        [ngClass]="Do()?'hide':'itemslist'">
+                        <fa-icon [icon]="faContactBook"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">Contacts</button>
+                </li>
         </ul>
 </div>

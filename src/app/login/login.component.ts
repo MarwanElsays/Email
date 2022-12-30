@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth-service.service';
 import { ConnectorService } from 'src/app/services/connector.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -11,11 +12,12 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private connectorservice: ConnectorService,private r:Router){}
+  constructor(private connectorservice: ConnectorService,private r:Router,private authserv : AuthService){}
 
   reactiveForm!: FormGroup;
 
   ngOnInit(): void {
+    this.authserv.accept = false;
     this.reactiveForm = new FormGroup({
       email:new FormControl(null,[Validators.required,Validators.email]),
       password: new FormControl(null,Validators.required)
@@ -34,7 +36,10 @@ export class LoginComponent implements OnInit {
       }
     })
 
-    if(Go)this.r.navigateByUrl('mail-page');
+    if(Go){
+      this.authserv.accept = true;
+      this.r.navigateByUrl('mail-page');
+    }
 
   }
 }

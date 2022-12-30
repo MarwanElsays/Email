@@ -1,13 +1,16 @@
 .container{
     background-color:#f6f8fc;
     width:250px;
-    height: 675px;
+    height: 605px;
 }
 
 #items{
+    margin-top: 10px;
+    padding-top: 50px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -34,18 +37,20 @@ li.hide:hover{
 
 .itemslist{
     list-style: none;
-    text-align: center;
-    width:250px;
+    text-align: left;
+    margin-left: 20px;
+    width:200px;
     height: 30px;
     line-height: 200%;
-    margin-bottom: 20px;
-    background-color: rgb(205, 234, 255);
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
     cursor: pointer;
 }
 
 li.itemslist:hover{
+    margin: 0;
+    padding-left: 30px;
+    width:220px;
     background-color: rgb(223, 222, 222);
 }
 
@@ -62,9 +67,33 @@ button{
 }
 
 .active{
+    margin: 0;
+    padding-left: 50px;
+    width:200px;
     background-color: rgb(6, 85, 183);
     color:seashell
 }
+
+li.active.hide{
+    padding: 0px;
+    width:30px;
+    margin-bottom: 20px;
+    background-color: rgb(6, 85, 183);
+    color:seashell
+}
+
+li.active.hide:hover{
+    padding: 0px;
+    width:30px;
+    margin-bottom: 20px;
+    background-color: rgb(6, 85, 183);
+    color:seashell
+}
+
+
+
 li.active:hover{
+    width:200px;
+    padding-left: 50px;
     background-color: rgb(6, 85, 183);
 }

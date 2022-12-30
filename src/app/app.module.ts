@@ -22,6 +22,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth-service.service';
 import { SignupComponent } from './signup/signup.component';
+import { ContactsComponent } from './ComponentsToShow/contacts/contacts.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { SignupComponent } from './signup/signup.component';
     NewMailComponent,
     ViewMailComponent,
     MailPageComponent,
-    SignupComponent
+    SignupComponent,
+    ContactsComponent
   ],
   imports: [
     BrowserModule,

@@ -8,4 +8,12 @@ export class Contact {
         this._name = name;
         this._accounts = accounts;
     }
+
+    get name(){
+        return this._name;
+    }
+
+    get accounts(){
+        return this._accounts;
+    }
 }

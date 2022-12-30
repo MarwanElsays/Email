@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { MailPageComponent } from './mail-page/mail-page.component';
 import { MailPageRouteGaurdService } from './services/mail-page-route-gaurd.service';
 import { SignupComponent } from './signup/signup.component';
+import { ContactsComponent } from './ComponentsToShow/contacts/contacts.component';
 
 
 const appRoute: Routes = [
@@ -19,8 +20,10 @@ const appRoute: Routes = [
   { path: 'signup', component: SignupComponent },
   {
     path: 'mail-page',
-    component: MailPageComponent,
+    component: MailPageComponent,canActivate:[MailPageRouteGaurdService],
     children: [
+      { path: '', component: InboxComponent, outlet: 'main' },
+      { path: 'contacts', component: ContactsComponent, outlet: 'main' },
       { path: 'inbox', component: InboxComponent, outlet: 'main' },
       { path: 'sent', component: SentComponent, outlet: 'main' },
       { path: 'trash', component: TrashComponent, outlet: 'main' },
