@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { User } from '../Classes/user';
+import { Gender, User } from '../Classes/user';
 import { ConnectorService } from '../services/connector.service';
 
 @Component({
@@ -10,30 +10,40 @@ import { ConnectorService } from '../services/connector.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
-  constructor(private connectorservice: ConnectorService,private r:Router){}
+  constructor(private s: ConnectorService, private r: Router) { }
 
   reactiveForm!: FormGroup;
 
   ngOnInit(): void {
     this.reactiveForm = new FormGroup({
-      firstname:new FormControl(null,Validators.required),
-      lastname: new FormControl(null,Validators.required),
-      birthDate: new FormControl(null,Validators.required),
-      email:new FormControl(null,[Validators.required,Validators.email]),
-      password: new FormControl(null,Validators.required)
+      firstName: new FormControl(null, Validators.required),
+      lastName: new FormControl(null, Validators.required),
+      birthDate: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+      gender: new FormControl(null, Validators.required)
     })
   }
 
-  onSubmit(){
-    const firstname:string = this.reactiveForm.get('firstname')?.value;
-    const lastname:string = this.reactiveForm.get('lastname')?.value;
-    const birthdate:string = this.reactiveForm.get('birthDate')?.value;
-    const email:string = this.reactiveForm.get('email')?.value;
-    const pass:string = this.reactiveForm.get('password')?.value;
+  onSubmit() {
+    const firstName: string = this.reactiveForm.get('firstName')?.value;
+    const lastName: string = this.reactiveForm.get('lastName')?.value;
+    const birthDate: string = this.reactiveForm.get('birthDate')?.value;
+    const email: string = this.reactiveForm.get('email')?.value;
+    const password: string = this.reactiveForm.get('password')?.value;
+    const genderString: string = this.reactiveForm.get('gender')?.value;
 
-    let user = new User(email,pass);
-    this.connectorservice.users.push(user);
-    console.log(firstname,lastname,birthdate,email,pass);
-    this.r.navigateByUrl('');
+    let gender: Gender = Gender.male;
+
+    switch (genderString) {
+      case 'Male': gender = Gender.male;     break;
+      case 'Female': gender = Gender.female; break;
+    }
+
+    const user = new User(firstName, lastName, new Date(birthDate), gender, email, password);
+    this.s.users.push(user);     //send to backend
+    console.log(this.reactiveForm);
+    if (this.reactiveForm.valid)
+      this.r.navigateByUrl('');
   }
 }

@@ -88,15 +88,6 @@ button:active {
     overflow:hidden
 }
 
-#attach input[type="file"]{
-    cursor:pointer;
-    position: absolute;
-    left: 0%;
-    top: 0%;
-    transform: scale(5);
-    opacity: 0;
-}
-
 #delete {
     margin-left: 71.5%;
 }
