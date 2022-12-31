@@ -1,17 +1,18 @@
 import { emailData } from './emailData';
 import { Email } from "./Email";
 
-export class Adapter{
+export class Adapter {
 
-    Adapt(email:Email){
-       let a!:emailData;
+    public static adapt(email: Email){
+       let data!: emailData;
 
-        a.userId = email.from;
-        a.body = email.message;
-        a.title = email.subject;
-        a.attachments = email.Attachments;
-        a.priority = email.priority;
-        a.receivers = email.to;       
+        data.userId = email.from;
+        data.body = email.message;
+        data.title = email.subject;
+        data.attachments = email.Attachments;
+        data.priority = email.priority;
+        data.receivers = email.to;
 
+        return data;
     }
 }

@@ -2,20 +2,19 @@ import { User } from "./user";
 
 export class Email {
     private _to: string[];
-    private _from: string;
+    private _from: User;
     private _subject: string;
     private _message: string;
     private _Attachments: string[];
-    private _date: Date;
     private _priority: string;
+    private _id!: string;
 
-    constructor(to: User[], from: User, subject: string, message: string, Attachments: string[], date: Date, id: string, priority: string) {
+    constructor(to: string[], from: User, subject: string, message: string, Attachments: string[], priority: string) {
         this._to = to;
         this._from = from;
         this._subject = subject;
         this._message = message;
         this._Attachments = Attachments;
-        this._date = date
         this._priority = priority;
     }
 
@@ -23,8 +22,16 @@ export class Email {
         return this._from.email;
     }
 
+    get fromEmail() {
+        return this._from.id;
+    }
+
+    get id() {
+        return this._id;
+    }
+
     get to() {
-        return this._to.email;
+        return this._to;
     }
 
     get subject() {
@@ -33,10 +40,6 @@ export class Email {
 
     get message() {
         return this._message;
-    }
-
-    get date() {
-        return this._date;
     }
 
     get Attachments() {

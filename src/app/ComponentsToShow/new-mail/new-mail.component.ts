@@ -2,7 +2,8 @@ import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 import { Email } from 'src/app/Classes/Email';
-import { Gender, User } from 'src/app/Classes/user';
+import { Adapter } from 'src/app/Classes/Adapter';
+import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
 
 @Component({
   selector: 'app-new-mail',
@@ -11,7 +12,7 @@ import { Gender, User } from 'src/app/Classes/user';
 })
 export class NewMailComponent {
 
-  constructor(private s: ConnectorService, private http: HttpClient) { }
+  constructor(private s: ConnectorService, private http: HttpClient, private backend: BackendCommunicatorService) { }
 
   @ViewChild('emailbox') emailbox: ElementRef | undefined;
   @ViewChild('subjectbox') subjectbox: ElementRef | undefined;
@@ -23,18 +24,9 @@ export class NewMailComponent {
     const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
-    let to = new User("", "", new Date(""), Gender.male, "", "");
-    this.s.users.forEach(user => {
-      if (user.email == email)
-        to = user;
-    });
-    const e = new Email(to, this.s.activeUser, subject, message, [], new Date(), this.s.ID, 1);
-    this.s.incrementID();
-    this.s.activeUser.addToSent(e);
-    to.addToInbox(e);
-    console.log(this.s.users);
-    this.s.allMails.push(e);
-    console.log(this.attachements);
+    let to: string[] = email.split(',');
+    const newMail = new Email(to, this.s.activeUser, subject, message, [], 'high');
+    this.backend.sendEmail(JSON.stringify(Adapter.adapt(newMail)));
   }
 
   Drafts() {
