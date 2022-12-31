@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ConnectorService } from './services/connector.service';
-import { ChangebkcolorDirective } from './Directives/changebkcolor.directive';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -31,7 +30,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    ChangebkcolorDirective,
     LoginComponent,
     MainPageComponent,
     TopMenuComponent,
@@ -44,7 +42,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ViewMailComponent,
     MailPageComponent,
     SignupComponent,
-    ContactsComponent
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,
