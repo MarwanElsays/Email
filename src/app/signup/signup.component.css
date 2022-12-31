@@ -9,7 +9,8 @@
 }
 
 h1{
-    color:rgb(36, 200, 36);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #000000;
 }
 
 #logo{
@@ -21,8 +22,9 @@ h1{
 
 input{
     width: 300px;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 10px;
+    margin-left: 10px;  
     border-radius: 10px;
     border-color: rgb(29, 254, 254);
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -51,6 +53,15 @@ button {
     border-radius: 16px;
 }
 
+#birthDate {
+    display: flex;
+    flex-direction: column;
+}
+
+#birthLabel {
+    margin-left: 12px;
+}
+
 button:active {
     background-color: rgb(2, 59, 144);
     transform: translateY(1px);
@@ -64,6 +75,6 @@ button:active {
     align-items: center;
     gap: 20px;
     height: 430px;
-    border-radius: 20px;
-    background-color: rgb(245, 247, 252,0.5);
+    border-radius: 20px;    
+    background-color: rgb(234,241,251);
 }

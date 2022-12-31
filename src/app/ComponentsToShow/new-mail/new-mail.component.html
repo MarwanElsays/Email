@@ -19,9 +19,9 @@
             Send
         </button>
     
-        <button id="attach">
+        <input type="file" style="display: none;" (change)="addAttachment()" multiple #fileUpload>
+        <button id="attach" (click)="fileUpload.click()">
             Attach
-            <input type="file">
         </button>
     
         <button id="delete" (click)="Drafts()" [routerLink]="[{outlets:{main:'draft'}}]">

@@ -5,32 +5,33 @@
     <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" id="myform">
         <h1> Create an Account </h1> 
         <div id="firstname">
-            <label id="namelabel">firstname: </label>
-            <input type="text" placeholder="firstname" formControlName="firstname">
+            <!-- <label id="namelabel">First Name</label> -->
+            <input type="text" placeholder="First Name" formControlName="firstName">
         </div>
         <div id="lastname">
-            <label>lastname: </label>
-            <input type="text" placeholder="lastname" formControlName="lastname">
-        </div>
-        <div id="birthDate">
-            <label>birthDate: </label>
-            <input type="date" formControlName="birthDate">
+            <!-- <label>Last Name</label> -->
+            <input type="text" placeholder="Last Name" formControlName="lastName">
         </div>
         <div id="email">
-            <label id="emaillabel">Email: </label>
+            <!-- <label id="emaillabel">Email</label> -->
             <input type="email" placeholder="E-mail" formControlName="email">
         </div>
         <div id="password">
-            <label>password: </label>
+            <!-- <label>Password</label> -->
             <input type="password" placeholder="Password" formControlName="password">
         </div>
+        <div id="birthDate">
+            <label id="birthLabel">Birth Date</label>
+            <input type="date" formControlName="birthDate">
+        </div>
         <div id="Gender">
-            Gender:
-            <select>
-                <option>male</option>
-                <option>female</option>
+            Gender
+            <select formControlName="gender">
+                <option>Male</option>
+                <option>Female</option>
             </select>
         </div>
+
 
         <button id="login"  type="submit" >
             Submit
