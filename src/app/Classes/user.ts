@@ -54,6 +54,8 @@ export class User {
 
     deleteContact(contact: Contact) {
         this.contacts.splice(this.contacts.indexOf(contact), 1);
+    }
+    
     deleteAll(email: Email[], root: string) {
         if (root != 'trash')
             this.trash.push(...email);
