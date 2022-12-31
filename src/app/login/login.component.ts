@@ -3,6 +3,8 @@ import { ConnectorService } from 'src/app/services/connector.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Email } from '../Classes/Email';
+import { Gender, User } from '../Classes/user';
 
 @Component({
   selector: 'app-login',
@@ -40,6 +42,11 @@ export class LoginComponent implements OnInit {
       this.authserv.accept = true;
       this.r.navigateByUrl('mail-page');
     }
+
+
+    let e = new User("maro","maro",new Date(),Gender.male,"maro","mmmm");
+
+    console.log(JSON.stringify(e));
 
   }
 }
