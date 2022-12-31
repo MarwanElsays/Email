@@ -41,7 +41,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     ViewMailComponent,
     MailPageComponent,
     SignupComponent,
-    ContactsComponent
+    ContactsComponent,
   ],
   imports: [
     BrowserModule,
