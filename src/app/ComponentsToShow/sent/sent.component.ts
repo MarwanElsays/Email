@@ -1,7 +1,7 @@
 import { ConnectorService } from './../../services/connector.service';
 import { Component, OnInit, ViewChild, ElementRef, AfterContentInit, AfterViewInit } from '@angular/core';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { Email } from 'src/app/Classes/Email';
+import { Email } from 'src/app/Classes/EmailData';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { User } from 'src/app/Classes/user';
 
