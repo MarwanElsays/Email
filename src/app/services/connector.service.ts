@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Email } from '../Classes/Email';
-import { Gender, User } from '../Classes/user';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +22,7 @@ export class ConnectorService {
   // get users() {
   //   return this._users;
   // }
-
+  
   set activeUserID(id:number){
     this._activeUserID = id;
   }

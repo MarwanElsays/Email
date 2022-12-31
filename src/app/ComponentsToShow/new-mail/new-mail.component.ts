@@ -1,9 +1,8 @@
 import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
-import { Email } from 'src/app/Classes/Email';
-import { Adapter } from 'src/app/Classes/Adapter';
+import { HttpClient } from '@angular/common/http';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
+import { EmailData } from 'src/app/Classes/EmailData';
 
 @Component({
   selector: 'app-new-mail',
@@ -24,9 +23,8 @@ export class NewMailComponent {
     const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
-    let to: string[] = email.split(',');
-    const newMail = new Email(to, this.s.activeUser, subject, message, [], 'high');
-    this.backend.sendEmail(JSON.stringify(Adapter.adapt(newMail)));
+    const newMail = new EmailData(1, email, 'high', subject, message, '');
+    this.backend.sendEmail(JSON.stringify(newMail));
   }
 
   Drafts() {

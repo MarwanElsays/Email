@@ -2,7 +2,7 @@ import { User } from './../../Classes/user';
 import { faRotateRight, faTrash, faPenToSquare, faPlus, faSave, faX } from '@fortawesome/free-solid-svg-icons';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ConnectorService } from 'src/app/services/connector.service';
-import { Email } from 'src/app/Classes/Email';
+import { Email } from 'src/app/Classes/EmailData';
 import { first } from 'rxjs';
 import { Contact } from 'src/app/Classes/contact';
 

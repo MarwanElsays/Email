@@ -1,6 +1,6 @@
 import { ConnectorService } from '../../services/connector.service';
 import { Component, OnInit } from '@angular/core';
-import { Email } from 'src/app/Classes/Email';
+import { Email } from 'src/app/Classes/EmailData';
 import { ActivatedRoute } from '@angular/router';
 import { faRotateRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 

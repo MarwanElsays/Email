@@ -3,7 +3,7 @@ import { ConnectorService } from 'src/app/services/connector.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Email } from '../Classes/Email';
+import { Email } from '../Classes/EmailData';
 import { Gender, User } from '../Classes/user';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 

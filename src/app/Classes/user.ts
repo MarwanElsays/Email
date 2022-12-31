@@ -1,32 +1,21 @@
 import { BackendCommunicatorService } from "../services/backend-communicator.service";
 import { Contact } from "./contact";
 import { Email } from "./Email";
-
-export enum Gender {
-    male,
-    female
-}
+import { Folder } from "./Folder";
 
 export class User {
 
     private _id: number;
-    private _firstName: string;
-    private _lastName: string;
-    private _birthDate: Date;
-    private _gender: Gender;
     private _email: string;
     private _password: string;
+    private _folders!: Folder[];
     private _inbox: Email[] = [];
     private _sent: Email[] = [];
     private _trash: Email[] = [];
     private _draft: Email[] = [];
     private _contacts: Contact[] = [];
 
-    constructor(firstName: string, lastName: string, birthDate: Date, gender: Gender, email: string, password: string, id: number, private backend: BackendCommunicatorService) {
-        this._firstName = firstName;
-        this._lastName = lastName;
-        this._birthDate = birthDate;
-        this._gender = gender;
+    constructor(email: string, password: string, id: number, private backend: BackendCommunicatorService) {
         this._email = email;
         this._password = password;
         this._id = id;
@@ -59,6 +48,14 @@ export class User {
         })
         emailIDs = emailIDs.slice(0, emailIDs.length - 2);
         this.backend.deleteMultipleEmails(this.id, emailIDs, root);
+    }
+
+    addCustomFolder(folderName: string) {
+        this.backend.createNewCustomFolder(this.id, folderName);
+    }
+
+    renameCustomFolder(oldName: string, newName: string) {
+        this.backend.renameCustomFolder(this.id, oldName, newName);
     }
 
     get trash() {

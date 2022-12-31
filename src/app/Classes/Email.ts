@@ -1,53 +1,25 @@
-import { User } from "./user";
-
 export class Email {
-    private _to: string[];
-    private _from: User;
-    private _subject: string;
-    private _message: string;
-    private _Attachments: string[];
+    private _sender: string;
+    private _receivers: string[];
     private _priority: string;
-    private _id!: string;
+    private _title: string;
+    private _body: string;
+    private _id: string;
+    private _time: string;
+    private _attachments: string[];
 
-    constructor(to: string[], from: User, subject: string, message: string, Attachments: string[], priority: string) {
-        this._to = to;
-        this._from = from;
-        this._subject = subject;
-        this._message = message;
-        this._Attachments = Attachments;
+    constructor(sender: string, receivers: string[], priority: string, title: string, body: string, id: string, time: string, attachments: string[]) {
+        this._sender = sender;
+        this._receivers = receivers;
         this._priority = priority;
-    }
-
-    get from() {
-        return this._from.email;
-    }
-
-    get fromEmail() {
-        return this._from.id;
+        this._title = title;
+        this._body = body;
+        this._id = id;
+        this._time = time;
+        this._attachments = attachments;
     }
 
     get id() {
         return this._id;
     }
-
-    get to() {
-        return this._to;
-    }
-
-    get subject() {
-        return this._subject;
-    }
-
-    get message() {
-        return this._message;
-    }
-
-    get Attachments() {
-        return this._Attachments;
-    }
-
-    get priority() {
-        return this._priority;
-    }
-
 }
