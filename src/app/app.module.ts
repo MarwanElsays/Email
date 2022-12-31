@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ConnectorService } from './services/connector.service';
-import { ChangebkcolorDirective } from './Directives/changebkcolor.directive';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,7 +22,6 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from './services/auth-service.service';
 import { SignupComponent } from './signup/signup.component';
 import { ContactsComponent } from './ComponentsToShow/contacts/contacts.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
@@ -31,7 +29,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
-    ChangebkcolorDirective,
     LoginComponent,
     MainPageComponent,
     TopMenuComponent,
@@ -53,7 +50,6 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     CommonModule,
     AppRouting,
     ReactiveFormsModule,
-    MatFormFieldModule,
     BrowserAnimationsModule,
     HttpClientModule,
   ],

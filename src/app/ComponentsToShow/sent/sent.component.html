@@ -1,11 +1,13 @@
 <div class="container">
     <div id="top"> 
-        <input type="checkbox">
+        <input type="checkbox" (change)="selectAll()" #checkAllBox>
         <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
+        <div id="trashiconall" (click)="user.deleteAll(checkedEmail,'sent')"><fa-icon [icon]="faTrash"></fa-icon></div>
     </div>
     
     <div id="emailsDiv" #emailsDiv> 
         <div *ngFor="let email of user.sent" [routerLink]="['/mail-page',{outlets:{main:['sentemails','sent',email.id]}}]" class="email">
+            <input type="checkbox" (change)="selectEmail($event,email)" [checked]="allChecked">
             <span class="to">To: {{email.to}}</span>
             <p class="subject"><b>{{email.subject}}</b> - {{email.message}}</p>
             <button  id="trashicon" (click)="user.delete(email, 'sent')"><fa-icon [icon]="faTrash"></fa-icon></button>
@@ -15,3 +17,15 @@
     
     <router-outlet></router-outlet>
 </div>
+
+<!-- [routerLink]="['/mail-page',{outlets:{main:['sentemails','sent',email.id]}}]" -->
+
+<!-- <div class="email">
+            
+    <span class="to">To: asdasdadad</span>
+    <p class="subject"><b>sdasdada</b> asdadadasssssssss
+    asdddddddddddddddddddddddddddddddddddd
+    saddddddddddddddddddddddddddddddddddddddd</p>
+    <button  id="trashicon" ><fa-icon [icon]="faTrash"></fa-icon></button>
+    <span class="datespan">22-2-2022</span>
+</div> -->

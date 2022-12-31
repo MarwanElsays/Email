@@ -52,6 +52,17 @@ export class User {
         }
     }
 
+    deleteAll(email: Email[], root: string) {
+        if (root != 'trash')
+            this.trash.push(...email);
+        switch (root) {
+            case 'inbox': this.inbox.splice(0); break;
+            case 'sent':  this.sent.splice(0);   break;
+            case 'draft': this.draft.splice(0); break;
+            case 'trash': this.trash.splice(0); break;
+        }
+    }
+
     get trash() {
         return this._trash;
     }
