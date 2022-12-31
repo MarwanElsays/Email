@@ -1,8 +1,7 @@
 import { User } from "./user";
 
 export class Email {
-    private _to: string[];
-    private _from: string;
+
     private _subject: string;
     private _message: string;
     private _Attachments: string[];
@@ -10,21 +9,11 @@ export class Email {
     private _priority: string;
 
     constructor(to: User[], from: User, subject: string, message: string, Attachments: string[], date: Date, id: string, priority: string) {
-        this._to = to;
-        this._from = from;
-        this._subject = subject;
+         this._subject = subject;
         this._message = message;
         this._Attachments = Attachments;
         this._date = date
         this._priority = priority;
-    }
-
-    get from() {
-        return this._from.email;
-    }
-
-    get to() {
-        return this._to.email;
     }
 
     get subject() {

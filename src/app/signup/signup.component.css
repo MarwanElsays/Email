@@ -30,16 +30,6 @@ input{
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
-#emaillabel{
-   margin-right: 35px;
-}
-
-label {
-    color: rgb(3, 14, 79);
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 20px;
-}
-
 button {
     width: 300px;
     font-weight: bold;
@@ -51,15 +41,6 @@ button {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     cursor: pointer;
     border-radius: 16px;
-}
-
-#birthDate {
-    display: flex;
-    flex-direction: column;
-}
-
-#birthLabel {
-    margin-left: 12px;
 }
 
 button:active {
@@ -77,4 +58,8 @@ button:active {
     height: 430px;
     border-radius: 20px;    
     background-color: rgb(234,241,251);
+}
+
+span{
+    color:red;
 }

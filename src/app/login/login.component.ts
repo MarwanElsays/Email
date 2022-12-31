@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Email } from '../Classes/Email';
 import { Gender, User } from '../Classes/user';
+import { BackendCommunicatorService } from '../services/backend-communicator.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ import { Gender, User } from '../Classes/user';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private connectorservice: ConnectorService, private r: Router, private authserv: AuthService) { }
+  constructor(private connectorservice: ConnectorService, private r: Router, private authserv: AuthService,private commback:BackendCommunicatorService) { }
 
   reactiveForm!: FormGroup;
 
@@ -32,8 +33,14 @@ export class LoginComponent implements OnInit {
 
     //const user = new User(email,pass);
     let Go: boolean = false;
-    this.connectorservice.users.forEach((u) => {
-      if (u.email == email && u.password == pass) {
+    // this.connectorservice.users.forEach((u) => {
+    //   if (u.email == email && u.password == pass) {
+    //     Go = true;
+    //   }
+    // })
+    this.commback.verifySignIn(email,pass).subscribe((val)=>{
+      if(val != "false"){
+        this.connectorservice.activeUserID = parseInt(val);
         Go = true;
       }
     })
@@ -42,11 +49,9 @@ export class LoginComponent implements OnInit {
       this.authserv.accept = true;
       this.r.navigateByUrl('mail-page');
     }
-
-
-    let e = new User("maro","maro",new Date(),Gender.male,"maro","mmmm");
-
-    console.log(JSON.stringify(e));
-
   }
 }
+
+
+// let e = new User("maro","maro",new Date(),Gender.male,"maro","mmmm");
+// console.log(JSON.stringify(e));
