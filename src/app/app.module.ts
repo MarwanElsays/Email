@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ConnectorService } from './services/connector.service';
-import { ChangebkcolorDirective } from './Directives/changebkcolor.directive';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -28,7 +27,6 @@ import { ContactsComponent } from './ComponentsToShow/contacts/contacts.componen
 @NgModule({
   declarations: [
     AppComponent,
-    ChangebkcolorDirective,
     LoginComponent,
     MainPageComponent,
     TopMenuComponent,

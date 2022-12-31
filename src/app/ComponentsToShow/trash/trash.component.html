@@ -1,11 +1,13 @@
 <div class="container">
     <div id="top"> 
-        <input type="checkbox">
+        <input type="checkbox" (change)="selectAll()" #checkAllBox>
         <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
+        <div id="trashiconall" (click)="user.deleteAll(checkedEmail,'trash')"><fa-icon [icon]="faTrash"></fa-icon></div>
     </div>
     
     <div id="emailsDiv" #emailsDiv> 
         <div *ngFor="let email of user.trash" [routerLink]="['/mail-page',{outlets:{main:['sentemails', 'trash', email.id]}}]" class="email"> 
+            <input type="checkbox" (change)="selectEmail($event,email)" [checked]="allChecked">
             <span class="to">To: {{email.to}}</span>
             <p class="subject"><b>{{email.subject}}</b> - {{email.message}}</p>
             <button  id="trashicon" (click)="user.delete(email, 'trash')"><fa-icon [icon]="faTrash"></fa-icon></button>
