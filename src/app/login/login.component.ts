@@ -12,31 +12,31 @@ import { Router } from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  constructor(private connectorservice: ConnectorService,private r:Router,private authserv : AuthService){}
+  constructor(private connectorservice: ConnectorService, private r: Router, private authserv: AuthService) { }
 
   reactiveForm!: FormGroup;
 
   ngOnInit(): void {
     this.authserv.accept = false;
     this.reactiveForm = new FormGroup({
-      email:new FormControl(null,[Validators.required,Validators.email]),
-      password: new FormControl(null,Validators.required)
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      password: new FormControl(null, Validators.required)
     })
   }
 
-  onSubmit(){
-    const email:string = this.reactiveForm.get('email')?.value;
-    const pass:string = this.reactiveForm.get('password')?.value;
+  onSubmit() {
+    const email: string = this.reactiveForm.get('email')?.value;
+    const pass: string = this.reactiveForm.get('password')?.value;
 
     //const user = new User(email,pass);
-    let Go:boolean = false;
-    this.connectorservice.users.forEach((u) =>{
-      if(u.email == email && u.password == pass){
-       Go = true;
+    let Go: boolean = false;
+    this.connectorservice.users.forEach((u) => {
+      if (u.email == email && u.password == pass) {
+        Go = true;
       }
     })
 
-    if(Go){
+    if (Go) {
       this.authserv.accept = true;
       this.r.navigateByUrl('mail-page');
     }

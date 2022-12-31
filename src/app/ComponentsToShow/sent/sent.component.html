@@ -8,7 +8,7 @@
         <div *ngFor="let email of user.sent" [routerLink]="['/mail-page',{outlets:{main:['sentemails','sent',email.id]}}]" class="email">
             <span class="to">To: {{email.to}}</span>
             <p class="subject"><b>{{email.subject}}</b> - {{email.message}}</p>
-            <button  id="trashicon" (click)="user.delete(email, 'sent')"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <button  id="trashicon" (click)="user.deleteEmail(email, 'sent')"><fa-icon [icon]="faTrash"></fa-icon></button>
             <span class="datespan">{{email.date.getFullYear() + '-' + (email.date.getMonth()+1) + '-' + email.date.getDate()}}</span>
         </div>
     </div>

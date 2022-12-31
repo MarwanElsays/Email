@@ -1,16 +1,22 @@
 import { User } from "./user";
 
 export class Contact {
-    private _name: string;
+    private _firstName: string;
+    private _lastName: string;
     private _accounts: User[];
 
-    constructor(name: string, accounts: User[]) {
-        this._name = name;
+    constructor(firstName: string, lastName: string, accounts: User[]) {
+        this._firstName = firstName;
+        this._lastName = lastName;
         this._accounts = accounts;
     }
 
-    get name(){
-        return this._name;
+    get firstName(){
+        return this._firstName;
+    }
+
+    get lastName() {
+        return this._lastName;
     }
 
     get accounts(){
