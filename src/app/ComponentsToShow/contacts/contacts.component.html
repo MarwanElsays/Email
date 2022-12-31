@@ -2,7 +2,7 @@
     <div id="top"> 
         <input type="checkbox">
         <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
-        <button id="new-contact">
+        <button id="new-contact" (click)="[showEdit = true]">
             <fa-icon [icon]="faPlus" style="margin-right: 5px;"></fa-icon>
             Add Contact
         </button>
@@ -31,10 +31,10 @@
                 <textarea id="email-input" #emails></textarea>
             </div>
             <div id="new-contact-options">
-                <button (click)="addContact()">
+                <button (click)="[addContact(), resetNewContactsDiv()]"> 
                     <fa-icon [icon]="faSave" style="font-size: large;"></fa-icon>
                 </button>
-                <button (click)="toggleShowEdit()">
+                <button (click)="[resetNewContactsDiv()]">
                     <fa-icon [icon]="faX" style="font-size: large;"></fa-icon>
                 </button>
             </div>
@@ -42,7 +42,8 @@
         <div *ngFor="let contact of user.contacts" class="contactEntry">
             <div class="name">
                 <input type="checkbox">
-                {{contact.name}}
+                {{ contact.firstName }}
+                {{ contact.lastName }}
             </div>
             <div class="accounts">
                 <span *ngFor="let acc of contact.accounts">
@@ -51,10 +52,10 @@
                 </span>
             </div>
             <div class="options">
-                <button id="edit" (click)="toggleShowEdit()">
+                <button id="edit" (click)="[initEdit(contact)]">
                     <fa-icon [icon]="faPenToSquare"></fa-icon>
                 </button>
-                <button id="delete">
+                <button id="delete" (click)="user.deleteContact(contact)">
                     <fa-icon [icon]="faTrash"></fa-icon>
                 </button>
             </div>

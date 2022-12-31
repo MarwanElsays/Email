@@ -7,7 +7,7 @@ export enum Gender {
 }
 
 export class User {
-    
+
     private _firstName: string;
     private _lastName: string;
     private _birthDate: Date;
@@ -20,7 +20,7 @@ export class User {
     private _draft: Email[] = [];
     private _contacts: Contact[] = [];
 
-    constructor(firstName: string, lastName: string, birthDate: Date, gender: Gender ,email: string, password: string) {
+    constructor(firstName: string, lastName: string, birthDate: Date, gender: Gender, email: string, password: string) {
         this._firstName = firstName;
         this._lastName = lastName;
         this._birthDate = birthDate;
@@ -29,8 +29,8 @@ export class User {
         this._password = password;
     }
 
-    addContacts(name:string,users:User[]){
-        this._contacts.push(new Contact(name,users));
+    addContacts(firstName: string, lastName: string, users: User[]) {
+        this._contacts.push(new Contact(firstName, lastName, users));
     }
 
     addToSent(mail: Email) {
@@ -41,17 +41,19 @@ export class User {
         this.inbox.push(mail);
     }
 
-    delete(email: Email, root: string) {
+    deleteEmail(email: Email, root: string) {
         if (root != 'trash')
             this.trash.push(email);
         switch (root) {
             case 'inbox': this.inbox.splice(this.inbox.indexOf(email), 1); break;
-            case 'sent':  this.sent.splice(this.sent.indexOf(email), 1);   break;
+            case 'sent': this.sent.splice(this.sent.indexOf(email), 1);    break;
             case 'draft': this.draft.splice(this.draft.indexOf(email), 1); break;
             case 'trash': this.trash.splice(this.trash.indexOf(email), 1); break;
         }
     }
 
+    deleteContact(contact: Contact) {
+        this.contacts.splice(this.contacts.indexOf(contact), 1);
     deleteAll(email: Email[], root: string) {
         if (root != 'trash')
             this.trash.push(...email);
