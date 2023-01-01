@@ -1,34 +1,73 @@
 <div [ngClass]="{hidden:Do()}" class="container">
         <ul id="items">
-                <li [routerLink]="[{outlets:{main:'inbox'}}]" [routerLinkActive]="'active'"
-                        [ngClass]="Do()?'hide':'itemslist'">
-                        <fa-icon [icon]="faInbox"></fa-icon>
-                        <button [ngClass]="{hidebutton:Do()}">Inbox</button>
-                </li>
-                <li [routerLink]="[{outlets:{main:'sent'}}]" [routerLinkActive]="'active'"
-                        [ngClass]="Do()?'hide':'itemslist'">
-                        <fa-icon [icon]="faPaperPlane"></fa-icon>
-                        <button [ngClass]="{hidebutton:Do()}">Sent</button>
-                </li>
-                <li [routerLink]="[{outlets:{main:'trash'}}]" [routerLinkActive]="'active'"
-                        [ngClass]="Do()?'hide':'itemslist'">
-                        <fa-icon [icon]="faTrash"></fa-icon>
-                        <button [ngClass]="{hidebutton:Do()}">Trash</button>
-                </li>
-                <li [routerLink]="[{outlets:{main:'draft'}}]" [routerLinkActive]="'active'"
-                        [ngClass]="Do()?'hide':'itemslist'">
-                        <fa-icon [icon]="faNoteSticky"></fa-icon>
-                        <button [ngClass]="{hidebutton:Do()}">Draft</button>
-                </li>
                 <li [routerLink]="[{outlets:{main:'new-mail'}}]" [routerLinkActive]="'active'"
                         [ngClass]="Do()?'hide':'itemslist'">
                         <i class="bi bi-pen-fill"></i>
                         <button [ngClass]="{hidebutton:Do()}">New Mail</button>
+                </li>
+                <li (click)="changeFolderName('inbox')" [routerLink]="[{outlets:{main:'folder'}}]"
+                        [ngClass]="Do()?'hide':'itemslist'">
+                        <fa-icon [icon]="faInbox"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">Inbox</button>
+                </li>
+                <li (click)="changeFolderName('sent')" [routerLink]="[{outlets:{main:'folder'}}]"
+                        [ngClass]="Do()?'hide':'itemslist'">
+                        <fa-icon [icon]="faPaperPlane"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">Sent</button>
+                </li>
+                <li (click)="changeFolderName('trash')" [routerLink]="[{outlets:{main:'folder'}}]"
+                        [ngClass]="Do()?'hide':'itemslist'">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">Trash</button>
+                </li>
+                <li (click)="changeFolderName('draft')" [routerLink]="[{outlets:{main:'folder'}}]"
+                        [ngClass]="Do()?'hide':'itemslist'">
+                        <fa-icon [icon]="faNoteSticky"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">Draft</button>
                 </li>
                 <li [routerLink]="[{outlets:{main:'contacts'}}]" [routerLinkActive]="'active'"
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faContactBook"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Contacts</button>
                 </li>
+                <li *ngFor="let folder of folders" (click)="changeFolderName(folder)" [routerLink]="[{outlets:{main:'folder'}}]"
+                        [ngClass]="Do()?'hide':'itemslist'">
+                        <fa-icon [icon]="faFolder"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">
+                                {{ folder }} 
+                        </button>
+                        <button id="edit" (click)="initEdit(folder)">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon>
+                        </button>
+                        <button id="delete" (click)="deleteFolder(folder)">
+                                <fa-icon [icon]="faTrash"></fa-icon>
+                        </button>
+                </li>
+                <li [ngClass]="Do()?'hide':'itemslist'" (click)="initEdit('')">
+                        <fa-icon [icon]="faFolderPlus"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">Add Folder</button>
+                </li>
         </ul>
+
+        <!-- edit custom folder -->
+        <div class="edit-folder" [ngClass]="{show: showEdit}">
+                <div id="sub-div" style="width: 100%; font-size: xx-large; font-family: Cambria;">
+                    Add/Edit Custom Folder
+                </div>
+                <div id="names">
+                    <div id="sub-div">
+                        <label style="margin-right: 7px;">Name</label>
+                        <input type="text" #Name>
+                    </div>
+                </div>
+                <div id="new-folder-options">
+                    <button class="options" (click)="addFolder()">
+                        <fa-icon [icon]="faSave" style="font-size: large;"></fa-icon>
+                    </button>
+                    <button class="options" (click)="endEdit()">
+                        <fa-icon [icon]="faX" style="font-size: large;"></fa-icon>
+                    </button>
+                </div>
+        </div>
+        <!------------------------->
 </div>

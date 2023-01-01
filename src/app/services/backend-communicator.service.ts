@@ -1,7 +1,6 @@
 import { Email } from 'src/app/Classes/Email';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -36,10 +35,10 @@ export class BackendCommunicatorService {
   }
 
   public getCustomFolders(userId: number) {
-    return this.http.get('http://localhost:8080/getAllCustomFolders', { 
+    return this.http.get<string[]>('http://localhost:8080/getAllCustomFolders', { 
       params: new HttpParams()
       .set('userId', userId) 
-    }).subscribe();
+    });
   }
 
   public getEmailsNumber(userId: number, folderName: string) {
@@ -51,11 +50,11 @@ export class BackendCommunicatorService {
   }
 
   public createNewCustomFolder(userId: number, folderName: string) {
-    return this.http.get('http://localhost:8080/createNewCustomFolder', { 
+    return this.http.get('http://localhost:8080/createNewCustomFolder', {
       params: new HttpParams()
       .set('userId', userId)
-      .set('folderName', folderName) 
-    }).subscribe();
+      .set('folderName', folderName)
+    });
   }
 
   public renameCustomFolder(userId: number, oldFolderName: string, newFolderName: string) {
@@ -64,7 +63,7 @@ export class BackendCommunicatorService {
       .set('userId', userId)
       .set('oldFolderName', oldFolderName)
       .set('newFolderName', newFolderName) 
-    }).subscribe();
+    });
   }
 
   public deleteCustomFolder(userId: number, folderName: string) {
@@ -72,7 +71,7 @@ export class BackendCommunicatorService {
       params: new HttpParams()
       .set('userId', userId)
       .set('folderName', folderName) 
-    }).subscribe();
+    });
   }
 
   //sendingEmail

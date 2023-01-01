@@ -6,13 +6,10 @@ import { AppComponent } from './app.component';
 import { ConnectorService } from './services/connector.service';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { DraftComponent } from './ComponentsToShow/Draft/draft.component';
+import { BrowserModule } from '@angular/platform-browser';  
 import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
 import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
 import { ViewMailComponent } from './ComponentsToShow/view-mail/view-mail.component';
-import { SentComponent } from './ComponentsToShow/sent/sent.component';
-import { TrashComponent } from './ComponentsToShow/trash/trash.component';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
 import { MailPageComponent } from './mail-page/mail-page.component';
 import { MainPageComponent } from './main-page/main-page.component';
@@ -24,6 +21,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ContactsComponent } from './ComponentsToShow/contacts/contacts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FolderComponent } from './folder/folder.component';
 
 
 @NgModule({
@@ -33,15 +31,13 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MainPageComponent,
     TopMenuComponent,
     LeftMenuComponent,
-    DraftComponent,
     InboxComponent,
-    SentComponent,
-    TrashComponent,
     NewMailComponent,
     ViewMailComponent,
     MailPageComponent,
     SignupComponent,
     ContactsComponent,
+    FolderComponent,
   ],
   imports: [
     BrowserModule,
