@@ -1,4 +1,5 @@
 export class Email {
+    
     private _sender: string;
     private _receivers: string[];
     private _priority: string;
