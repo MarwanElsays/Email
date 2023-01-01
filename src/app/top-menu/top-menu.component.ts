@@ -23,8 +23,8 @@ export class TopMenuComponent implements OnInit {
 
   ngOnInit(): void {
    this.reactiveForm = new FormGroup({
-    Criteria:new FormControl(null),
-    Folder:new FormControl(null),
+    Criteria:new FormControl('all'),
+    Folder:new FormControl('All Folders'),
    })
   }
 
