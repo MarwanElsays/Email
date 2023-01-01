@@ -20,7 +20,7 @@ const appRoute: Routes = [
     path: 'mail-page',
     component: MailPageComponent,canActivate:[MailPageRouteGaurdService],
     children: [
-      { path: '', component: InboxComponent, outlet: 'main' },
+      { path: '', component: NewMailComponent, outlet: 'main' },
       { path: 'contacts', component: ContactsComponent, outlet: 'main' },
       { path: 'inbox', component: FolderComponent, outlet: 'main' },
       // { path: 'sent', component: SentComponent, outlet: 'main' },

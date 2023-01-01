@@ -1,5 +1,4 @@
 export type Email = {
-    
     sender: string;
     receivers: string[];
     priority: string;
@@ -7,5 +6,5 @@ export type Email = {
     body: string;
     id: string;
     time: string;
-    attachments: string[];
-}
+    attachments: string[]; 
+} 
