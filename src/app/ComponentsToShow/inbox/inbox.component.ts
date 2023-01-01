@@ -1,9 +1,11 @@
+import { EmailData } from './../../Classes/emailData';
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Email } from 'src/app/Classes/Email';
 import { User } from 'src/app/Classes/user';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
 import { ConnectorService } from 'src/app/services/connector.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-inbox',
@@ -18,14 +20,15 @@ export class InboxComponent implements OnInit{
   styleIt:boolean = true;
   faRotateRight = faRotateRight;
   faTrash = faTrash;
+  emails:Email[] = [];
   allChecked:boolean = false;
   checkedEmail:Email[] = [];
   
   ngOnInit(): void {
+
     this.backcomm.getEmailsList(this.s.activeUserID,'inbox',1,1,0).subscribe((emails)=>{
-      console.log(emails);
+      this.emails = emails;
     });
-    
   }
 
   private _user: number = this.s.activeUserID;
