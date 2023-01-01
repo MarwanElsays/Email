@@ -31,6 +31,10 @@ export class ConnectorService {
     return this._activeUserID;
   }
 
+  set activeUserID(id: number) {
+    this._activeUserID = id;
+  }
+
   // get allMails() {
   //   return this._allMails;
   // }

@@ -5,11 +5,11 @@
         <div id="rotateicon"><fa-icon [icon]="faRotateRight"></fa-icon></div>
     </div> -->
     <div id="InboxemailsDiv">
-        <div id="subject">{{email?.subject}}</div>
-        <div id="To" *ngIf="root == 'inbox' || root == 'trash'">From: {{email?.from}}</div>
-        <div id="To" *ngIf="root != 'inbox'">To: {{email?.to}}</div>
+        <div id="subject">{{email?.title}}</div>
+        <div id="To" *ngIf="root == 'inbox' || root == 'trash'">From: {{email?.sender}}</div>
+        <div id="To" *ngIf="root != 'inbox'">To: {{email?.receivers}}</div>
         <div id="message">
-            {{email?.message}}
+            {{email?.body}}
         </div>
     </div>
 </div>

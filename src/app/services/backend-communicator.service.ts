@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Email } from '../Classes/Email';
 
 @Injectable({
   providedIn: 'root'
@@ -28,14 +29,14 @@ export class BackendCommunicatorService {
   }
 
   public getEmailsList(userId: number, folderName: string, sortType: number, sortIdntifier: number, start: number) {
-    return this.http.get('http://localhost:8080/getEmailsList', {
+    return this.http.get<Email[]>('http://localhost:8080/getEmailsList', {
       params: new HttpParams()
         .set('userId', userId)
         .set('folderName', folderName)
         .set('sortType', sortType)
         .set('sortIdntifier', sortIdntifier)
         .set('start', start)
-    }).subscribe();
+    });
   }
 
   public getCustomFolders(userId: number) {
