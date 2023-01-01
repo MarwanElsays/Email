@@ -35,10 +35,10 @@ export class BackendCommunicatorService {
   }
 
   public getCustomFolders(userId: number) {
-    return this.http.get('http://localhost:8080/getAllCustomFolders', { 
+    return this.http.get<string[]>('http://localhost:8080/getAllCustomFolders', { 
       params: new HttpParams()
       .set('userId', userId) 
-    }).subscribe();
+    });
   }
 
   public getEmailsNumber(userId: number, folderName: string) {

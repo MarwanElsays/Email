@@ -1,6 +1,6 @@
 <div class="container">
     <div id="top"> 
-        <!-- <input type="checkbox" (change)="selectAll()" #checkAllBox> -->
+        <input type="checkbox" (change)="selectAll()" #checkAllBox>
         <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
         <!-- <div id="trashiconall" (click)="user.deleteAll(checkedEmail,'inbox')"><fa-icon [icon]="faTrash"></fa-icon></div> -->
     </div>
@@ -10,8 +10,8 @@
             <div class="mode" (click)="styleIt = true" [ngClass]="{activetab:styleIt}">Default</div>
             <div class="mode" (click)="styleIt = false" [ngClass]="{activetab:!styleIt}">Priority</div>
         </div>
-        <div *ngFor="let email of emails" [routerLink]="['/mail-page',{outlets:{main:['sentemails', 'inbox', email.id]}}]" class="email">
-            <!-- <input type="checkbox" (change)="selectEmail($event,email)" [checked]="allChecked"> -->
+        <div *ngFor="let email of folder.emails" [routerLink]="['/mail-page',{outlets:{main:['sentemails', email.id]}}]" class="email">
+            <input type="checkbox" (change)="selectEmail($event,email)" [checked]="allChecked">
             <span class="to">To: {{email.receivers[0]}}</span>
             <p class="subject"><b>{{email.title}}</b> - {{email.body}}</p>
             <!-- <button  id="trashicon" (click)="user.deleteEmail(email, 'inbox')"><fa-icon [icon]="faTrash"></fa-icon></button> -->

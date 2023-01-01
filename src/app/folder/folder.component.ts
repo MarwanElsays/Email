@@ -1,8 +1,13 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Email } from '../Classes/Email';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 import { ConnectorService } from '../services/connector.service';
+
+export class Folder {
+  name!: string;
+  emails: Email[] = [];
+}
 
 @Component({
   selector: 'app-folder',
@@ -10,33 +15,45 @@ import { ConnectorService } from '../services/connector.service';
   styleUrls: ['./folder.component.css']
 })
 export class FolderComponent implements OnInit {
-  name!: string;
-  emails!: Email[];
+  folder: Folder = new Folder();
   checkedEmail:Email[] = [];
+  allChecked: boolean = false;
   @ViewChild('checkAllBox') checkAllBox!: ElementRef;
 
-  styleIt:boolean = true;
+  styleIt: boolean = true;
   faRotateRight = faRotateRight;
   faTrash = faTrash;
   
   constructor(private s: ConnectorService, private backend: BackendCommunicatorService) {}
 
   ngOnInit(): void {
-    this.name = 'inbox';
-    this.backend.getEmailsList(this.s.activeUserID, this.name, 1, 1, 0).subscribe((emails) => {
-      this.emails = emails;
+    this.s.changeFolderName.subscribe((name) => {
+      this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0).subscribe((emails) => {
+        console.log(this.folder.name);
+        this.folder.name = name;
+        this.folder.emails = emails;
+      });
     });
   }
 
-  // selectAll(){
-  //   let isChecked = (<HTMLInputElement>this.checkAllBox.nativeElement).checked;
-  //   if(isChecked){
-  //     // this.allChecked = true;
-  //     this.checkedEmail = this.user.sent.slice();
-  //   }
-  //   else{
-  //     this.allChecked = false;
-  //     this.checkedEmail = [];
-  //   }
-  // }
+  selectEmail(event: Event, email: Email) {
+    let isChecked = (<HTMLInputElement>event.target).checked;
+    if(isChecked)
+      this.checkedEmail.push(email);
+    else{
+      this.checkedEmail.splice(this.checkedEmail.indexOf(email),1);
+    }
+  }
+
+  selectAll() {
+    let isChecked = (<HTMLInputElement>this.checkAllBox.nativeElement).checked;
+    if(isChecked){
+      this.allChecked = true;
+      this.checkedEmail = this.folder.emails.slice();
+    }
+    else {
+      this.allChecked = false;
+      this.checkedEmail = [];
+    }
+  }
 }
