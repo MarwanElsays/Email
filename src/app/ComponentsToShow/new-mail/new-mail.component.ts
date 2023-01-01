@@ -2,7 +2,7 @@ import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
-import { EmailData } from 'src/app/Classes/EmailData';
+import { EmailData } from 'src/app/Classes/emailData';
 
 @Component({
   selector: 'app-new-mail',
@@ -23,7 +23,7 @@ export class NewMailComponent {
     const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
-    const newMail = new EmailData(1, email, 'high', subject, message, '');
+    const newMail = new EmailData(this.s.activeUserID, email, 'high', subject, message, '');
     this.backend.sendEmail(JSON.stringify(newMail));
   }
 

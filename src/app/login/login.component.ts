@@ -3,8 +3,6 @@ import { ConnectorService } from 'src/app/services/connector.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Email } from '../Classes/EmailData';
-import { Gender, User } from '../Classes/user';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 
 @Component({
@@ -40,15 +38,19 @@ export class LoginComponent implements OnInit {
     // })
     this.commback.verifySignIn(email,pass).subscribe((val)=>{
       if(val != "false"){
+        // Go = true;
+        this.authserv.accept = true;
+        this.r.navigateByUrl('mail-page');
         this.connectorservice.activeUserID = parseInt(val);
-        Go = true;
       }
     })
 
-    if (Go) {
-      this.authserv.accept = true;
-      this.r.navigateByUrl('mail-page');
-    }
+    // console.log(this.connectorservice.activeUserID);
+    //  console.log("ana"+Go)
+    // if (Go) {
+    //   this.authserv.accept = true;
+    //   this.r.navigateByUrl('mail-page');
+    // }
   }
 }
 
