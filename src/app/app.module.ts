@@ -24,6 +24,7 @@ import { SignupComponent } from './signup/signup.component';
 import { ContactsComponent } from './ComponentsToShow/contacts/contacts.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FolderComponent } from './folder/folder.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     MailPageComponent,
     SignupComponent,
     ContactsComponent,
+    FolderComponent,
   ],
   imports: [
     BrowserModule,

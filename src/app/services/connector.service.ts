@@ -18,10 +18,6 @@ export class ConnectorService {
   incrementID() {
     this._ID++;
   }
-    
-  // get users() {
-  //   return this._users;
-  // }
 
   get ID() {
     return this._ID;
@@ -29,14 +25,6 @@ export class ConnectorService {
 
   get hideMenu() {
     return this._hideMenu;
-  }
-
-  // get activeUser() {
-  //   return this._activeUser;
-  // }
-
-  get allMails() {
-    return this._allMails;
   }
 
   
