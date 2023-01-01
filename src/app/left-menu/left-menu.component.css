@@ -2,6 +2,7 @@
     background-color:#f6f8fc;
     width:250px;
     height: 605px;
+    position: relative;
 }
 
 #items{
@@ -97,3 +98,78 @@ li.active:hover{
     padding-left: 50px;
     background-color: rgb(6, 85, 183);
 }
+
+
+/* edit folder */
+.edit-folder {
+    position: absolute;
+    width: 500px;
+    height: 200px;
+    left: 500px;
+    top: 150px;
+    box-shadow: 0px 3px 3px 2px grey;
+    grid-template-rows: 2fr 1fr 1fr;
+    background-color: rgb(234,241,251);
+    border-radius: 20px;
+    display: none;
+    z-index: 10;
+}
+
+#sub-div {
+    width: 100%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.show {
+    display: grid;
+}
+
+input[type="text"] {
+    font-size: 16px;
+    width: 260px;
+    height: min-content;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-block: 2px;
+    background-color: white;
+}
+
+#names {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+#new-folder-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.options {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    margin-left: 10px;
+    background-color: seashell;
+    border-width: 2px;
+    border-color: black;
+    border-style: solid;
+    cursor: pointer;
+}
+
+.options:hover {
+    background-color: rgb(223, 222, 222);
+}
+
+.options:active {
+    background-color: rgb(6, 85, 183);
+    transform: translateY(1px);
+}
+
+/* ***************** */

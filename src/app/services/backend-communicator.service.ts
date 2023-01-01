@@ -50,11 +50,11 @@ export class BackendCommunicatorService {
   }
 
   public createNewCustomFolder(userId: number, folderName: string) {
-    return this.http.get('http://localhost:8080/createNewCustomFolder', { 
+    return this.http.get('http://localhost:8080/createNewCustomFolder', {
       params: new HttpParams()
       .set('userId', userId)
-      .set('folderName', folderName) 
-    }).subscribe();
+      .set('folderName', folderName)
+    });
   }
 
   public renameCustomFolder(userId: number, oldFolderName: string, newFolderName: string) {
@@ -63,7 +63,7 @@ export class BackendCommunicatorService {
       .set('userId', userId)
       .set('oldFolderName', oldFolderName)
       .set('newFolderName', newFolderName) 
-    }).subscribe();
+    });
   }
 
   public deleteCustomFolder(userId: number, folderName: string) {
@@ -71,7 +71,7 @@ export class BackendCommunicatorService {
       params: new HttpParams()
       .set('userId', userId)
       .set('folderName', folderName) 
-    }).subscribe();
+    });
   }
 
   //sendingEmail
