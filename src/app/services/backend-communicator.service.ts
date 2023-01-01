@@ -112,22 +112,22 @@ export class BackendCommunicatorService {
 
   //search 
   public searchFile(userId: number, required: string, folderName: string, criteria: string) {
-    return this.http.get('http://localhost:8080/searchFile', { 
+    return this.http.get<Email[]>('http://localhost:8080/searchFile', { 
       params: new HttpParams()
       .set('userId', userId)
       .set('required', required)
       .set('folderName', folderName)
       .set('criteria', criteria) 
-    }).subscribe();
+    });
   }
 
   public searchAll(userId: number, required: string, criteria: string) {
-    return this.http.get('http://localhost:8080/searchAll', { 
+    return this.http.get<Email[]>('http://localhost:8080/searchAll', { 
       params: new HttpParams()
       .set('userId', userId)
       .set('required', required)
       .set('criteria', criteria) 
-    }).subscribe();
+    });
   }
 
   //filter

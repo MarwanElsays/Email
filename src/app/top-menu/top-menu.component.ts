@@ -1,7 +1,9 @@
 import { ConnectorService } from './../services/connector.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { faBars, faMagnifyingGlass, faSliders } from '@fortawesome/free-solid-svg-icons';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { BackendCommunicatorService } from '../services/backend-communicator.service';
+import { Email } from '../Classes/Email';
 
 @Component({
   selector: 'app-top-menu',
@@ -10,36 +12,41 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class TopMenuComponent implements OnInit {
 
-  constructor(private s: ConnectorService) { }
+  constructor(private s: ConnectorService,private commBack:BackendCommunicatorService) { }
   faBars = faBars;
   faMagnifyingGlass = faMagnifyingGlass;
   faSliders = faSliders;
-  hide:boolean = true;
+  hide:boolean = false;
   reactiveForm!:FormGroup;
+  SearchedEmails:Email[] = [];
+  @ViewChild('searchInput')searchInput!:ElementRef;
 
   ngOnInit(): void {
    this.reactiveForm = new FormGroup({
-    sender:new FormControl(null,Validators.email),
-    Receiver:new FormControl(null,Validators.email),
-    Importance:new FormControl(null),
-    Subject:new FormControl(null),
-    Body:new FormControl(null),
-    Attachments:new FormControl(null),
+    Criteria:new FormControl(null),
     Folder:new FormControl(null),
    })
   }
 
   onSubmit(){
-    let SearchArray:string[] = [];
-    SearchArray.push(this.reactiveForm.get('sender')?.value);
-    SearchArray.push(this.reactiveForm.get('Receiver')?.value);
-    SearchArray.push(this.reactiveForm.get('Importance')?.value);
-    SearchArray.push(this.reactiveForm.get('Subject')?.value);
-    SearchArray.push(this.reactiveForm.get('Body')?.value);
-    SearchArray.push(this.reactiveForm.get('Attachments')?.value);
-    SearchArray.push(this.reactiveForm.get('Folder')?.value);
+    let Criteria = this.reactiveForm.get('Criteria')?.value;
+    let Folder = this.reactiveForm.get('Folder')?.value;
+    let searchtext = (<HTMLInputElement>this.searchInput.nativeElement).value;
     this.hide = false;
-    console.log(SearchArray);
+    
+    if(Folder == "All Folders"){
+      this.commBack.searchAll(this.s.activeUserID,searchtext,Criteria).subscribe((emails)=>{
+        this.SearchedEmails = emails;
+        console.log(emails);
+      })
+    }else{
+      this.commBack.searchFile(this.s.activeUserID,searchtext,Folder,Criteria).subscribe((emails)=>{
+        this.SearchedEmails = emails;
+        console.log(emails);
+      })
+    }
+    
+    
   }
 
   Do() {
