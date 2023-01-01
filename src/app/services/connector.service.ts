@@ -1,14 +1,17 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
+import { Email } from '../Classes/Email';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ConnectorService {
+export class ConnectorService implements OnInit{
+
+  ngOnInit(): void {
+    /* get id of curr user from service */
+  }
   private _ID: number = 0;
   private _hideMenu: boolean = false;
-  // private _allMails: Email[] = [];
-  // private _users: User[] = [new User("Ali", "Mones", new Date(2003, 2, 3), Gender.male, "ali@m.com", "pwp"), 
-  //                           new User("Marwan", "Mostafa", new Date(2002, 1, 28), Gender.male, 'marwan@m.com', "wow")];
+  private _allMails: Email[] = [];
   private _activeUserID: number = 0;
   
   toggleMenu() {

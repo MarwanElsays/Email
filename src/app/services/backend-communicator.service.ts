@@ -1,3 +1,4 @@
+import { Email } from 'src/app/Classes/Email';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -9,7 +10,7 @@ export class BackendCommunicatorService {
 
   constructor(private http: HttpClient) { }
 
-  public verifySignIn(emailAddress: string, password: string): Observable<string> {
+  public verifySignIn(emailAddress: string, password: string){
     // "false" if new user, userId if current user
     return this.http.get<string>('http://localhost:8080/signIn', {
       params: new HttpParams()
@@ -20,22 +21,18 @@ export class BackendCommunicatorService {
 
   public verifySignUp(emailAddress: string, password: string) {
     // false if current user, id if new user
-    return this.http.get('http://localhost:8080/signUp', {
-      params: new HttpParams()
-        .set('emailAddress', emailAddress)
-        .set('password', password)
-    });
+    return this.http.get<string>('http://localhost:8080/signUp', { params: new HttpParams()
+                                                                  .set('emailAddress', emailAddress)
+                                                                  .set('password', password) });
   }
 
   public getEmailsList(userId: number, folderName: string, sortType: number, sortIdntifier: number, start: number) {
-    return this.http.get('http://localhost:8080/getEmailsList', {
-      params: new HttpParams()
-        .set('userId', userId)
-        .set('folderName', folderName)
-        .set('sortType', sortType)
-        .set('sortIdntifier', sortIdntifier)
-        .set('start', start)
-    }).subscribe();
+    return this.http.get<Email[]>('http://localhost:8080/getEmailsList', { params: new HttpParams()
+                                                                    .set('userId', userId)
+                                                                    .set('folderName', folderName)
+                                                                    .set('sortType', sortType.toString())
+                                                                    .set('sortIdntifier', sortIdntifier.toString())
+                                                                    .set('start', start.toString()) });
   }
 
   public getCustomFolders(userId: number) {

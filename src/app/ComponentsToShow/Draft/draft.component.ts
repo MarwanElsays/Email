@@ -11,7 +11,7 @@ import { User } from 'src/app/Classes/user';
 export class DraftComponent {
 
   constructor(private s: ConnectorService) { }
-  private _user: User = this.s.activeUser;
+  private _user: number = this.s.activeUserID;
   faRotateRight = faRotateRight;
   faTrash = faTrash;
 

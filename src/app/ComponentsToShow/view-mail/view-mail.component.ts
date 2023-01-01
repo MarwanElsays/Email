@@ -1,6 +1,6 @@
 import { ConnectorService } from '../../services/connector.service';
 import { Component, OnInit } from '@angular/core';
-import { Email } from 'src/app/Classes/EmailData';
+import { Email } from 'src/app/Classes/Email';
 import { ActivatedRoute } from '@angular/router';
 import { faRotateRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
@@ -22,7 +22,7 @@ export class ViewMailComponent implements OnInit {
     this.activeRoute.paramMap.subscribe((param) => {
       const emailID = parseInt(<string>param.get('id'));
       this._root = <string>param.get('root');
-      this._email = this.s.allMails.find(x => x.id == emailID);
+      // this._email = this.s.allMails.find(x => x.id == emailID);
     })
   }
 
