@@ -29,7 +29,6 @@ export class FolderComponent implements OnInit {
   ngOnInit(): void {
     this.s.changeFolderName.subscribe((name) => {
       this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0).subscribe((emails) => {
-        console.log(this.folder.name);
         this.folder.name = name;
         this.folder.emails = emails;
       });
