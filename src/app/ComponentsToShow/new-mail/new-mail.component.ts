@@ -2,7 +2,7 @@ import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
-import { EmailData } from 'src/app/Classes/emailData';
+import { EmailData } from 'src/app/Classes/EmailData';
 
 @Component({
   selector: 'app-new-mail',

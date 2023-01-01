@@ -1,7 +1,7 @@
+import { Folder } from "../folder/folder.component";
 import { BackendCommunicatorService } from "../services/backend-communicator.service";
 import { Contact } from "./contact";
 import { Email } from "./Email";
-import { Folder } from "./Folder";
 
 export class User {
 

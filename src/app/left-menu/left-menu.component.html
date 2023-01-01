@@ -1,24 +1,34 @@
 <div [ngClass]="{hidden:Do()}" class="container">
         <ul id="items">
-                <li [routerLink]="[{outlets:{main:'inbox'}}]" [routerLinkActive]="'active'"
+                <li (click)="changeFolderName('inbox')" [routerLink]="[{outlets:{main:'folder'}}]"
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faInbox"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Inbox</button>
                 </li>
-                <li [routerLink]="[{outlets:{main:'sent'}}]" [routerLinkActive]="'active'"
+                <li (click)="changeFolderName('sent')" [routerLink]="[{outlets:{main:'folder'}}]"
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faPaperPlane"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Sent</button>
                 </li>
-                <li [routerLink]="[{outlets:{main:'trash'}}]" [routerLinkActive]="'active'"
+                <li (click)="changeFolderName('trash')" [routerLink]="[{outlets:{main:'folder'}}]"
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faTrash"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Trash</button>
                 </li>
-                <li [routerLink]="[{outlets:{main:'draft'}}]" [routerLinkActive]="'active'"
+                <li (click)="changeFolderName('draft')" [routerLink]="[{outlets:{main:'folder'}}]"
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faNoteSticky"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Draft</button>
+                </li>
+                <li (click)="changeFolderName('custom1')" [routerLink]="[{outlets:{main:'folder'}}]"
+                        [ngClass]="Do()?'hide':'itemslist'">
+                        <fa-icon [icon]="faNoteSticky"></fa-icon>
+                        <button [ngClass]="{hidebutton:Do()}">Custom Folder</button>
+                        <ul>
+                                <!-- <li *ngFor="let customFolder of s.getFolderNames()">
+                                        {{ customFolder }}
+                                </li> -->
+                        </ul>
                 </li>
                 <li [routerLink]="[{outlets:{main:'new-mail'}}]" [routerLinkActive]="'active'"
                         [ngClass]="Do()?'hide':'itemslist'">

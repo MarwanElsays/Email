@@ -1,6 +1,6 @@
 .container{
     position: relative;
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     width:100%;
     height: 664px;
     border-radius: 20px;
@@ -32,6 +32,60 @@ input[type="checkbox"]{
     color:rgb(94, 95, 95);
 }
 
+#modes{
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(255, 255, 255);
+    width:99.3%;
+    height:50px;
+}
+
+.mode{
+    font-weight: bold;
+    text-align: center;
+    line-height: 300%;
+    width:180px;
+    color: #3f3f3f;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    user-select: none;
+}
+
+.activetab{
+    color: rgb(10, 45, 136);
+    border-bottom:3px solid rgb(10, 45, 136); 
+}
+
+button{
+    width:99.3%;
+    height: 100px;
+    background-color: #e1ecfc;
+    color: rgb(56, 53, 53);
+    border: none;
+    border-bottom: 0.1px solid rgb(187, 173, 247);
+}
+
+#InboxemailsDiv{
+    width:100%;
+    height: 619px;
+    border-bottom-right-radius: 17px;
+    border-bottom-left-radius: 17px;
+    overflow-y: auto;
+}
+
+#InboxemailsDiv::-webkit-scrollbar{
+    width: 14px;
+}
+
+#InboxemailsDiv::-webkit-scrollbar-track{
+    background-color: rgb(255, 255, 255);
+}
+
+#InboxemailsDiv::-webkit-scrollbar-thumb{
+    background-color: rgb(1, 15, 54);
+    border-radius: 45px;
+}
+
 .email{
     display: flex;
     flex-direction: row;
@@ -48,6 +102,7 @@ input[type="checkbox"]{
     background-color: #d9e7fc;
     box-shadow: 0px 2px 2px 1px grey;
 }
+
 
 .email input[type="checkbox"]{
     margin-left: 20px;
@@ -109,7 +164,8 @@ input[type="checkbox"]{
 .datespan{
     font-size: 14px;
     color: #00245a;
-    width:80px;
+    width: 80px;
+    word-wrap: break-word;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     line-height: 350%;
@@ -135,4 +191,5 @@ input[type="checkbox"]{
     background-color: rgb(1, 15, 54);
     border-radius: 45px;
 }
+
 /*f2f6fc*/
