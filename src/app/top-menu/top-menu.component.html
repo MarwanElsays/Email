@@ -3,50 +3,74 @@
     <div id="logo" [routerLink]="['/mail-page', {outlets:{main:['inbox']}}]"><b style="color: rgb(3, 63, 116);">M</b>mail</div>
     <div id="Search">
         <fa-icon [icon]="faMagnifyingGlass" id="fasearch" class="icons"></fa-icon>
-        <input type="search" placeholder="search">
+        <input type="search" placeholder="search" #searchInput>
        <fa-icon [icon]="faSliders" id="faSliders" class="icons" (click)="hide=!hide"></fa-icon>
     </div>
 </div>
 <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" *ngIf="hide">
-    <div class="searchcriteria">
-        <label>sender</label>
-        <input type="email" placeholder="sender" formControlName="sender">
+    <h2>Select a Search Criteria</h2>
+    <div class="containCriteria">
+        <div class="searchcriteria">
+            <label>Criteria</label>
+            <select formControlName="Criteria">
+                <option>body</option>
+                <option>subject</option>
+                <option>sender</option>
+                <option>receiver</option>
+                <option>attachment</option>
+                <option>all</option>
+            </select>
+        </div>
+        <div class="searchcriteria">
+            <label>Folder</label>
+            <select formControlName="Folder">
+                <option>All Folders</option>
+                <option>inbox</option>
+                <option>sent</option>
+                <option>draft</option>
+                <option>trash</option>
+            </select>
+        </div>
+        <!-- <input type="email" placeholder="sender" formControlName="sender"> -->
     </div>
-    <div class="searchcriteria">
-        <label>Receiver</label>
-        <input type="email" placeholder="Receiver" formControlName="Receiver">
-    </div>
-    <div class="searchcriteria">
-        <label>Importance</label>
-        <select formControlName="Importance">
-            <option>low</option>
-            <option>middle</option>
-            <option>high</option>
-            <option>highhh</option>
-        </select>
-    </div>
-    <div class="searchcriteria">
-        <label>Subject</label>
-        <input type="text" placeholder="Subject" formControlName="Subject">
-    </div>
-    <div class="searchcriteria">
-        <label>Body</label>
-        <input type="text" placeholder="Body" formControlName="Body">
-    </div>
-    <div class="searchcriteria">
-        <label>Attachments</label>
-        <input type="text" placeholder="Attachments" formControlName="Attachments">
-    </div>
-    <div class="searchcriteria">
-        <label>Folder</label>
-        <select formControlName="Folder">
-            <option>All Mails</option>
-            <option>sent</option>
-            <option>inbox</option>
-            <option>sent</option>
-        </select>
-    </div>
+
     <button type="submit" id="submit">
         search
     </button>
 </form>
+
+<!-- <div class="searchcriteria">
+    <label>Folder</label>
+    <select formControlName="Folder">
+        <option>All Mails</option>
+        <option>sent</option>
+        <option>inbox</option>
+        <option>sent</option>
+    </select>
+</div> -->
+
+<!-- <div class="searchcriteria">
+    <label>Receiver</label>
+    <input type="email" placeholder="Receiver" formControlName="Receiver">
+</div>
+<div class="searchcriteria">
+    <label>Importance</label>
+    <select formControlName="Importance">
+        <option>low</option>
+        <option>middle</option>
+        <option>high</option>
+        <option>highhh</option>
+    </select>
+</div>
+<div class="searchcriteria">
+    <label>Subject</label>
+    <input type="text" placeholder="Subject" formControlName="Subject">
+</div>
+<div class="searchcriteria">
+    <label>Body</label>
+    <input type="text" placeholder="Body" formControlName="Body">
+</div>
+<div class="searchcriteria">
+    <label>Attachments</label>
+    <input type="text" placeholder="Attachments" formControlName="Attachments">
+</div> -->
