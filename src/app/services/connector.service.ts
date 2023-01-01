@@ -31,10 +31,9 @@ export class ConnectorService {
     return this._activeUserID;
   }
 
-  get allMails() {
-    return this._allMails;
-  }
-
+  // get allMails() {
+  //   return this._allMails;
+  // }
   
 }
 
