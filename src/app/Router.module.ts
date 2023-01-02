@@ -21,7 +21,7 @@ const appRoute: Routes = [
     children: [
       { path: '', component: NewMailComponent, outlet: 'main' },
       { path: 'contacts', component: ContactsComponent, outlet: 'main' },
-      { path: 'folder', component: FolderComponent, outlet: 'main' },
+      { path: 'folder/:root', component: FolderComponent, outlet: 'main' },
       { path: 'new-mail', component: NewMailComponent, outlet: 'main' },
       { path: 'sentemails/:id', component: ViewMailComponent, outlet: 'main' },
     ]
