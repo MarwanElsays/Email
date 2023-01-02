@@ -16,6 +16,7 @@ export class ConnectorService implements OnInit{
   private _ID: number = 0;
   private _hideMenu: boolean = false;
   private _folderName: string = '';
+  folders: string[] = [];
   private _allMails: Email[] = [];
   private _activeUserID: number = 0;
   changeFolderName = new EventEmitter<string>();

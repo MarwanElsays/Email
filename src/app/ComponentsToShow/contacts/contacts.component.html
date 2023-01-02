@@ -1,8 +1,8 @@
-<!-- <div class="container">
+<div class="container">
     <div id="top"> 
         <input type="checkbox">
         <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
-        <button id="new-contact" (click)="[showEdit = true]">
+        <button id="new-contact" (click)="initEdit(emptyContact())">
             <fa-icon [icon]="faPlus" style="margin-right: 5px;"></fa-icon>
             Add Contact
         </button>
@@ -10,18 +10,16 @@
 
     
     <div id="contactsDiv" #contactsDivs>
+    
+        <!-- edit / add contact -->
         <div class="edit-contact" [ngClass]="{show: showEdit}">
             <div id="sub-div" style="width: 100%; font-size: xx-large; font-family: Cambria;">
                 Add/Edit Contact
             </div>
             <div id="names">
                 <div id="sub-div">
-                    <label style="margin-right: 7px;">First Name</label>
-                    <input type="text" #firstName>
-                </div>
-                <div id="sub-div">
-                    <label style="margin-right: 7px;">Last Name</label>
-                    <input type="text" #lastName>
+                    <label style="margin-right: 7px;">Name</label>
+                    <input type="text" #name>
                 </div>
             </div>
             <div id="emails">
@@ -31,37 +29,38 @@
                 <textarea id="email-input" #emails></textarea>
             </div>
             <div id="new-contact-options">
-                <button (click)="[addContact(), resetNewContactsDiv()]"> 
+                <button (click)="addContact()">
                     <fa-icon [icon]="faSave" style="font-size: large;"></fa-icon>
                 </button>
-                <button (click)="[resetNewContactsDiv()]">
+                <button (click)="endEdit()">
                     <fa-icon [icon]="faX" style="font-size: large;"></fa-icon>
-                </button> -->
-            <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div *ngFor="let contact of user.contacts" class="contactEntry">
+                </button>
+            </div>
+        </div>
+        <!----------------->
+
+        <div *ngFor="let contact of contacts" class="contactEntry">
             <div class="name">
                 <input type="checkbox">
-                {{ contact.firstName }}
-                {{ contact.lastName }}
+                {{ contact.contactName }}
             </div>
             <div class="accounts">
-                <span *ngFor="let acc of contact.accounts">
-                   {{acc.email}}
+                <span *ngFor="let account of contact.emailAddresses">
+                   {{ account }}
                    <br>
                 </span>
             </div>
             <div class="options">
-                <button id="edit" (click)="[initEdit(contact)]">
+                <button id="edit" (click)="initEdit(contact)">
                     <fa-icon [icon]="faPenToSquare"></fa-icon>
                 </button>
-                <button id="delete" (click)="user.deleteContact(contact)">
+                <button id="delete" (click)="deleteContact(contact)">
                     <fa-icon [icon]="faTrash"></fa-icon>
                 </button>
             </div>
-        </div> -->
+        </div>
         
-    <!-- </div> -->
+    </div>
     
     <!-- <router-outlet></router-outlet> -->
-<!-- </div> -->
+</div>

@@ -12,7 +12,7 @@ import { lastValueFrom } from 'rxjs';
 export class LeftMenuComponent implements OnInit {
 
   constructor(public s: ConnectorService, public backend: BackendCommunicatorService) { }
-  folders: string[] = [];
+  // folders: string[] = [];
   showEdit: boolean = false;
   @ViewChild('Name') newFolderName?: ElementRef;
   oldFolderName: string = '';
@@ -30,7 +30,7 @@ export class LeftMenuComponent implements OnInit {
   
   ngOnInit(): void {
     this.backend.getCustomFolders(this.s.activeUserID).subscribe((folders) => {
-      this.folders = folders;
+      this.s.folders = folders;
     });
   }
 
@@ -58,7 +58,7 @@ export class LeftMenuComponent implements OnInit {
   endEdit() {
     this.showEdit = false;
     this.backend.getCustomFolders(this.s.activeUserID).subscribe((folders) => {
-      this.folders = folders;
+      this.s.folders = folders;
       this.oldFolderName = '';
     });
   }
