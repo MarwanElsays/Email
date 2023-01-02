@@ -95,7 +95,7 @@
             <div class="mode" (click)="styleIt = false" [ngClass]="{activetab:!styleIt}">Priority</div>
         </div>
         <div *ngFor="let email of folder.emails"  class="email" (click)="[viewMail(email)]">
-            <input type="checkbox" (change)="[selectEmail(email, $event)]" (click)="$event.stopPropagation()" [checked]="allChecked">
+            <input type="checkbox" style="margin-bottom: 15px;" (change)="[selectEmail(email, $event)]" (click)="$event.stopPropagation()" [checked]="allChecked">
             <span class="to">To: {{email.receivers[0]}}</span>
             <p class="subject"><b>{{email.title}}</b> - {{email.body}}</p>
             <select id="move" (change)="[moveEmail(email, $event)]" (click)="[$event.stopPropagation()]">

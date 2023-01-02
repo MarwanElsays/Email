@@ -11,14 +11,8 @@ export class ConnectorService{
   hideMenu: boolean = false;
   folders: string[] = [];
   activeUserID: number = parseInt(<string>window.localStorage.getItem('userID'));
-  changeFolderName = new EventEmitter<string>();
   
   toggleMenu() {
     this.hideMenu = !this.hideMenu;
   }
-  
-  // changeFolderNameEmit(name: string) {
-  //   this.changeFolderName.emit(name);
-  // }
-
 }
