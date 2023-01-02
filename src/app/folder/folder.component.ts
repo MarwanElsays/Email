@@ -39,7 +39,10 @@ export class FolderComponent implements OnInit {
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
     })
-    this.folders = this.s.folders;    this.filterGroup = new FormGroup({
+    
+    this.folders = this.s.folders;  
+
+    this.filterGroup = new FormGroup({
       filterType: new FormControl('priority'),
       priorityIdentifier: new FormControl('low'),
       attachIdentifier: new FormControl('no attachment'),
