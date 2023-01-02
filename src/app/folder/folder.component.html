@@ -4,7 +4,7 @@
         <div>
             <fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon>
         </div>
-        <select id="move" (change)="[moveMultiple($event)]">
+        <select id="move-all" (change)="[moveMultiple($event)]">
             <option value="">Move To</option>
             <option>inbox</option>
             <option>sent</option>
@@ -86,26 +86,27 @@
                 filter
             </button>
         </form>
+        <!---------------------------------->
     </div>
     
     <div id="InboxemailsDiv" #emailsDiv>
-        <div id="modes"> 
+        <div id="modes">
             <div class="mode" (click)="styleIt = true" [ngClass]="{activetab:styleIt}">Default</div>
             <div class="mode" (click)="styleIt = false" [ngClass]="{activetab:!styleIt}">Priority</div>
         </div>
-        <div *ngFor="let email of folder.emails"  class="email" (change)="[viewMail(email, $event)]">
-            <input type="checkbox" (change)="selectEmail($event, email)" [checked]="allChecked">
+        <div *ngFor="let email of folder.emails"  class="email" (click)="[viewMail(email)]">
+            <input type="checkbox" (change)="[selectEmail(email, $event)]" (click)="$event.stopPropagation()" [checked]="allChecked">
             <span class="to">To: {{email.receivers[0]}}</span>
             <p class="subject"><b>{{email.title}}</b> - {{email.body}}</p>
-            <select id="move" (change)="[moveEmail(email, $event)]">
+            <select id="move" (change)="[moveEmail(email, $event)]" (click)="[$event.stopPropagation()]">
                 <option value="">Move To</option>
-                <option>inbox</option>
-                <option>sent</option>
-                <option>trash</option>
-                <option>draft</option>
-                <option *ngFor="let folder of s.folders">{{ folder }}</option>
+                <option id="move">inbox</option>
+                <option id="move">sent</option>
+                <option id="move">trash</option>
+                <option id="move">draft</option>
+                <option id="move" *ngFor="let folder of s.folders">{{ folder }}</option>
             </select>
-            <button  id="trashicon" (click)="deleteEmail(email.id, $event)"><fa-icon [icon]="faTrash"></fa-icon></button>
+            <button  id="trashicon" (click)="[deleteEmail(email.id, $event), $event.stopPropagation()]"><fa-icon [icon]="faTrash"></fa-icon></button>
             <span class="datespan">{{ email.time }}</span>
         </div>
     </div>

@@ -39,42 +39,39 @@ export class FolderComponent implements OnInit {
     this.sortGroup = new FormGroup({
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
-    })
-    this.activeRoute.paramMap.subscribe(async (param) => {
-      const name = param.get('root');
-      this.folder.name = <string>name;
-      this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
-
+    });
     this.filterGroup = new FormGroup({
       filterType: new FormControl('priority'),
       priorityIdentifier: new FormControl('low'),
       attachIdentifier: new FormControl('no attachment'),
-    })
+    });
+    this.activeRoute.paramMap.subscribe(async (param) => {
+      const name = param.get('root');
+      this.folder.name = <string>name;
+      this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
+    });
   }
 
   async moveEmail(email: Email, event: Event) {
-    event.stopImmediatePropagation();
-    event.stopPropagation();
-    let dstFolder = (<HTMLInputElement>event.target).value;
+    const dstFolder = (<HTMLInputElement>event.target).value;
     console.log(this.folder.name);
     await lastValueFrom(this.backend.MoveEmail(this.s.activeUserID, email.id, this.folder.name, dstFolder));
-    location.reload();
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
   async moveMultiple(event: Event) {
-    let dstFolder = (<HTMLInputElement>event.target).value;
+    const dstFolder = (<HTMLInputElement>event.target).value;
     let emailsString: string = ''
     this.checkedEmail.forEach((email) => {
       emailsString += email.id + ",";
-    })
-    emailsString.slice(0, -1);
+    });
+    emailsString = emailsString.slice(0, -1);
+    this.checkedEmail = [];
     await lastValueFrom(this.backend.MoveMultipleEmails(this.s.activeUserID, emailsString, this.folder.name, dstFolder));
-    // location.reload();
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
-  selectEmail(event: Event, email: Email) {
-    event.stopImmediatePropagation(); 
-    console.log(event.target);
+  selectEmail(email: Email, event: Event) {
     let isChecked = (<HTMLInputElement>event.target).checked;
     if(isChecked)
       this.checkedEmail.push(email);
@@ -113,7 +110,6 @@ export class FolderComponent implements OnInit {
   }
 
   async deleteEmail(emailId:string, event: Event){
-    event.stopImmediatePropagation();
     if(this.folder.name != 'trash')
       await lastValueFrom(this.backend.deleteEmail(this.s.activeUserID,emailId,this.folder.name));
     else
@@ -125,15 +121,15 @@ export class FolderComponent implements OnInit {
   async deleteAll(){
     let emailIds ='';
     this.checkedEmail.forEach(e =>{
-      emailIds+=e.id+',';
-    })
-
+      emailIds += e.id + ',';
+    });
+    emailIds = emailIds.slice(0, -1);
+    this.checkedEmail = [];
     await lastValueFrom(this.backend.deleteMultipleEmails(this.s.activeUserID,emailIds,this.folder.name));
     this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
-  viewMail(email: Email, event: Event) {
-    console.log(event.target);
+  viewMail(email: Email) {
     this.r.navigate(['/mail-page',{outlets:{main:['sentemails', email.id]}}]);
   }
 

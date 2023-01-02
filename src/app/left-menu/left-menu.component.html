@@ -37,14 +37,14 @@
                         <button [ngClass]="{hidebutton:Do()}">
                                 {{ folder }}
                         </button>
-                        <button id="edit" (click)="initEdit(folder)">
+                        <button id="edit" (click)="initEdit($event, folder)">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon>
                         </button>
-                        <button id="delete" (click)="deleteFolder(folder)">
+                        <button id="delete" (click)="deleteFolder($event, folder)">
                                 <fa-icon [icon]="faTrash"></fa-icon>
                         </button>
                 </li>
-                <li [ngClass]="Do()?'hide':'itemslist'" (click)="initEdit('')">
+                <li [ngClass]="Do()?'hide':'itemslist'" (click)="initEdit($event, '')">
                         <fa-icon [icon]="faFolderPlus"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Add Folder</button>
                 </li>
