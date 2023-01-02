@@ -36,17 +36,7 @@ export class TopMenuComponent implements OnInit {
     let searchtext = (<HTMLInputElement>this.searchInput.nativeElement).value;
     this.hide = false;
     
-    if(Folder == "All Folders"){
-      this.commBack.searchAll(this.s.activeUserID,searchtext,Criteria).subscribe((emails)=>{
-        this.SearchedEmails = emails;
-        console.log(emails);
-      })
-    }else{
-      this.commBack.searchFile(this.s.activeUserID,searchtext,Folder,Criteria).subscribe((emails)=>{
-        this.SearchedEmails = emails;
-        console.log(emails);
-      })
-    }    
+    this.r.navigate(['/mail-page',{outlets:{main:['folder','search']}}],{queryParams:{Criteria:Criteria,Folder:Folder,searchtext:searchtext}});  
   }
 
   logOut(){
@@ -60,3 +50,16 @@ export class TopMenuComponent implements OnInit {
   }
 
 }
+
+
+// if(Folder == "All Folders"){
+//   this.commBack.searchAll(this.s.activeUserID,searchtext,Criteria).subscribe((emails)=>{
+//     this.SearchedEmails = emails;
+//     console.log(emails);
+//   })
+// }else{
+//   this.commBack.searchFile(this.s.activeUserID,searchtext,Folder,Criteria).subscribe((emails)=>{
+//     this.SearchedEmails = emails;
+//     console.log(emails);
+//   })
+// }  

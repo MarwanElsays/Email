@@ -15,10 +15,10 @@
         <div id="trashiconall" (click)="deleteAll()">
             <fa-icon [icon]="faTrash"></fa-icon>
         </div>
-        <button id="sortButton" (click)="showsort=!showsort">
+        <button id="sortButton" (click)="showsort=!showsort" *ngIf="!inSearch">
             Sort <fa-icon [icon]="faSort"></fa-icon>
         </button>
-        <button id="filterButton" (click)="showfilter=!showfilter">
+        <button id="filterButton" (click)="showfilter=!showfilter" *ngIf="!inSearch">
             filter <fa-icon [icon]="faFilter"></fa-icon>
         </button>
 
