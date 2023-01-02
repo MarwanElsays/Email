@@ -24,11 +24,13 @@ export class FolderComponent implements OnInit {
   allChecked: boolean = false;
   @ViewChild('checkAllBox') checkAllBox!: ElementRef;
   sortGroup!:FormGroup;
+  filterGroup!:FormGroup;
   styleIt: boolean = true;
   faRotateRight = faRotateRight;
   faTrash = faTrash;
   faSort = faSort;
-  showsort = false;
+  showsort = true;    /* to show the sort div*/
+  showfilter = true;  /* to show the filter div*/
   faFilter = faFilter;
   
   constructor(public s: ConnectorService, private backend: BackendCommunicatorService, private r: Router, private activeRoute: ActivatedRoute) {}
@@ -42,7 +44,12 @@ export class FolderComponent implements OnInit {
       const name = param.get('root');
       this.folder.name = <string>name;
       this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
-    });
+
+    this.filterGroup = new FormGroup({
+      filterType: new FormControl('priority'),
+      priorityIdentifier: new FormControl('low'),
+      attachIdentifier: new FormControl('no attachment'),
+    })
   }
 
   async moveEmail(email: Email, event: Event) {
@@ -130,4 +137,13 @@ export class FolderComponent implements OnInit {
     this.r.navigate(['/mail-page',{outlets:{main:['sentemails', email.id]}}]);
   }
 
+  async onFilter(){
+    this.showfilter = false;
+    let required;
+    let Criteria = this.filterGroup.get('filterType')?.value;
+    if(Criteria == "priority")required = this.filterGroup.get('priorityIdentifier')?.value;
+    else required = this.filterGroup.get('attachIdentifier')?.value;
+
+    this.folder.emails = await lastValueFrom(this.backend.filter(this.s.activeUserID,required,this.folder.name,Criteria));
+  }
 }

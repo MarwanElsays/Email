@@ -137,13 +137,13 @@ export class BackendCommunicatorService {
 
   //filter
   public filter(userId: number, required: string, fileName: string, criteria: string) {
-    return this.http.get('http://localhost:8080/filter', {
+    return this.http.get<Email[]>('http://localhost:8080/filter', { 
       params: new HttpParams()
-        .set('userId', userId)
-        .set('required', required)
-        .set('fileName', fileName)
-        .set('criteria', criteria)
-    }).subscribe();
+      .set('userId', userId)
+      .set('required', required)
+      .set('fileName', fileName)
+      .set('criteria', criteria) 
+    });
   }
 
   //sort
