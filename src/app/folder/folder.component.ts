@@ -1,5 +1,7 @@
+import { FormGroup, FormControl } from '@angular/forms';
 import { Component, ElementRef, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { faRotateRight, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faRotateRight, faTrash,faSort,faFilter} from '@fortawesome/free-solid-svg-icons';
+import { lastValueFrom } from 'rxjs';
 import { Email } from '../Classes/Email';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 import { ConnectorService } from '../services/connector.service';
@@ -19,19 +21,26 @@ export class FolderComponent implements OnInit {
   checkedEmail:Email[] = [];
   allChecked: boolean = false;
   @ViewChild('checkAllBox') checkAllBox!: ElementRef;
-
+  sortGroup!:FormGroup;
   styleIt: boolean = true;
   faRotateRight = faRotateRight;
   faTrash = faTrash;
+  faSort = faSort;
+  showsort = false;
+  faFilter = faFilter;
   
   constructor(private s: ConnectorService, private backend: BackendCommunicatorService) {}
 
   ngOnInit(): void {
-    this.s.changeFolderName.subscribe((name) => {
-      this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0).subscribe((emails) => {
-        this.folder.name = name;
-        this.folder.emails = emails;
-      });
+    this.sortGroup = new FormGroup({
+      sortType: new FormControl('priority'),
+      sortIdentifier: new FormControl('Ascending'),
+    })
+
+
+     this.s.changeFolderName.subscribe(async (name) => {
+     this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0));
+     this.folder.name = name;
     });
   }
 
@@ -54,5 +63,40 @@ export class FolderComponent implements OnInit {
       this.allChecked = false;
       this.checkedEmail = [];
     }
+  }
+
+  async onSort(){
+    this.showsort = false;
+    let sortType;
+    let sortIdentifier;
+
+    if(this.sortGroup.get('sortType')?.value == "priority")sortType = 0;
+    else sortType = 1;
+
+    if(this.sortGroup.get('sortIdentifier')?.value == "Ascending")sortIdentifier = 0;
+    else sortIdentifier = 1;
+     
+    this.folder.emails = await lastValueFrom(this.backend.sort(this.s.activeUserID,this.folder.name,sortType,sortIdentifier));
+
+    console.log("hi",this.folder.emails );
+  }
+
+  async deleteEmail(emailId:string){
+    if(this.folder.name != 'trash')
+      await lastValueFrom(this.backend.deleteEmail(this.s.activeUserID,emailId,this.folder.name));
+    else
+      await lastValueFrom(this.backend.deleteEmailForever(this.s.activeUserID,emailId));
+
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+  }
+
+  async deleteAll(){
+    let emailIds ='';
+    this.checkedEmail.forEach(e =>{
+      emailIds+=e.id+',';
+    })
+
+    await lastValueFrom(this.backend.deleteMultipleEmails(this.s.activeUserID,emailIds,this.folder.name));
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 }

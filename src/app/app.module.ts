@@ -7,7 +7,6 @@ import { ConnectorService } from './services/connector.service';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';  
-import { InboxComponent } from './ComponentsToShow/inbox/inbox.component';
 import { NewMailComponent } from './ComponentsToShow/new-mail/new-mail.component';
 import { ViewMailComponent } from './ComponentsToShow/view-mail/view-mail.component';
 import { LeftMenuComponent } from './left-menu/left-menu.component';
@@ -31,7 +30,6 @@ import { FolderComponent } from './folder/folder.component';
     MainPageComponent,
     TopMenuComponent,
     LeftMenuComponent,
-    InboxComponent,
     NewMailComponent,
     ViewMailComponent,
     MailPageComponent,

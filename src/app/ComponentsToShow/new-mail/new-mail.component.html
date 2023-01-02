@@ -15,7 +15,7 @@
     </div>
     
     <div id="mail-options">
-        <button id="send" (click)="send()" [routerLink]="['/mail-page', {outlets:{main:'sent'}}]">
+        <button id="send" (click)="send()" >
             Send
         </button>
     
@@ -24,8 +24,10 @@
             Attach
         </button>
     
-        <button id="delete" (click)="Drafts()" [routerLink]="[{outlets:{main:'draft'}}]">
+        <button id="delete" (click)="Drafts()" [routerLink]="[{outlets:{main:'folder'}}]">
             Delete Draft
         </button>
     </div>
 </div>
+
+<!-- [routerLink]="['/mail-page', {outlets:{main:'folder'}}]" -->

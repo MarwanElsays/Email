@@ -1,8 +1,10 @@
+import { Router } from '@angular/router';
 import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
-import { EmailData } from 'src/app/Classes/EmailData';
+import { EmailData } from 'src/app/Classes/emailData';
+import { lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-new-mail',
@@ -11,7 +13,7 @@ import { EmailData } from 'src/app/Classes/EmailData';
 })
 export class NewMailComponent {
 
-  constructor(private s: ConnectorService, private http: HttpClient, private backend: BackendCommunicatorService) { }
+  constructor(private s: ConnectorService, private http: HttpClient, private backend: BackendCommunicatorService,private r:Router) { }
 
   @ViewChild('emailbox') emailbox: ElementRef | undefined;
   @ViewChild('subjectbox') subjectbox: ElementRef | undefined;
@@ -19,12 +21,12 @@ export class NewMailComponent {
   @ViewChild('fileUpload') fileUpload: ElementRef | undefined;
   private attachements: FileList | undefined;
 
-  send() {
+  async send() {
     const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
     const newMail = new EmailData(this.s.activeUserID, email, 'high', subject, message, '');
-    this.backend.sendEmail(JSON.stringify(newMail));
+    await lastValueFrom(this.backend.sendEmail(JSON.stringify(newMail)));
   }
 
   Drafts() {
@@ -48,3 +50,5 @@ export class NewMailComponent {
   }
 
 }
+
+
