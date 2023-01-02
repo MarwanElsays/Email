@@ -1,10 +1,13 @@
-import { User } from './../../Classes/user';
 import { faRotateRight, faTrash, faPenToSquare, faPlus, faSave, faX } from '@fortawesome/free-solid-svg-icons';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ConnectorService } from 'src/app/services/connector.service';
-import { Email } from 'src/app/Classes/Email';
-import { first } from 'rxjs';
-import { Contact } from 'src/app/Classes/contact';
+import { lastValueFrom } from 'rxjs';
+import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
+
+export class Contact {
+  contactName: string = '';
+  emailAddresses: string[] = [];
+}
 
 
 @Component({
@@ -14,12 +17,16 @@ import { Contact } from 'src/app/Classes/contact';
 })
 
 
-export class ContactsComponent {
-  @ViewChild('firstName') firstName?: ElementRef;
-  @ViewChild('lastName') lastName?: ElementRef;
+export class ContactsComponent implements OnInit {
+  @ViewChild('name') name?: ElementRef;
   @ViewChild('emails') emails?: ElementRef;
-  private _user: number = this.s.activeUserID;
+  contacts: Contact[] = [];
   showEdit: boolean = false;
+  oldName: string = '';
+  oldEmails: string = '';
+  
+  
+  // icons
   faRotateRight = faRotateRight;
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
@@ -27,48 +34,57 @@ export class ContactsComponent {
   faSave = faSave;
   faX = faX;
   
-  constructor(private s: ConnectorService) { }
+  constructor(private s: ConnectorService, private backend: BackendCommunicatorService) { }
+  async ngOnInit() {
+    this.contacts = await lastValueFrom(this.backend.getAllContacts(this.s.activeUserID));
+  }
 
-  // addContact() {
-  //   const firstName = (<HTMLInputElement>this.firstName?.nativeElement).value;
-  //   const lastName = (<HTMLInputElement>this.lastName?.nativeElement).value;
-  //   const emailString = (<HTMLInputElement>this.emails?.nativeElement).value;
-  //   const emails: string[] = emailString.split('\n');
-  //   let contactEmails: User[] = [];
-  //   let found: boolean = false;
-  //   this.s.users.forEach((user) => {
-  //     emails.forEach((email) => {
-  //       if (email == user.email) {
-  //         contactEmails.push(user);
-  //         found = true;
-  //       }
-  //     })
-  //   });
-  //   if (found)
-  //     this.user.addContacts(firstName, lastName, contactEmails);
-  //   console.log(this.user.contacts);
-  // }
+  
+  initEdit(contact: Contact) {
+    this.showEdit = true;
+    (<HTMLInputElement>this.name?.nativeElement).value = contact.contactName;
+    let emails: string = '';
+    contact.emailAddresses.forEach((email) => {
+      emails += email + ',';
+    });
+    emails = emails.slice(0, -1);
+    (<HTMLInputElement>this.emails?.nativeElement).value = emails;
+    this.oldName = contact.contactName;
+    this.oldEmails = emails;
+  }
 
-  // initEdit(contact: Contact) {
-  //   this.showEdit = true;
-  //   (<HTMLInputElement>this.firstName?.nativeElement).value = contact.firstName;
-  //   (<HTMLInputElement>this.lastName?.nativeElement).value = contact.lastName;
-  //   let emails: string = '';
-  //   contact.accounts.forEach((user) => {
-  //     emails += user.email + '\n';
-  //   });
-  //   (<HTMLInputElement>this.emails?.nativeElement).value = emails;
-  //   // this.user.deleteContact(contact);
-  // }
+  async addContact() {
+    const name = (<HTMLInputElement>this.name?.nativeElement).value;
+    const emails = (<HTMLInputElement>this.emails?.nativeElement).value;
+    console.log(this.oldEmails, this.oldName);
+    if (this.oldName == '' && this.oldEmails == '')
+      this.contacts = await lastValueFrom(this.backend.addNewContact(this.s.activeUserID, name, emails));
+    else {
+      if (this.oldName != name) {
+        this.contacts = await lastValueFrom(this.backend.editContactName(this.s.activeUserID, this.oldName, name));
+      }
+      if (this.oldEmails != emails) {
+        this.contacts = await lastValueFrom(this.backend.editContactEmails(this.s.activeUserID, this.oldEmails, emails));
+      }
+    }
+    this.endEdit();
+    console.log(this.contacts);
+  }
 
-  // resetNewContactsDiv() {
-  //   this.showEdit = false;
-  //   (<HTMLInputElement>this.firstName?.nativeElement).value = '';
-  //   (<HTMLInputElement>this.lastName?.nativeElement).value = '';
-  //   (<HTMLInputElement>this.emails?.nativeElement).value = '';
-  // }
+  async deleteContact(contact: Contact) {
+    console.log(this.contacts);
+    this.contacts = await lastValueFrom(this.backend.deleteContact(this.s.activeUserID, contact.contactName));
+    console.log(this.contacts);
+    this.endEdit();
+  }
+  
+  endEdit() {
+    this.showEdit = false;
+    this.oldEmails = '';
+    this.oldName = '';
+  }
 
-  get user() {
-    return this._user;
+  emptyContact() {
+    return new Contact();
   }
 }

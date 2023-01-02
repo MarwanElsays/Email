@@ -11,8 +11,8 @@ export class ConnectorService{
   constructor(private backend: BackendCommunicatorService) {}
 
   hideMenu: boolean = false;
+  folders: string[] = [];
   folderName: string = '';
-  allMails: Email[] = [];
   activeUserID: number = 0;
   changeFolderName = new EventEmitter<string>();
   

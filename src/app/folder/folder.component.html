@@ -4,6 +4,14 @@
         <div>
             <fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon>
         </div>
+        <select id="move" (change)="[moveMultiple($event)]">
+            <option value="">Move To</option>
+            <option>inbox</option>
+            <option>sent</option>
+            <option>trash</option>
+            <option>draft</option>
+            <option *ngFor="let folder of s.folders">{{ folder }}</option>
+        </select>
         <div id="trashiconall" (click)="deleteAll()">
             <fa-icon [icon]="faTrash"></fa-icon>
         </div>
@@ -89,6 +97,14 @@
             <input type="checkbox" (change)="selectEmail($event,email)" [checked]="allChecked">
             <span class="to">To: {{email.receivers[0]}}</span>
             <p class="subject"><b>{{email.title}}</b> - {{email.body}}</p>
+            <select id="move" (change)="[moveEmail(email, $event)]">
+                <option value="">Move To</option>
+                <option>inbox</option>
+                <option>sent</option>
+                <option>trash</option>
+                <option>draft</option>
+                <option *ngFor="let folder of s.folders">{{ folder }}</option>
+            </select>
             <button  id="trashicon" (click)="deleteEmail(email.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
             <span class="datespan">{{ email.time }}</span>
         </div>

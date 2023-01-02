@@ -46,7 +46,7 @@ export class User {
         email.forEach((email) => {
             emailIDs += email.id;
         })
-        emailIDs = emailIDs.slice(0, emailIDs.length - 2);
+        emailIDs = emailIDs.slice(0, emailIDs.length - 2); //investigate
         this.backend.deleteMultipleEmails(this.id, emailIDs, root);
     }
 
