@@ -44,11 +44,13 @@ export class FolderComponent implements OnInit{
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
     });
+
     this.filterGroup = new FormGroup({
       filterType: new FormControl('priority'),
       priorityIdentifier: new FormControl('low'),
       attachIdentifier: new FormControl('no attachment'),
     });
+
     this.activeRoute.paramMap.subscribe(async (param) => {
       const name = param.get('root');
       this.folder.name = <string>name;
@@ -75,21 +77,40 @@ export class FolderComponent implements OnInit{
 
   async moveEmail(email: Email, event: Event) {
     const dstFolder = (<HTMLInputElement>event.target).value;
-    console.log(this.folder.name);
+    
+    let ok = true;
+    if(this.folder.name == 'search'){
+      this.folder.name = this.SearchedFolder;
+      this.folder.emails = this.folder.emails.filter((e) => e.id != email.id)
+      ok = false;
+    }
+    
     await lastValueFrom(this.backend.MoveEmail(this.s.activeUserID, email.id, this.folder.name, dstFolder));
-    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+    if(ok)
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
   async moveMultiple(event: Event) {
     const dstFolder = (<HTMLInputElement>event.target).value;
     let emailsString: string = ''
+    let ok = true;
+
     this.checkedEmail.forEach((email) => {
       emailsString += email.id + ",";
     });
     emailsString = emailsString.slice(0, -1);
+
+    if(this.folder.name == 'search'){
+      this.folder.name = this.SearchedFolder;
+      let emailidesss = emailsString.split(',');
+      this.folder.emails = this.folder.emails.filter((e) => !emailidesss.includes(e.id))
+      ok = false;
+    }
+
     this.checkedEmail = [];
     await lastValueFrom(this.backend.MoveMultipleEmails(this.s.activeUserID, emailsString, this.folder.name, dstFolder));
-    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+    if(ok)
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
   selectEmail(email: Email, event: Event) {
