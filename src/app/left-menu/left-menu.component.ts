@@ -41,7 +41,8 @@ export class LeftMenuComponent implements OnInit {
 
 
   // folder manipulation //////
-  initEdit(currName: string) {
+  initEdit(event: Event, currName: string) {
+    event.stopImmediatePropagation();
     this.showEdit = true;
     (<HTMLInputElement>this.newFolderName?.nativeElement).value = currName;
     this.oldFolderName = currName;
@@ -64,7 +65,8 @@ export class LeftMenuComponent implements OnInit {
     });
   }
 
-  async deleteFolder(name: string) {
+  async deleteFolder(event: Event, name: string) {
+    event.stopImmediatePropagation();
     await lastValueFrom(this.backend.deleteCustomFolder(this.s.activeUserID, name));
     this.endEdit();
   }
