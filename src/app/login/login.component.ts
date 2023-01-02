@@ -36,12 +36,12 @@ export class LoginComponent implements OnInit {
     //     Go = true;
     //   }
     // })
-    this.commback.verifySignIn(email,pass).subscribe((val)=>{
-      if(val != "false"){
+    this.commback.verifySignIn(email,pass).subscribe((value:string)=>{
+      if(value.toString() != 'false'){
         // Go = true;
         this.authserv.accept = true;
         this.r.navigateByUrl('mail-page');
-        this.connectorservice.activeUserID = parseInt(val);
+        this.connectorservice.activeUserID = parseInt(value);
       }
     })
 

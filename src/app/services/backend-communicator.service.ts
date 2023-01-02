@@ -1,6 +1,7 @@
 import { Email } from 'src/app/Classes/Email';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,7 @@ export class BackendCommunicatorService {
 
   constructor(private http: HttpClient) { }
 
-  public verifySignIn(emailAddress: string, password: string){
+  public verifySignIn(emailAddress: string, password: string):Observable<string>{
     // "false" if new user, userId if current user
     return this.http.get<string>('http://localhost:8080/signIn', {
       params: new HttpParams()
@@ -75,11 +76,11 @@ export class BackendCommunicatorService {
   }
 
   //sendingEmail
-  public sendEmail(emailData: string) {
-    this.http.post('http://localhost:8080/sendEmail', null, { 
+  public sendEmail(emailData: string){
+    return this.http.post('http://localhost:8080/sendEmail', null, { 
       params: new HttpParams()
       .set('emailData', emailData) 
-    }).subscribe();
+    });
   }
 
   //deleting email
@@ -89,7 +90,7 @@ export class BackendCommunicatorService {
       .set('userId', userId)
       .set('emailId', emailId)
       .set('folderName', folderName) 
-    }).subscribe();
+    });
   }
 
   public deleteEmailForever(userId: number, emailId: string) {
@@ -97,7 +98,7 @@ export class BackendCommunicatorService {
       params: new HttpParams()
       .set('userId', userId)
       .set('emailId', emailId) 
-    }).subscribe();
+    });
   }
 
   public deleteMultipleEmails(userId: number, emailsIds: string, folderName: string) {
@@ -106,7 +107,7 @@ export class BackendCommunicatorService {
       .set('userId', userId)
       .set('emailsIds', emailsIds)
       .set('folderName', folderName) 
-    }).subscribe();
+    });
   }
 
   //search 
@@ -142,13 +143,13 @@ export class BackendCommunicatorService {
 
   //sort
   public sort(userId: number, folderName: string, sortType: number, sortIdntifier: number) {
-    return this.http.get('http://localhost:8080/sort', { 
+    return this.http.get<Email[]>('http://localhost:8080/sort', { 
       params: new HttpParams()
       .set('userId', userId)
       .set('folderName', folderName)
       .set('sortType', sortType)
       .set('sortIdntifier', sortIdntifier)
-    }).subscribe();
+    });
   }
 
   public uploadMultipleFiles(files: FileList) {
