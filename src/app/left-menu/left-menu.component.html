@@ -30,11 +30,12 @@
                         <fa-icon [icon]="faContactBook"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Contacts</button>
                 </li>
-                <li *ngFor="let folder of folders" (click)="changeFolderName(folder)" [routerLink]="[{outlets:{main:'folder'}}]"
+                <li *ngFor="let folder of s.folders" (click)="changeFolderName(folder)"
+                
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faFolder"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">
-                                {{ folder }} 
+                                {{ folder }}
                         </button>
                         <button id="edit" (click)="initEdit(folder)">
                                 <fa-icon [icon]="faPenToSquare"></fa-icon>
@@ -71,3 +72,4 @@
         </div>
         <!------------------------->
 </div>
+<!-- [routerLink]="[{outlets:{main:'folder'}}]---->

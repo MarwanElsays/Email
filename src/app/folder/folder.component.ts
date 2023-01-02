@@ -18,6 +18,7 @@ export class Folder {
 })
 export class FolderComponent implements OnInit {
   folder: Folder = new Folder();
+  folders: string[] = [];
   checkedEmail:Email[] = [];
   allChecked: boolean = false;
   @ViewChild('checkAllBox') checkAllBox!: ElementRef;
@@ -29,19 +30,36 @@ export class FolderComponent implements OnInit {
   showsort = false;
   faFilter = faFilter;
   
-  constructor(private s: ConnectorService, private backend: BackendCommunicatorService) {}
+  constructor(public s: ConnectorService, private backend: BackendCommunicatorService) {}
 
-  ngOnInit(): void {
-    this.sortGroup = new FormGroup({
+  ngOnInit() {
+  this.sortGroup = new FormGroup({
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
     })
-
-
-     this.s.changeFolderName.subscribe(async (name) => {
-     this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0));
-     this.folder.name = name;
+    this.folders = this.s.folders;
+    this.s.changeFolderName.subscribe((name) => {
+      this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0).subscribe((emails) => {
+        this.folder.name = name;
+        this.folder.emails = emails;
+      });
     });
+  }
+
+  async moveEmail(email: Email, event: Event) {
+    let dstFolder = (<HTMLInputElement>event.target).value;
+    console.log(this.folder.name);
+    await lastValueFrom(this.backend.MoveEmail(this.s.activeUserID, email.id, this.folder.name, dstFolder));
+  }
+
+  async moveMultiple(event: Event) {
+    let dstFolder = (<HTMLInputElement>event.target).value;
+    let emailsString: string = ''
+    this.checkedEmail.forEach((email) => {
+      emailsString += email.id + ",";
+    })
+    emailsString.slice(0, -1);
+    await lastValueFrom(this.backend.MoveMultipleEmails(this.s.activeUserID, emailsString, this.s.folderName, dstFolder));
   }
 
   selectEmail(event: Event, email: Email) {
