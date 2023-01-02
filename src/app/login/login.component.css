@@ -17,7 +17,8 @@
 
 input{
     width: 350px;
-    font-size: 18px;
+    height: 30px;
+    font-size: 20px;
     border-radius: 10px;
     border-color: azure;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -29,7 +30,7 @@ input{
 }
 
 #password{
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 }
 
 label {
@@ -68,8 +69,13 @@ button:active {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    height: 200px;
+    height: 180px;
+    width:350px;
     border-radius: 20px;    
     background-color: rgb(234,241,251);
+}
 
+#error{
+    color:red;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }

@@ -21,6 +21,7 @@ import { ContactsComponent } from './ComponentsToShow/contacts/contacts.componen
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FolderComponent } from './folder/folder.component';
+import { LoginGaurdService } from './services/LoginGuard.service';
 
 
 @NgModule({
@@ -47,7 +48,7 @@ import { FolderComponent } from './folder/folder.component';
     BrowserAnimationsModule,
     HttpClientModule,
   ],
-  providers: [ConnectorService,MailPageRouteGaurdService,AuthService, HttpClient],
+  providers: [ConnectorService,MailPageRouteGaurdService,AuthService, HttpClient,LoginGaurdService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

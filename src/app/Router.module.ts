@@ -10,10 +10,10 @@ import { MailPageRouteGaurdService } from './services/mail-page-route-gaurd.serv
 import { SignupComponent } from './signup/signup.component';
 import { ContactsComponent } from './ComponentsToShow/contacts/contacts.component';
 import { FolderComponent } from './folder/folder.component';
-
+import { LoginGaurdService } from './services/LoginGuard.service';
 
 const appRoute: Routes = [
-  { path: '', component: LoginComponent },
+  { path: '', component: LoginComponent,canActivate:[LoginGaurdService]},
   { path: 'signup', component: SignupComponent },
   {
     path: 'mail-page',
