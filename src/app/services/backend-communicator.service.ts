@@ -2,6 +2,7 @@ import { Email } from 'src/app/Classes/Email';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contact } from '../ComponentsToShow/contacts/contacts.component';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -80,58 +81,58 @@ export class BackendCommunicatorService {
   }
 
   //sendingEmail
-  public sendEmail(emailData: string) {
-    this.http.post('http://localhost:8080/sendEmail', null, {
+  public sendEmail(emailData: string){
+    return this.http.post('http://localhost:8080/sendEmail', null, { 
       params: new HttpParams()
-        .set('emailData', emailData)
-    }).subscribe();
+      .set('emailData', emailData) 
+    });
   }
 
   //deleting email
   public deleteEmail(userId: number, emailId: string, folderName: string) {
     return this.http.delete('http://localhost:8080/deleteEmail', {
       params: new HttpParams()
-        .set('userId', userId)
-        .set('emailId', emailId)
-        .set('folderName', folderName)
-    }).subscribe();
+      .set('userId', userId)
+      .set('emailId', emailId)
+      .set('folderName', folderName) 
+    });
   }
 
   public deleteEmailForever(userId: number, emailId: string) {
     return this.http.delete('http://localhost:8080/deleteForever', {
       params: new HttpParams()
-        .set('userId', userId)
-        .set('emailId', emailId)
-    }).subscribe();
+      .set('userId', userId)
+      .set('emailId', emailId) 
+    });
   }
 
   public deleteMultipleEmails(userId: number, emailsIds: string, folderName: string) {
     return this.http.delete('http://localhost:8080/deleteMultipleEmails', {
       params: new HttpParams()
-        .set('userId', userId)
-        .set('emailsIds', emailsIds)
-        .set('folderName', folderName)
-    }).subscribe();
+      .set('userId', userId)
+      .set('emailsIds', emailsIds)
+      .set('folderName', folderName) 
+    });
   }
 
   //search 
   public searchFile(userId: number, required: string, folderName: string, criteria: string) {
-    return this.http.get('http://localhost:8080/searchFile', {
+    return this.http.get<Email[]>('http://localhost:8080/searchFile', { 
       params: new HttpParams()
-        .set('userId', userId)
-        .set('required', required)
-        .set('folderName', folderName)
-        .set('criteria', criteria)
-    }).subscribe();
+      .set('userId', userId)
+      .set('required', required)
+      .set('folderName', folderName)
+      .set('criteria', criteria) 
+    });
   }
 
   public searchAll(userId: number, required: string, criteria: string) {
-    return this.http.get('http://localhost:8080/searchAll', {
+    return this.http.get<Email[]>('http://localhost:8080/searchAll', { 
       params: new HttpParams()
-        .set('userId', userId)
-        .set('required', required)
-        .set('criteria', criteria)
-    }).subscribe();
+      .set('userId', userId)
+      .set('required', required)
+      .set('criteria', criteria) 
+    });
   }
 
   //filter
@@ -147,13 +148,13 @@ export class BackendCommunicatorService {
 
   //sort
   public sort(userId: number, folderName: string, sortType: number, sortIdntifier: number) {
-    return this.http.get('http://localhost:8080/sort', {
+    return this.http.get<Email[]>('http://localhost:8080/sort', { 
       params: new HttpParams()
-        .set('userId', userId)
-        .set('folderName', folderName)
-        .set('sortType', sortType)
-        .set('sortIdntifier', sortIdntifier)
-    }).subscribe();
+      .set('userId', userId)
+      .set('folderName', folderName)
+      .set('sortType', sortType)
+      .set('sortIdntifier', sortIdntifier)
+    });
   }
 
   public uploadMultipleFiles(files: FileList) {

@@ -10,7 +10,48 @@
             <option>draft</option>
             <option *ngFor="let folder of s.folders">{{ folder }}</option>
         </select>
-        <!-- <div id="trashiconall" (click)="user.deleteAll(checkedEmail,'inbox')"><fa-icon [icon]="faTrash"></fa-icon></div> -->
+        <div id="trashiconall" (click)="deleteAll()"><fa-icon [icon]="faTrash"></fa-icon></div>
+        <button id="sortButton" (click)="showsort=!showsort">Sort <fa-icon [icon]="faSort"></fa-icon></button>
+        <button id="filterButton">filter <fa-icon [icon]="faFilter"></fa-icon></button>
+        <form [formGroup]="sortGroup"  id="sort" *ngIf="showsort" (ngSubmit)="onSort()">
+            <div class="sortdiv">
+                <label >Sort by</label>
+                <select formControlName="sortType">
+                    <option>priority</option>
+                    <option>Date</option>
+                </select>
+            </div>
+            <div class="sortdiv">
+                <label>order </label>
+                <select formControlName="sortIdentifier">
+                    <option>Ascending</option>
+                    <option>Descending</option>
+                </select>
+            </div>
+            <button id="sortsort" type="submit">
+                Sort
+            </button>
+        </form>
+
+        <!-- <div id="filter" >
+            <div>
+                <label>Filter by</label>
+                <select>
+                    <option>priority</option>
+                    <option>Date</option>
+                </select>
+            </div>
+            <div>
+                <label>Filter by</label>
+                <select>
+                    <option>priority</option>
+                    <option>Date</option>
+                </select>
+            </div>
+            <button id="filterfilter">
+                filter
+            </button>
+        </div> -->
     </div>
     
     <div id="InboxemailsDiv" #emailsDiv>
@@ -18,11 +59,10 @@
             <div class="mode" (click)="styleIt = true" [ngClass]="{activetab:styleIt}">Default</div>
             <div class="mode" (click)="styleIt = false" [ngClass]="{activetab:!styleIt}">Priority</div>
         </div>
-        <div *ngFor="let email of folder.emails" [routerLink]="['/mail-page',{outlets:{main:['sentemails', email.id]}}]" class="email">
-            <input type="checkbox" id="check" (change)="selectEmail($event,email)" [checked]="allChecked">
+        <div *ngFor="let email of folder.emails"  class="email">
+            <input type="checkbox" (change)="selectEmail($event,email)" [checked]="allChecked">
             <span class="to">To: {{email.receivers[0]}}</span>
             <p class="subject"><b>{{email.title}}</b> - {{email.body}}</p>
-            <!-- <button  id="trashicon" (click)="user.deleteEmail(email, 'inbox')"><fa-icon [icon]="faTrash"></fa-icon></button> -->
             <select id="move" (change)="[moveEmail(email, $event)]">
                 <option value="">Move To</option>
                 <option>inbox</option>
@@ -31,9 +71,10 @@
                 <option>draft</option>
                 <option *ngFor="let folder of s.folders">{{ folder }}</option>
             </select>
+            <button  id="trashicon" (click)="deleteEmail(email.id)"><fa-icon [icon]="faTrash"></fa-icon></button>
             <span class="datespan">{{ email.time }}</span>
         </div>
     </div>
-    
-    <router-outlet></router-outlet>
+    <!-- [routerLink]="['/mail-page',{outlets:{main:['sentemails', email.id]}}]" -->
+    <!-- <router-outlet></router-outlet> -->
 </div>
