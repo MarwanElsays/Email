@@ -6,16 +6,19 @@ import { AuthService } from './auth-service.service';
 @Injectable({
   providedIn: 'root'
 })
-export class MailPageRouteGaurdService implements CanActivate {
+
+export class LoginGaurdService implements CanActivate {
 
   constructor(private authService:AuthService,private r:Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
 
-    if(this.authService.accept)return true;
+    if(window.localStorage.getItem('status') === 'true'){
+        this.r.navigateByUrl('/mail-page');
+        return false;
+    }
     else{
-      this.r.navigateByUrl('');
-      return false;
+      return true;
     }
   }
 }

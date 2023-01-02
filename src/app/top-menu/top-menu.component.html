@@ -1,11 +1,16 @@
 <div class="container">
-    <button id="menu" (click)="Do()"><fa-icon id="fabars" [icon]="faBars"></fa-icon></button>
+    <button id="menu" (click)="Do()">
+        <fa-icon id="fabars" [icon]="faBars"></fa-icon>
+    </button>
     <div id="logo" [routerLink]="['/mail-page', {outlets:{main:['inbox']}}]"><b style="color: rgb(3, 63, 116);">M</b>mail</div>
     <div id="Search">
         <fa-icon [icon]="faMagnifyingGlass" id="fasearch" class="icons"></fa-icon>
         <input type="search" placeholder="search" #searchInput>
        <fa-icon [icon]="faSliders" id="faSliders" class="icons" (click)="hide=!hide"></fa-icon>
     </div>
+    <button id="logOut" (click)="logOut()">
+        <fa-icon id="faRightFromBracket" [icon]="faRightFromBracket"></fa-icon>
+    </button>
 </div>
 <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit()" *ngIf="hide">
     <h2>Select a Search Criteria</h2>

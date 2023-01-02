@@ -158,4 +158,24 @@ label{
     cursor: pointer;
 }
 
+#logOut{
+    position: absolute;
+    right: 17px;
+    top: 12px;
+    width:45px;
+    height: 45px;
+    border:none;
+    cursor: pointer;
+    border-radius: 90%;
+    color: rgb(0, 0, 0);
+}
+
+#logOut:hover{
+    background-color: rgb(220, 220, 220);
+}
+
+#faRightFromBracket{
+    font-size: large;
+}
+
 /* background-color: rgb(234,241,251); */
