@@ -10,22 +10,22 @@
                         <fa-icon [icon]="faInbox"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Inbox</button>
                 </li>
-                <li (click)="changeFolderName('sent')" [routerLink]="[{outlets:{main:'folder'}}]"
+                <li (click)="changeFolderName('sent')" [routerLink]="[{outlets:{main:'folder'}}]" 
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faPaperPlane"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Sent</button>
                 </li>
-                <li (click)="changeFolderName('trash')" [routerLink]="[{outlets:{main:'folder'}}]"
+                <li (click)="changeFolderName('trash')" [routerLink]="[{outlets:{main:'folder'}}]" 
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faTrash"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Trash</button>
                 </li>
-                <li (click)="changeFolderName('draft')" [routerLink]="[{outlets:{main:'folder'}}]"
+                <li (click)="changeFolderName('draft')" [routerLink]="[{outlets:{main:'folder'}}]" 
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faNoteSticky"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Draft</button>
                 </li>
-                <li [routerLink]="[{outlets:{main:'contacts'}}]" [routerLinkActive]="'active'"
+                <li [routerLink]="[{outlets:{main:'contacts'}}]" [routerLinkActive]="'active'" 
                         [ngClass]="Do()?'hide':'itemslist'">
                         <fa-icon [icon]="faContactBook"></fa-icon>
                         <button [ngClass]="{hidebutton:Do()}">Contacts</button>
