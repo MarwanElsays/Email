@@ -28,8 +28,8 @@ export class FolderComponent implements OnInit {
   faRotateRight = faRotateRight;
   faTrash = faTrash;
   faSort = faSort;
-  showsort = true;    /* to show the sort div*/
-  showfilter = true;  /* to show the filter div*/
+  showsort = false;    /* to show the sort div*/
+  showfilter = false;  /* to show the filter div*/
   faFilter = faFilter;
   
   constructor(public s: ConnectorService, private backend: BackendCommunicatorService) {}
