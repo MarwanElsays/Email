@@ -1,10 +1,11 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, ElementRef, OnChanges, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faRotateRight, faTrash,faSort,faFilter} from '@fortawesome/free-solid-svg-icons';
 import { lastValueFrom } from 'rxjs';
 import { Email } from '../Classes/Email';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 import { ConnectorService } from '../services/connector.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 export class Folder {
   name!: string;
@@ -32,35 +33,32 @@ export class FolderComponent implements OnInit {
   showfilter = true;  /* to show the filter div*/
   faFilter = faFilter;
   
-  constructor(public s: ConnectorService, private backend: BackendCommunicatorService) {}
+  constructor(public s: ConnectorService, private backend: BackendCommunicatorService, private r: Router, private activeRoute: ActivatedRoute) {}
 
-  ngOnInit() {
-  this.sortGroup = new FormGroup({
+  async ngOnInit() {
+    this.sortGroup = new FormGroup({
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
     })
-    
-    this.folders = this.s.folders;  
+    this.activeRoute.paramMap.subscribe(async (param) => {
+      const name = param.get('root');
+      this.folder.name = <string>name;
+      this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
 
     this.filterGroup = new FormGroup({
       filterType: new FormControl('priority'),
       priorityIdentifier: new FormControl('low'),
       attachIdentifier: new FormControl('no attachment'),
     })
-
-
-    this.s.changeFolderName.subscribe((name) => {
-      this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0).subscribe((emails) => {
-        this.folder.name = name;
-        this.folder.emails = emails;
-      });
-    });
   }
 
   async moveEmail(email: Email, event: Event) {
+    event.stopImmediatePropagation();
+    event.stopPropagation();
     let dstFolder = (<HTMLInputElement>event.target).value;
     console.log(this.folder.name);
     await lastValueFrom(this.backend.MoveEmail(this.s.activeUserID, email.id, this.folder.name, dstFolder));
+    location.reload();
   }
 
   async moveMultiple(event: Event) {
@@ -70,16 +68,20 @@ export class FolderComponent implements OnInit {
       emailsString += email.id + ",";
     })
     emailsString.slice(0, -1);
-    await lastValueFrom(this.backend.MoveMultipleEmails(this.s.activeUserID, emailsString, this.s.folderName, dstFolder));
+    await lastValueFrom(this.backend.MoveMultipleEmails(this.s.activeUserID, emailsString, this.folder.name, dstFolder));
+    // location.reload();
   }
 
   selectEmail(event: Event, email: Email) {
+    event.stopImmediatePropagation(); 
+    console.log(event.target);
     let isChecked = (<HTMLInputElement>event.target).checked;
     if(isChecked)
       this.checkedEmail.push(email);
     else{
       this.checkedEmail.splice(this.checkedEmail.indexOf(email),1);
     }
+    console.log(this.checkedEmail);
   }
 
   selectAll() {
@@ -110,7 +112,8 @@ export class FolderComponent implements OnInit {
     console.log("hi",this.folder.emails );
   }
 
-  async deleteEmail(emailId:string){
+  async deleteEmail(emailId:string, event: Event){
+    event.stopImmediatePropagation();
     if(this.folder.name != 'trash')
       await lastValueFrom(this.backend.deleteEmail(this.s.activeUserID,emailId,this.folder.name));
     else
@@ -127,6 +130,11 @@ export class FolderComponent implements OnInit {
 
     await lastValueFrom(this.backend.deleteMultipleEmails(this.s.activeUserID,emailIds,this.folder.name));
     this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+  }
+
+  viewMail(email: Email, event: Event) {
+    console.log(event.target);
+    this.r.navigate(['/mail-page',{outlets:{main:['sentemails', email.id]}}]);
   }
 
   async onFilter(){

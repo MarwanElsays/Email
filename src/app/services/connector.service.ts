@@ -1,6 +1,4 @@
 import { EventEmitter, Injectable, OnInit } from '@angular/core';
-import { Email } from '../Classes/Email';
-import { Folder } from '../folder/folder.component';
 import { BackendCommunicatorService } from './backend-communicator.service';
 
 @Injectable({
@@ -12,7 +10,7 @@ export class ConnectorService{
 
   hideMenu: boolean = false;
   folders: string[] = [];
-  folderName: string = '';
+  // folderName: string = '';
   activeUserID: number = 0;
   changeFolderName = new EventEmitter<string>();
   

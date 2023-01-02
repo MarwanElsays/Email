@@ -3,6 +3,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { faInbox, faPaperPlane, faTrash, faNoteSticky,faContactBook, faFolder, faFolderPlus, faSave, faX, faPenToSquare, faTachographDigital} from '@fortawesome/free-solid-svg-icons';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 import { lastValueFrom } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-left-menu',
@@ -11,7 +12,7 @@ import { lastValueFrom } from 'rxjs';
 })
 export class LeftMenuComponent implements OnInit {
 
-  constructor(public s: ConnectorService, public backend: BackendCommunicatorService) { }
+  constructor(public s: ConnectorService, public backend: BackendCommunicatorService, private r: Router) { }
   // folders: string[] = [];
   showEdit: boolean = false;
   @ViewChild('Name') newFolderName?: ElementRef;
@@ -35,7 +36,7 @@ export class LeftMenuComponent implements OnInit {
   }
 
   changeFolderName(name: string) {
-    this.s.changeFolderNameEmit(name);
+    this.r.navigate(['/mail-page', {outlets:{main:['folder', name]}}]);
   }
 
 
