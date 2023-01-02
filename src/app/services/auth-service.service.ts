@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthService{
 
-  constructor() { }
-
-  accept:boolean = false;
+  constructor() {}
+  accept:boolean = window.localStorage.getItem('status') === 'true';
+  
 }

@@ -10,36 +10,15 @@ export class ConnectorService{
 
   hideMenu: boolean = false;
   folders: string[] = [];
-  // folderName: string = '';
-  activeUserID: number = 0;
+  activeUserID: number = parseInt(<string>window.localStorage.getItem('userID'));
   changeFolderName = new EventEmitter<string>();
   
   toggleMenu() {
     this.hideMenu = !this.hideMenu;
   }
   
-  changeFolderNameEmit(name: string) {
-    this.changeFolderName.emit(name);
-  }
+  // changeFolderNameEmit(name: string) {
+  //   this.changeFolderName.emit(name);
+  // }
 
 }
-
-// getFolderNames() {
-//   let folders: string[] = ['help'];
-//   // this.backend.getCustomFolders(this.activeUserID).subscribe((f) => {
-//   //   folders = f;
-//   //   console.log(folders);
-//   // });
-//   return folders;
-//}
-
-// get allMails() {
-//   return this._allMails;
-// }
-
-
-// sendMail = new EventEmitter<Email>();
-
-// emitEmail(email:Email){
-//   this.sendMail.emit(email);
-// }

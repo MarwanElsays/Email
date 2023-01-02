@@ -1,9 +1,10 @@
 import { ConnectorService } from './../services/connector.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { faBars, faMagnifyingGlass, faSliders } from '@fortawesome/free-solid-svg-icons';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { faBars, faMagnifyingGlass, faSliders , faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { FormGroup, FormControl } from '@angular/forms';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 import { Email } from '../Classes/Email';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-menu',
@@ -12,9 +13,10 @@ import { Email } from '../Classes/Email';
 })
 export class TopMenuComponent implements OnInit {
 
-  constructor(private s: ConnectorService,private commBack:BackendCommunicatorService) { }
+  constructor(private s: ConnectorService,private commBack:BackendCommunicatorService,private r:Router) { }
   faBars = faBars;
   faMagnifyingGlass = faMagnifyingGlass;
+  faRightFromBracket = faRightFromBracket;
   faSliders = faSliders;
   hide:boolean = false;
   reactiveForm!:FormGroup;
@@ -44,9 +46,13 @@ export class TopMenuComponent implements OnInit {
         this.SearchedEmails = emails;
         console.log(emails);
       })
-    }
-    
-    
+    }    
+  }
+
+  logOut(){
+    this.commBack.signOut(this.s.activeUserID);
+    window.localStorage.setItem('status','false');
+    this.r.navigateByUrl('');
   }
 
   Do() {
