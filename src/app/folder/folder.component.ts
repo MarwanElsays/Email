@@ -1,7 +1,7 @@
 import { FormGroup, FormControl } from '@angular/forms';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { faRotateRight, faTrash,faSort,faFilter} from '@fortawesome/free-solid-svg-icons';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Subscription } from 'rxjs';
 import { Email } from '../Classes/Email';
 import { BackendCommunicatorService } from '../services/backend-communicator.service';
 import { ConnectorService } from '../services/connector.service';
@@ -17,7 +17,7 @@ export class Folder {
   templateUrl: './folder.component.html',
   styleUrls: ['./folder.component.css']
 })
-export class FolderComponent implements OnInit {
+export class FolderComponent implements OnInit{
   folder: Folder = new Folder();
   folders: string[] = [];
   checkedEmail:Email[] = [];
@@ -25,50 +25,92 @@ export class FolderComponent implements OnInit {
   @ViewChild('checkAllBox') checkAllBox!: ElementRef;
   sortGroup!:FormGroup;
   filterGroup!:FormGroup;
-  styleIt: boolean = true;
+  styleIt: boolean = true;   /*change the border below priority & default*/
   faRotateRight = faRotateRight;
   faTrash = faTrash;
   faSort = faSort;
   showsort = false;    /* to show the sort div*/
   showfilter = false;  /* to show the filter div*/
   faFilter = faFilter;
+  SearchedFolder:string = 'search';
+  inSearch:boolean = false;
+  subs!: Subscription;
   
-  constructor(public s: ConnectorService, private backend: BackendCommunicatorService, private r: Router, private activeRoute: ActivatedRoute) {}
+  constructor(public s: ConnectorService, private backend: BackendCommunicatorService, private r: Router, 
+    private activeRoute: ActivatedRoute) {}
 
   async ngOnInit() {
     this.sortGroup = new FormGroup({
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
     });
+
     this.filterGroup = new FormGroup({
       filterType: new FormControl('priority'),
       priorityIdentifier: new FormControl('low'),
       attachIdentifier: new FormControl('no attachment'),
     });
+
     this.activeRoute.paramMap.subscribe(async (param) => {
       const name = param.get('root');
       this.folder.name = <string>name;
-      this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
+      if(this.folder.name != 'search'){
+        this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
+      }
     });
+
+    this.subs = this.activeRoute.queryParamMap.subscribe(async (param) =>{
+      let Criteria = <string>param.get('Criteria');
+      let queryfolder = <string>param.get('Folder');
+      let searchtext = <string>param.get('searchtext');
+
+      if(typeof queryfolder != 'object'){
+        this.SearchedFolder = queryfolder;
+        this.inSearch = true;
+        if(queryfolder == 'All Folders')
+          this.folder.emails = await lastValueFrom(this.backend.searchAll(this.s.activeUserID,searchtext,Criteria));
+        else
+          this.folder.emails = await lastValueFrom(this.backend.searchFile(this.s.activeUserID,searchtext,queryfolder,Criteria));   
+      }
+    })
   }
 
   async moveEmail(email: Email, event: Event) {
     const dstFolder = (<HTMLInputElement>event.target).value;
-    console.log(this.folder.name);
+    
+    let ok = true;
+    if(this.folder.name == 'search'){
+      this.folder.name = this.SearchedFolder;
+      this.folder.emails = this.folder.emails.filter((e) => e.id != email.id)
+      ok = false;
+    }
+    
     await lastValueFrom(this.backend.MoveEmail(this.s.activeUserID, email.id, this.folder.name, dstFolder));
-    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+    if(ok)
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
   async moveMultiple(event: Event) {
     const dstFolder = (<HTMLInputElement>event.target).value;
     let emailsString: string = ''
+    let ok = true;
+
     this.checkedEmail.forEach((email) => {
       emailsString += email.id + ",";
     });
     emailsString = emailsString.slice(0, -1);
+
+    if(this.folder.name == 'search'){
+      this.folder.name = this.SearchedFolder;
+      let emailidesss = emailsString.split(',');
+      this.folder.emails = this.folder.emails.filter((e) => !emailidesss.includes(e.id))
+      ok = false;
+    }
+
     this.checkedEmail = [];
     await lastValueFrom(this.backend.MoveMultipleEmails(this.s.activeUserID, emailsString, this.folder.name, dstFolder));
-    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+    if(ok)
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
   selectEmail(email: Email, event: Event) {
@@ -79,6 +121,7 @@ export class FolderComponent implements OnInit {
       this.checkedEmail.splice(this.checkedEmail.indexOf(email),1);
     }
     console.log(this.checkedEmail);
+
   }
 
   selectAll() {
@@ -110,23 +153,43 @@ export class FolderComponent implements OnInit {
   }
 
   async deleteEmail(emailId:string, event: Event){
+    let ok = true;
+    if(this.folder.name == 'search'){
+      this.folder.name = this.SearchedFolder;
+      this.folder.emails = this.folder.emails.filter((e) => e.id != emailId)
+      ok = false;
+    }
+
     if(this.folder.name != 'trash')
       await lastValueFrom(this.backend.deleteEmail(this.s.activeUserID,emailId,this.folder.name));
     else
       await lastValueFrom(this.backend.deleteEmailForever(this.s.activeUserID,emailId));
-
-    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+     
+    if(ok)
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
   }
 
   async deleteAll(){
     let emailIds ='';
+    let ok = true;
+
     this.checkedEmail.forEach(e =>{
       emailIds += e.id + ',';
     });
     emailIds = emailIds.slice(0, -1);
+ 
+    if(this.folder.name == 'search'){
+      this.folder.name = this.SearchedFolder;
+      let emailidesss = emailIds.split(',');
+      this.folder.emails = this.folder.emails.filter((e) => !emailidesss.includes(e.id))
+      ok = false;
+    }
+
     this.checkedEmail = [];
     await lastValueFrom(this.backend.deleteMultipleEmails(this.s.activeUserID,emailIds,this.folder.name));
-    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+    if(ok)
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+    
   }
 
   viewMail(email: Email) {
@@ -141,5 +204,15 @@ export class FolderComponent implements OnInit {
     else required = this.filterGroup.get('attachIdentifier')?.value;
 
     this.folder.emails = await lastValueFrom(this.backend.filter(this.s.activeUserID,required,this.folder.name,Criteria));
+  }
+
+  /********Default & Priority*************/
+
+  async Getemails(){
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+  }
+
+  async GetPriorityemails(){
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 0, 1, 0));
   }
 }
