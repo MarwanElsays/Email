@@ -25,7 +25,7 @@ export class FolderComponent implements OnInit{
   @ViewChild('checkAllBox') checkAllBox!: ElementRef;
   sortGroup!:FormGroup;
   filterGroup!:FormGroup;
-  styleIt: boolean = true;
+  styleIt: boolean = true;   /*change the border below priority & default*/
   faRotateRight = faRotateRight;
   faTrash = faTrash;
   faSort = faSort;
@@ -183,5 +183,15 @@ export class FolderComponent implements OnInit{
     else required = this.filterGroup.get('attachIdentifier')?.value;
 
     this.folder.emails = await lastValueFrom(this.backend.filter(this.s.activeUserID,required,this.folder.name,Criteria));
+  }
+
+  /********Default & Priority*************/
+
+  async Getemails(){
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+  }
+
+  async GetPriorityemails(){
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 0, 1, 0));
   }
 }

@@ -91,8 +91,8 @@
     
     <div id="InboxemailsDiv" #emailsDiv>
         <div id="modes">
-            <div class="mode" (click)="styleIt = true" [ngClass]="{activetab:styleIt}">Default</div>
-            <div class="mode" (click)="styleIt = false" [ngClass]="{activetab:!styleIt}">Priority</div>
+            <div class="mode" (click)="[styleIt = true,Getemails()]" [ngClass]="{activetab:styleIt}" *ngIf="!inSearch">Default</div>
+            <div class="mode" (click)="[styleIt = false,GetPriorityemails()]" [ngClass]="{activetab:!styleIt}" *ngIf="!inSearch">Priority</div>
         </div>
         <div *ngFor="let email of folder.emails"  class="email" (click)="[viewMail(email)]">
             <input type="checkbox" (change)="[selectEmail(email, $event)]" (click)="$event.stopPropagation()" [checked]="allChecked">
