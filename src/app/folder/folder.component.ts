@@ -40,10 +40,12 @@ export class FolderComponent implements OnInit {
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
     })
+    
     this.activeRoute.paramMap.subscribe(async (param) => {
       const name = param.get('root');
       this.folder.name = <string>name;
       this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
+     })
 
     this.filterGroup = new FormGroup({
       filterType: new FormControl('priority'),
