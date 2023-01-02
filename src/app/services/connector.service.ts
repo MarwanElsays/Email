@@ -10,7 +10,7 @@ export class ConnectorService{
 
   hideMenu: boolean = false;
   folders: string[] = [];
-  folderName: string = '';
+  // folderName: string = '';
   activeUserID: number = 0;
   changeFolderName = new EventEmitter<string>();
   
