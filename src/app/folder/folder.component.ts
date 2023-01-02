@@ -192,6 +192,10 @@ export class FolderComponent implements OnInit{
     
   }
 
+  Reload(){
+    location.reload();
+  }
+
   viewMail(email: Email) {
     this.r.navigate(['/mail-page',{outlets:{main:['sentemails', email.id]}}]);
   }

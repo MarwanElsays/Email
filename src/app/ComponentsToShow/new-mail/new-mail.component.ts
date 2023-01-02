@@ -3,7 +3,7 @@ import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
-import { EmailData } from 'src/app/Classes/EmailData';
+import { EmailData } from 'src/app/Classes/emailData';
 import { lastValueFrom } from 'rxjs';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 

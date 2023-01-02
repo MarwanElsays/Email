@@ -1,7 +1,7 @@
 <div class="container">
     <div id="top"> 
         <input type="checkbox" (change)="selectAll()" #checkAllBox>
-        <div>
+        <div (click)="Reload()">
             <fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon>
         </div>
         <select id="move-all" (change)="[moveMultiple($event)]">
