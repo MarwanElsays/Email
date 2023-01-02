@@ -177,9 +177,10 @@ export class BackendCommunicatorService {
     // return this.http.get('http://localhost:8080/uploadMultipleFiles', { params: new HttpParams().set('files', files) });
   }
 
-  public downloadFile(userId: number, emailId: string) {
+  public downloadFile(fileName: string, userId: number, emailId: string) {
     return this.http.get('http://localhost:8080/downloadFile/{fileName:.+}', {
       params: new HttpParams()
+        .set('fileName', fileName)
         .set('userId', userId)
         .set('emailId', emailId)
     }).subscribe();

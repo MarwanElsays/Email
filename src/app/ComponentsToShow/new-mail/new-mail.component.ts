@@ -3,8 +3,9 @@ import { ConnectorService } from './../../services/connector.service';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
-import { EmailData } from 'src/app/Classes/emailData';
+import { EmailData } from 'src/app/Classes/EmailData';
 import { lastValueFrom } from 'rxjs';
+import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-new-mail',
@@ -19,35 +20,50 @@ export class NewMailComponent {
   @ViewChild('subjectbox') subjectbox: ElementRef | undefined;
   @ViewChild('messagebox') messagebox: ElementRef | undefined;
   @ViewChild('fileUpload') fileUpload: ElementRef | undefined;
+  @ViewChild('priority') priority: ElementRef | undefined;
   private attachements: FileList | undefined;
+  attachmentsNames: string[] = [];
+
+  // icons
+  faPaperclip = faPaperclip;
 
   async send() {
     const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
-    const newMail = new EmailData(this.s.activeUserID, email, 'high', subject, message, '');
+    const priority = (<HTMLInputElement>this.priority?.nativeElement).value;
+    const newMail = new EmailData(this.s.activeUserID, email, priority, subject, message, '');
     await lastValueFrom(this.backend.sendEmail(JSON.stringify(newMail)));
+    this.r.navigate(['/mail-page',{outlets:{main:['folder', 'sent']}}]);
   }
 
-  Drafts() {
+  async Drafts() {
     const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
-    // let e = new Email(email, subject, message, [], new Date(), this.s.ID, 1);
-    // this.s.ID++;
-    // this.s.Draftemails.push(e);
-    // this.s.allMails.push(e);
+    const priority = (<HTMLInputElement>this.priority?.nativeElement).value;
+    const newMail = new EmailData(this.s.activeUserID, email, priority, subject, message, '');
+
   }
 
   addAttachment() {
     const files: FileList = this.fileUpload?.nativeElement.files;
-    this.attachements = files;
-    console.log(files[0]);
 
+    for (let i = 0; i < files.length; i++) {
+      this.attachmentsNames.push(files[0].name);
+    }
     let formData = new FormData();
-    formData.append('file', files[0]);
+    formData.append(files[0].name, files[0]);
     this.http.post('http://localhost:8085/file', formData).subscribe();
   }
+
+  // async openAttachment(attachmentName: string) {
+  //   for (let i = 0; i < (<FileList>this.attachements).length; i++) {
+  //     if (this.attachements![i]!.name == attachmentName) {
+  //       this.backend.downloadFile(this.s.activeUserID, )
+  //     }
+  //   }
+  // }
 
 }
 
