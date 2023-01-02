@@ -23,11 +23,13 @@ export class FolderComponent implements OnInit {
   allChecked: boolean = false;
   @ViewChild('checkAllBox') checkAllBox!: ElementRef;
   sortGroup!:FormGroup;
+  filterGroup!:FormGroup;
   styleIt: boolean = true;
   faRotateRight = faRotateRight;
   faTrash = faTrash;
   faSort = faSort;
-  showsort = false;
+  showsort = true;    /* to show the sort div*/
+  showfilter = true;  /* to show the filter div*/
   faFilter = faFilter;
   
   constructor(public s: ConnectorService, private backend: BackendCommunicatorService) {}
@@ -37,7 +39,16 @@ export class FolderComponent implements OnInit {
       sortType: new FormControl('priority'),
       sortIdentifier: new FormControl('Ascending'),
     })
-    this.folders = this.s.folders;
+    
+    this.folders = this.s.folders;  
+
+    this.filterGroup = new FormGroup({
+      filterType: new FormControl('priority'),
+      priorityIdentifier: new FormControl('low'),
+      attachIdentifier: new FormControl('no attachment'),
+    })
+
+
     this.s.changeFolderName.subscribe((name) => {
       this.backend.getEmailsList(this.s.activeUserID, name, 1, 1, 0).subscribe((emails) => {
         this.folder.name = name;
@@ -116,5 +127,15 @@ export class FolderComponent implements OnInit {
 
     await lastValueFrom(this.backend.deleteMultipleEmails(this.s.activeUserID,emailIds,this.folder.name));
     this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+  }
+
+  async onFilter(){
+    this.showfilter = false;
+    let required;
+    let Criteria = this.filterGroup.get('filterType')?.value;
+    if(Criteria == "priority")required = this.filterGroup.get('priorityIdentifier')?.value;
+    else required = this.filterGroup.get('attachIdentifier')?.value;
+
+    this.folder.emails = await lastValueFrom(this.backend.filter(this.s.activeUserID,required,this.folder.name,Criteria));
   }
 }

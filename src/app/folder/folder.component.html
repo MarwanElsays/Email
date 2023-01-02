@@ -1,7 +1,9 @@
 <div class="container">
     <div id="top"> 
         <input type="checkbox" (change)="selectAll()" #checkAllBox>
-        <div><fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon></div>
+        <div>
+            <fa-icon [icon]="faRotateRight" id="rotateicon"></fa-icon>
+        </div>
         <select id="move" (change)="[moveMultiple($event)]">
             <option value="">Move To</option>
             <option>inbox</option>
@@ -10,48 +12,80 @@
             <option>draft</option>
             <option *ngFor="let folder of s.folders">{{ folder }}</option>
         </select>
-        <div id="trashiconall" (click)="deleteAll()"><fa-icon [icon]="faTrash"></fa-icon></div>
-        <button id="sortButton" (click)="showsort=!showsort">Sort <fa-icon [icon]="faSort"></fa-icon></button>
-        <button id="filterButton">filter <fa-icon [icon]="faFilter"></fa-icon></button>
+        <div id="trashiconall" (click)="deleteAll()">
+            <fa-icon [icon]="faTrash"></fa-icon>
+        </div>
+        <button id="sortButton" (click)="showsort=!showsort">
+            Sort <fa-icon [icon]="faSort"></fa-icon>
+        </button>
+        <button id="filterButton" (click)="showfilter=!showfilter">
+            filter <fa-icon [icon]="faFilter"></fa-icon>
+        </button>
+
+        <!---------------------     Sorting form       ------------------------------->
         <form [formGroup]="sortGroup"  id="sort" *ngIf="showsort" (ngSubmit)="onSort()">
             <div class="sortdiv">
-                <label >Sort by</label>
+                <label>
+                    Sort by
+                </label>
                 <select formControlName="sortType">
                     <option>priority</option>
                     <option>Date</option>
                 </select>
             </div>
+
             <div class="sortdiv">
-                <label>order </label>
+                <label>
+                    order 
+                </label>
                 <select formControlName="sortIdentifier">
                     <option>Ascending</option>
                     <option>Descending</option>
                 </select>
             </div>
+
             <button id="sortsort" type="submit">
                 Sort
             </button>
         </form>
 
-        <!-- <div id="filter" >
-            <div>
-                <label>Filter by</label>
-                <select>
-                    <option>priority</option>
-                    <option>Date</option>
+        <!---------------------     Filtering form       ------------------------------->
+        <form [formGroup]="filterGroup" id="filter" *ngIf="showfilter" (ngSubmit)="onFilter()">
+            <div class="filterdiv">
+                <label>
+                    Filter by
+                </label>
+                <select formControlName="filterType">
+                    <option >priority</option>
+                    <option>Attachments</option>
                 </select>
             </div>
-            <div>
-                <label>Filter by</label>
-                <select>
-                    <option>priority</option>
-                    <option>Date</option>
+
+            <div *ngIf="filterGroup.get('filterType')?.value == 'priority'" class="filterdiv">
+                <label>
+                    priority
+                </label>
+                <select formControlName="priorityIdentifier">
+                    <option>urgent</option>
+                    <option>high</option>
+                    <option>normal</option>
+                    <option>low</option>
                 </select>
             </div>
-            <button id="filterfilter">
+
+            <div *ngIf="filterGroup.get('filterType')?.value == 'Attachments'" class="filterdiv">
+                <label>
+                    Attachments
+                </label>
+                <select formControlName="attachIdentifier">
+                    <option>attachment</option>
+                    <option>no attachment</option>
+                </select>
+            </div>
+            <button id="filterfilter" type="submit">
                 filter
             </button>
-        </div> -->
+        </form>
     </div>
     
     <div id="InboxemailsDiv" #emailsDiv>
