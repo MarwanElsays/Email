@@ -184,7 +184,7 @@ export class BackendCommunicatorService {
       params: new HttpParams()
         .set('userId', userId)
         .set('emailId', emailId),
-        responseType: 'text'
+        responseType: 'blob'
     });
   }
 
