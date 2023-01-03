@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Email } from 'src/app/Classes/Email';
 import { ActivatedRoute } from '@angular/router';
 import { faRotateRight, faArrowLeft, faPaperclip,faFilePdf,faFileWord,faFileExcel,faFileImage,faCode,faC} from '@fortawesome/free-solid-svg-icons';
-import { faJava,faJs } from '@fortawesome/free-brands-svg-icons';
+import { faJava,faJs,faCss3 } from '@fortawesome/free-brands-svg-icons';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
 
 @Component({
@@ -31,6 +31,7 @@ export class ViewMailComponent implements OnInit {
   Image = faFileImage;
   Html = faCode;
   c = faC;
+  Css = faCss3;
 
   ngOnInit() {
     this.activeRoute.paramMap.subscribe((param) => {
