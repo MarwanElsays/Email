@@ -1,4 +1,5 @@
-import { EventEmitter, Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Email } from '../Classes/Email';
 import { BackendCommunicatorService } from './backend-communicator.service';
 
 @Injectable({
@@ -11,6 +12,7 @@ export class ConnectorService{
   hideMenu: boolean = false;
   folders: string[] = [];
   activeUserID: number = parseInt(<string>window.localStorage.getItem('userID'));
+  allMails: Email[] = [];
   
   toggleMenu() {
     this.hideMenu = !this.hideMenu;

@@ -3,11 +3,11 @@
         <div id="mail-info">
             <div class="info">
                 <label>To</label>
-                <input type="email" id="to" #emailbox>
+                <input type="email" [(ngModel)]="receivers" id="to" #emailbox>
             </div>
             <div class="info">
                 <label>Subject</label>
-                <input type="text" id="subject" #subjectbox>
+                <input type="text" [(ngModel)]="title" id="subject" #subjectbox>
             </div>
         </div>
         <div id="priority" style="display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; user-select: none; cursor: default;">
@@ -23,10 +23,10 @@
     
     <div style="display: grid; grid-template-rows: 6fr 1fr;">
         <div id="mail-body">
-            <textarea id="mail" cols="30" rows="10" #messagebox></textarea>
+            <textarea [(ngModel)]="body" id="mail" cols="30" rows="10" #messagebox></textarea>
         </div>
         <div style="display: flex; flex-direction: row; margin-left: 29px;">
-            <div *ngFor="let attachment of attachmentsNames" class="attachment">
+            <div *ngFor="let attachment of attachmentsNames.split(',')" class="attachment">
                 <fa-icon [icon]="faPaperclip"></fa-icon>
                 {{ attachment }}
             </div>
@@ -43,8 +43,8 @@
             Attach
         </button>
     
-        <button id="delete" (click)="Drafts()" [routerLink]="[{outlets:{main:'folder'}}]">
-            Delete Draft
+        <button id="delete" (click)="Drafts()">
+            Draft
         </button>
     </div>
 </div>

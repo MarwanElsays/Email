@@ -1,20 +1,20 @@
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConnectorService } from './../../services/connector.service';
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
 import { lastValueFrom } from 'rxjs';
 import { faPaperclip } from '@fortawesome/free-solid-svg-icons';
-import { EmailData } from 'src/app/Classes/EmailData';
-
+import { EmailData } from 'src/app/Classes/emailData';
+import { Email } from 'src/app/Classes/Email';
 @Component({
   selector: 'app-new-mail',
   templateUrl: './new-mail.component.html',
   styleUrls: ['./new-mail.component.css']
 })
-export class NewMailComponent {
+export class NewMailComponent implements OnInit {
 
-  constructor(private s: ConnectorService, private http: HttpClient, private backend: BackendCommunicatorService,private r:Router) { }
+  constructor(private s: ConnectorService, private http: HttpClient, private backend: BackendCommunicatorService,private r:Router, private activatedRouter: ActivatedRoute) { }
 
   @ViewChild('emailbox') emailbox: ElementRef | undefined;
   @ViewChild('subjectbox') subjectbox: ElementRef | undefined;
@@ -22,18 +22,52 @@ export class NewMailComponent {
   @ViewChild('fileUpload') fileUpload: ElementRef | undefined;
   @ViewChild('priority') priority: ElementRef | undefined;
   private attachements: FileList | undefined;
-  attachmentsNames: string[] = [];
+  attachmentsNames: string = '';
+
+  receivers: string = '';
+  title: string = '';
+  body: string = '';
+  formData: FormData = new FormData();
 
   // icons
   faPaperclip = faPaperclip;
+
+  ngOnInit() {
+    this.activatedRouter.queryParamMap.subscribe((param) => {
+      const id = <string>param.get('id');
+      let email!: Email;
+      this.s.allMails.forEach((mail) => {
+        if (mail.id == id)
+          email = mail;
+      });
+      let receivers: string = '';
+      if (email) {
+        email.receivers.forEach((receiver) => {
+          receivers += email.receivers + ',';
+        });
+        receivers = receivers.slice(0, -1);
+        this.receivers = receivers;
+        this.title = email.title;
+        this.body = email.body;
+        let attachements: string = '';
+        email.attachments.forEach((att) => {
+          attachements += att + ',';
+        });
+        attachements = attachements.slice(0, -1);
+        this.attachmentsNames = attachements;
+      }
+    });
+  }
 
   async send() {
     const email = (<HTMLInputElement>this.emailbox?.nativeElement).value;
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
     const priority = (<HTMLInputElement>this.priority?.nativeElement).value;
-    const newMail = new EmailData(this.s.activeUserID, email, priority, subject, message, '');
+    const newMail = new EmailData(this.s.activeUserID, email, priority, subject, message, this.attachmentsNames);
+    console.log(this.formData);
     await lastValueFrom(this.backend.sendEmail(JSON.stringify(newMail)));
+    await lastValueFrom(this.backend.uploadMultipleFiles(this.formData));
     this.r.navigate(['/mail-page',{outlets:{main:['folder', 'sent']}}]);
   }
 
@@ -42,19 +76,19 @@ export class NewMailComponent {
     const subject = (<HTMLInputElement>this.subjectbox?.nativeElement).value;
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
     const priority = (<HTMLInputElement>this.priority?.nativeElement).value;
-    const newMail = new EmailData(this.s.activeUserID, email, priority, subject, message, '');
-
+    const newMail = new EmailData(this.s.activeUserID, email, priority, subject, message, this.attachmentsNames);
+    await lastValueFrom(this.backend.moveEmailToDraft(JSON.stringify(newMail)));
+    this.r.navigate(['/mail-page',{outlets:{main:['folder', 'draft']}}]);
   }
 
   addAttachment() {
     const files: FileList = this.fileUpload?.nativeElement.files;
-
     for (let i = 0; i < files.length; i++) {
-      this.attachmentsNames.push(files[0].name);
+      this.attachmentsNames += files[i].name + ',';
     }
-    let formData = new FormData();
-    formData.append(files[0].name, files[0]);
-    this.http.post('http://localhost:8085/file', formData).subscribe();
+    for (let i = 0; i < files.length; i++) {
+      this.formData.append('files', files[i]);
+    }
   }
 
   // async openAttachment(attachmentName: string) {

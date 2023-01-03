@@ -97,7 +97,7 @@ export class BackendCommunicatorService {
   public sendEmail(emailData: string){
     return this.http.post('http://localhost:8080/sendEmail', null, { 
       params: new HttpParams()
-      .set('emailData', emailData) 
+      .set('emailData', emailData)
     });
   }
 
@@ -173,17 +173,17 @@ export class BackendCommunicatorService {
     });
   }
 
-  public uploadMultipleFiles(files: FileList) {
-    // return this.http.get('http://localhost:8080/uploadMultipleFiles', { params: new HttpParams().set('files', files) });
+  public uploadMultipleFiles(files: FormData) {
+    return this.http.post('http://localhost:8080/uploadMultipleFiles', files);
   }
 
   public downloadFile(fileName: string, userId: number, emailId: string) {
-    return this.http.get('http://localhost:8080/downloadFile/{fileName:.+}', {
+    return this.http.get('http://localhost:8080/downloadFile/' + fileName, {
       params: new HttpParams()
-        .set('fileName', fileName)
         .set('userId', userId)
-        .set('emailId', emailId)
-    }).subscribe();
+        .set('emailId', emailId),
+        responseType: 'text'
+    });
   }
 
   //Done
@@ -254,5 +254,12 @@ export class BackendCommunicatorService {
       params: new HttpParams()
       .set('userId', userId)
     })
+  }
+
+  public moveEmailToDraft(emailData: string) {
+    return this.http.delete('http://localhost:8080/moveEmailToDraft', {
+      params: new HttpParams()
+      .set('emailData', emailData)
+    });
   }
 }
