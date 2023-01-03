@@ -14,7 +14,7 @@ export class ViewMailComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute, private s: ConnectorService, private backend: BackendCommunicatorService) { }
 
-  email!: Email;
+  email: Email | undefined;
   attachmentNames: string[] = [];
   
   // icons
@@ -34,8 +34,9 @@ export class ViewMailComponent implements OnInit {
   }
   
   openAttachment(attachmentName: string) {
-    this.backend.downloadFile(attachmentName, this.s.activeUserID, this.email.id).subscribe((s) => {
-      
+    this.backend.downloadFile(attachmentName, this.s.activeUserID, this.email!.id).subscribe((s) => {
+      console.log(s);
+    
     })
   }
 }

@@ -173,9 +173,11 @@ export class BackendCommunicatorService {
     });
   }
 
+  //Done
   public uploadMultipleFiles(files: FormData) {
     return this.http.post('http://localhost:8080/uploadMultipleFiles', files);
   }
+
 
   public downloadFile(fileName: string, userId: number, emailId: string) {
     return this.http.get('http://localhost:8080/downloadFile/' + fileName, {
@@ -225,7 +227,7 @@ export class BackendCommunicatorService {
     });
   }
   
-  //Still
+  //Done
   public MoveEmail(userId: number, emailId: string, sourceFolderName: string, distFolderName: string){
     return this.http.delete('http://localhost:8080/moveEmail', {
       params: new HttpParams()
@@ -256,6 +258,7 @@ export class BackendCommunicatorService {
     })
   }
 
+  //Done
   public moveEmailToDraft(emailData: string) {
     return this.http.delete('http://localhost:8080/moveEmailToDraft', {
       params: new HttpParams()
