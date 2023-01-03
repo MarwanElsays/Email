@@ -1,0 +1,24 @@
+[
+{
+  "sender" : "m@m.com",
+  "receivers" : [ "ali@m.com" ],
+  "priority" : "low",
+  "title" : "marwan",
+  "body" : "hello",
+  "id" : "26e6206f-13c1-4622-9e8c-9913946043ce",
+  "time" : "2023-01-03 19:22:01",
+  "attachments" : [ "3.3Questions.docx", "Main.java", "main.js", "Contentchild.pdf" ]
+}
+,
+{
+  "sender" : "m@m.com",
+  "receivers" : [ "maro@m.com" ],
+  "priority" : "urgent",
+  "title" : "exams",
+  "body" : "angular",
+  "id" : "29ebc84f-738d-4f43-9107-c024cfe6606a",
+  "time" : "2023-01-03 19:22:53",
+  "attachments" : [ "Contentchild.pdf" ]
+}
+
+]

@@ -1,0 +1,57 @@
+[
+{
+  "sender" : "test@g",
+  "receivers" : [ "alihassan@lol.com" ],
+  "priority" : "Urgent",
+  "title" : "sent1",
+  "body" : "test1",
+  "id" : "1f57237b-326a-4ece-8cc5-9f639bb853aa",
+  "time" : "2020-12-22 11:49:34",
+  "attachments" : [ ]
+}
+,
+{
+  "sender" : "test@g",
+  "receivers" : [ "alihassan@lol.com" ],
+  "priority" : "high",
+  "title" : "sent2",
+  "body" : "test1",
+  "id" : "713efe52-3540-434d-9d4c-57020591c53a",
+  "time" : "2020-12-21 21:33:00",
+  "attachments" : [ ]
+}
+,
+{
+  "sender" : "test@g",
+  "receivers" : [ "alihassan@lol.com" ],
+  "priority" : "Urgent",
+  "title" : "sent3",
+  "body" : "bodyLOL",
+  "id" : "6bb08177-0e78-4d21-ac77-ea4fe350a73a",
+  "time" : "2020-12-24 00:05:08",
+  "attachments" : [ ]
+}
+,
+{
+  "sender" : "shosh@gmail.com",
+  "receivers" : [ "newtest@lol.com", "newtest@lol.com" ],
+  "priority" : "Normal",
+  "title" : "testing",
+  "body" : "allloooooooo",
+  "id" : "be4d3f60-0e48-4259-9bac-aa4435166950",
+  "time" : "2020-12-25 23:45:01",
+  "attachments" : [ "naive1.png"]
+}
+,
+{
+  "sender" : "test@g",
+  "receivers" : [ "alihassan@lol.com" ],
+  "priority" : "low",
+  "title" : "sent4",
+  "body" : "test1",
+  "id" : "2cac324e-d914-497f-bd21-1b49e56e04be",
+  "time" : "2020-12-24 00:02:18",
+  "attachments" : [ ]
+}
+
+]

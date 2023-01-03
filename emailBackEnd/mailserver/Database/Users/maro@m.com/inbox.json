@@ -1,0 +1,13 @@
+[
+{
+  "sender" : "m@m.com",
+  "receivers" : [ "maro@m.com" ],
+  "priority" : "urgent",
+  "title" : "exams",
+  "body" : "angular",
+  "id" : "29ebc84f-738d-4f43-9107-c024cfe6606a",
+  "time" : "2023-01-03 19:22:53",
+  "attachments" : [ "Contentchild.pdf" ]
+}
+
+]
