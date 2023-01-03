@@ -55,7 +55,7 @@ export class FolderComponent implements OnInit{
       const name = param.get('root');
       this.folder.name = <string>name;
       if(this.folder.name != 'search'){
-        this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 1, 0));
+        this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 0, 0));
       }
     });
 
@@ -87,7 +87,7 @@ export class FolderComponent implements OnInit{
     
     await lastValueFrom(this.backend.MoveEmail(this.s.activeUserID, email.id, this.folder.name, dstFolder));
     if(ok)
-      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 0, 0));
   }
 
   async moveMultiple(event: Event) {
@@ -110,7 +110,7 @@ export class FolderComponent implements OnInit{
     this.checkedEmail = [];
     await lastValueFrom(this.backend.MoveMultipleEmails(this.s.activeUserID, emailsString, this.folder.name, dstFolder));
     if(ok)
-      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 0, 0));
   }
 
   selectEmail(email: Email, event: Event) {
@@ -166,7 +166,7 @@ export class FolderComponent implements OnInit{
       await lastValueFrom(this.backend.deleteEmailForever(this.s.activeUserID,emailId));
      
     if(ok)
-      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 0, 0));
   }
 
   async deleteAll(){
@@ -188,7 +188,7 @@ export class FolderComponent implements OnInit{
     this.checkedEmail = [];
     await lastValueFrom(this.backend.deleteMultipleEmails(this.s.activeUserID,emailIds,this.folder.name));
     if(ok)
-      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+      this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 0, 0));
     
   }
 
