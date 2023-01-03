@@ -55,6 +55,7 @@ export class FolderComponent implements OnInit{
       const name = param.get('root');
       this.folder.name = <string>name;
       if(this.folder.name != 'search'){
+        this.inSearch = false;
         this.folder.emails = await lastValueFrom(this.backend.getEmailsList(this.s.activeUserID, <string>name, 1, 0, 0));
       }
     });
@@ -170,6 +171,7 @@ export class FolderComponent implements OnInit{
   }
 
   async deleteAll(){
+    if(this.checkedEmail.length == 0)return;
     let emailIds ='';
     let ok = true;
 
@@ -213,6 +215,7 @@ export class FolderComponent implements OnInit{
     if(Criteria == "priority")required = this.filterGroup.get('priorityIdentifier')?.value;
     else required = this.filterGroup.get('attachIdentifier')?.value;
 
+    console.log(Criteria,required);
     this.folder.emails = await lastValueFrom(this.backend.filter(this.s.activeUserID,required,this.folder.name,Criteria));
   }
 
