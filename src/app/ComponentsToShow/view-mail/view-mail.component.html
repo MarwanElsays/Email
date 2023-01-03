@@ -4,8 +4,8 @@
     </div>
     <div id="InboxemailsDiv">
         <div id="subject">{{email?.title}}</div>
-        <div id="To">From: {{email?.sender}}</div>
-        <div id="To" >To: {{email?.receivers}}</div>
+        <div id="To"><label>From: </label> {{email?.sender}}</div>
+        <div id="To"><label>To: </label>  {{email?.receivers}}</div>
         <div id="message">
             {{email?.body}}
         </div>
