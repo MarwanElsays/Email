@@ -3,14 +3,14 @@
         <!-- <div id="backicon" [routerLink]="['/mail-page', {outlets:{main:'sent'}}]"><fa-icon [icon]="faArrowLeft" ></fa-icon></div> -->
     </div>
     <div id="InboxemailsDiv">
-        <div id="subject">{{email.title}}</div>
-        <div id="To">From: {{email.sender}}</div>
-        <div id="To" >To: {{email.receivers}}</div>
+        <div id="subject">{{email?.title}}</div>
+        <div id="To">From: {{email?.sender}}</div>
+        <div id="To" >To: {{email?.receivers}}</div>
         <div id="message">
-            {{email.body}}
+            {{email?.body}}
         </div>
         <div id="attachmentsDiv">
-            <div *ngFor="let attachment of email.attachments" (click)="openAttachment(attachment)" class="attachment">
+            <div *ngFor="let attachment of email?.attachments" (click)="openAttachment(attachment)" class="attachment">
                 <fa-icon [icon]="faPaperclip"></fa-icon>
                 {{ attachment }}
             </div>
