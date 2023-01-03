@@ -193,7 +193,13 @@ export class FolderComponent implements OnInit{
   }
 
   viewMail(email: Email) {
-    this.r.navigate(['/mail-page',{outlets:{main:['sentemails', email.id]}}]);
+    this.s.allMails = this.folder.emails;
+    if (this.folder.name != 'draft') {
+      this.r.navigate(['/mail-page',{outlets:{main:['sentemails', email.id]}}]);
+      return;
+    }
+    this.r.navigate(['/mail-page',{outlets:{main:['new-mail']}}], {queryParams: {id: email.id}});
+    this.backend.deleteEmail(this.s.activeUserID, email.id, 'draft');
   }
 
   async onFilter(){
@@ -209,7 +215,7 @@ export class FolderComponent implements OnInit{
   /********Default & Priority*************/
 
   async Getemails(){
-    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 1, 0));
+    this.folder.emails = await lastValueFrom (this.backend.getEmailsList(this.s.activeUserID, this.folder.name, 1, 0, 0));
   }
 
   async GetPriorityemails(){

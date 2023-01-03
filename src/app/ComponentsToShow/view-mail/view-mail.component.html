@@ -1,16 +1,22 @@
 <div class="container">
-    <!-- <div id="top"> 
-        <div id="backicon" [routerLink]="['/mail-page', {outlets:{main:'sent'}}]"><fa-icon [icon]="faArrowLeft" ></fa-icon></div>
-        <input type="checkbox">
-        <div id="rotateicon"><fa-icon [icon]="faRotateRight"></fa-icon></div>
-    </div> -->
+    <div id="top"> 
+        <!-- <div id="backicon" [routerLink]="['/mail-page', {outlets:{main:'sent'}}]"><fa-icon [icon]="faArrowLeft" ></fa-icon></div> -->
+    </div>
     <div id="InboxemailsDiv">
-        <!-- <div id="subject">{{email?.subject}}</div>
-        <div id="To" *ngIf="root == 'inbox' || root == 'trash'">From: {{email?.from}}</div>
-        <div id="To" *ngIf="root != 'inbox'">To: {{email?.to}}</div>
+        <div id="subject">{{email.title}}</div>
+        <div id="To">From: {{email.sender}}</div>
+        <div id="To" >To: {{email.receivers}}</div>
         <div id="message">
-            {{email?.message}}
-        </div> -->
+            {{email.body}}
+        </div>
+        <div id="attachmentsDiv">
+            <div *ngFor="let attachment of email.attachments" (click)="openAttachment(attachment)" class="attachment">
+                <fa-icon [icon]="faPaperclip"></fa-icon>
+                {{ attachment }}
+            </div>
+        </div>
     </div>
 </div>
 
+<!-- *ngIf="root == 'inbox' || root == 'trash'"
+*ngIf="root != 'inbox'" -->
