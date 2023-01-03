@@ -36,7 +36,6 @@ export class ViewMailComponent implements OnInit {
   openAttachment(attachmentName: string) {
     this.backend.downloadFile(attachmentName, this.s.activeUserID, this.email!.id).subscribe((s) => {
       console.log(s);
-    
     })
   }
 }
