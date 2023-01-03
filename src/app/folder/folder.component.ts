@@ -192,6 +192,10 @@ export class FolderComponent implements OnInit{
     
   }
 
+  Reload(){
+    location.reload();
+  }
+
   viewMail(email: Email) {
     this.s.allMails = this.folder.emails;
     if (this.folder.name != 'draft') {
