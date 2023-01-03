@@ -1,0 +1,79 @@
+[CONVERGENCE CHECK]
+===================
+is_convergent <- null
+if stopping condition is error value
+	then:
+	num of higher <- 0
+	num of higher or equal <- 0
+	for i from 0 to number of rows:
+		sum <- 0
+		for j from 0 to number of columns:
+			if j equals i then skip iteration
+			else sum <- sum + absolute(matrix[i][j])
+		endfor
+		if matrix[i][i] > sum: then (num of higher) <- (num of higher) + 1
+		if matrix[i][i] >= sum: then (num of higher or equal) <- (num of higher or equal) + 1
+		if matrix[i][i] < sum then: not convergent: is_convergent <- false and exit the check
+	endfor
+
+if (number of higher or equal) equals number of diagonal elements and (number of higher) not zero
+	then is_convergent <- true
+else: is_convergent <- false
+
+if is_convergent is null then is_convergent <- true
+
+[MAIN FUNCTION]
+===============
+current iteration values <- initial guess
+iterations <- 0
+calculated error <- max integer possible
+status <- is_convergent
+equations <- []
+calculations <- []
+results <- []
+errors <- []
+
+while infinite loop
+	if (iterations) equals (number of iterations) or (calculated error) <= error
+		then break
+	calculated error <- 0
+	iterations calculations <- []
+	iteration errors <- []
+	for i from 0 to number of rows
+		equation <- []
+		append (last element of augmented matrix in row i) to equation
+		calculation <- []
+		desired variable <- last element of augmented matrix in row i
+		for j from 0 to number of columns
+			if j equals i then skip iteration
+			append (-matrix[i][j]) to equation
+			append (current iterations values[j]) to calculation
+			desired variable <- (current iteration values[j]) * matrix[i][j]
+		endfor
+		append (diagonal element at row i) to equation
+		desired variable <- (desired variable) / (diagonal element at row i)
+		
+		calc <- (desired variable) - (current iteration values[i]) * 100
+		intermediate error <- calc / (desired variable)
+		if calculated error < intermediate error
+			then calculated error <- intermediate error
+		append (intermediate error) to iteration errors
+		current iteration values[i] <- desired variable
+		
+		if first iteration
+			then append (equation) to equations
+		append (desired variable) to calculation
+		append (calculation) to iteration calculation
+	endfor
+	append (iteration calculation) to calculations
+	append (current iteration values) to results
+	append (iteration errors) to errors
+	iterations <- iterations + 1
+
+	if not convergent and iterations > 1000
+		then break
+	if iterations equals 10000
+		then break
+	
+endwhile
+	

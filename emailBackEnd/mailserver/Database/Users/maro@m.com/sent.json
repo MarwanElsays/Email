@@ -1,0 +1,13 @@
+[
+{
+  "sender" : "maro@m.com",
+  "receivers" : [ "ali@m.com", "m@m.com" ],
+  "priority" : "urgent",
+  "title" : "hello guys",
+  "body" : "hi broooooooos",
+  "id" : "2bdf34f9-4f4a-4ada-acc1-1baa8f73a723",
+  "time" : "2023-01-03 18:28:28",
+  "attachments" : [ "Contentchild.pdf" ]
+}
+
+]
