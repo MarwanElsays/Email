@@ -11,8 +11,17 @@
         </div>
         <div id="attachmentsDiv">
             <div *ngFor="let attachment of email?.attachments" (click)="openAttachment(attachment)" class="attachment">
-                <fa-icon [icon]="faPaperclip"></fa-icon>
+               <fa-icon [icon]="java" *ngIf="attachment.endsWith('java')"></fa-icon> 
+               <fa-icon [icon]="Pdf" *ngIf="attachment.includes('pdf')"></fa-icon> 
+               <fa-icon [icon]="Js" *ngIf="attachment.includes('js')"></fa-icon>
+               <fa-icon [icon]="docx" *ngIf="attachment.includes('docx')"></fa-icon>
+               <fa-icon [icon]="Excel" *ngIf="attachment.includes('xlsx')"></fa-icon>
+               <fa-icon [icon]="Image" *ngIf="attachment.includes('png') || attachment.includes('jpg')"></fa-icon>
+               <fa-icon [icon]="Html" *ngIf="attachment.includes('html')"></fa-icon>
+               <fa-icon [icon]="c" *ngIf="attachment.includes('c++')"></fa-icon>
                 {{ attachment }}
+
+                <span class="tooltiptext">download</span>
             </div>
         </div>
     </div>
@@ -20,3 +29,5 @@
 
 <!-- *ngIf="root == 'inbox' || root == 'trash'"
 *ngIf="root != 'inbox'" -->
+
+<!-- *ngIf="str.includes('java')" -->

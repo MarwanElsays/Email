@@ -2,7 +2,8 @@ import { ConnectorService } from '../../services/connector.service';
 import { Component, OnInit } from '@angular/core';
 import { Email } from 'src/app/Classes/Email';
 import { ActivatedRoute } from '@angular/router';
-import { faRotateRight, faArrowLeft, faPaperclip } from '@fortawesome/free-solid-svg-icons';
+import { faRotateRight, faArrowLeft, faPaperclip,faFilePdf,faFileWord,faFileExcel,faFileImage,faCode,faC} from '@fortawesome/free-solid-svg-icons';
+import { faJava,faJs } from '@fortawesome/free-brands-svg-icons';
 import { BackendCommunicatorService } from 'src/app/services/backend-communicator.service';
 
 @Component({
@@ -15,12 +16,21 @@ export class ViewMailComponent implements OnInit {
   constructor(private activeRoute: ActivatedRoute, private s: ConnectorService, private backend: BackendCommunicatorService) { }
 
   email: Email | undefined;
+  // str:string = '' ;
   attachmentNames: string[] = [];
   
   // icons
   faArrowLeft = faArrowLeft;
   faRotateRight = faRotateRight;
   faPaperclip = faPaperclip;
+  java = faJava;
+  Pdf = faFilePdf;
+  Js = faJs;
+  docx = faFileWord;
+  Excel = faFileExcel;
+  Image = faFileImage;
+  Html = faCode;
+  c = faC;
 
   ngOnInit() {
     this.activeRoute.paramMap.subscribe((param) => {
@@ -35,7 +45,14 @@ export class ViewMailComponent implements OnInit {
   
   openAttachment(attachmentName: string) {
     this.backend.downloadFile(attachmentName, this.s.activeUserID, this.email!.id).subscribe((s) => {
-      console.log(s);
+      let anchor = document.createElement("a");
+      anchor.href = URL.createObjectURL(s);
+      anchor.download = attachmentName;
+      anchor.click();
     })
   }
 }
+
+
+// this.str = s.type;
+// console.log(this.str)
