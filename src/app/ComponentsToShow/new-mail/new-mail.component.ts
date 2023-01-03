@@ -65,9 +65,9 @@ export class NewMailComponent implements OnInit {
     const message = (<HTMLInputElement>this.messagebox?.nativeElement).value;
     const priority = (<HTMLInputElement>this.priority?.nativeElement).value;
     const newMail = new EmailData(this.s.activeUserID, email, priority, subject, message, this.attachmentsNames);
-    console.log(this.formData);
     await lastValueFrom(this.backend.sendEmail(JSON.stringify(newMail)));
-    await lastValueFrom(this.backend.uploadMultipleFiles(this.formData));
+    if (this.attachmentsNames != '')
+      await lastValueFrom(this.backend.uploadMultipleFiles(this.formData));
     this.r.navigate(['/mail-page',{outlets:{main:['folder', 'sent']}}]);
   }
 
